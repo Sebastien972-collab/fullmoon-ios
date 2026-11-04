@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		860F26A42CBC31D6004E8D40 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 860F26A32CBC31D6004E8D40 /* MarkdownUI */; };
 		CF7089EE309A4D0400C368FB /* Noctis in Frameworks */ = {isa = PBXBuildFile; productRef = CF7089ED309A4D0400C368FB /* Noctis */; };
+		CFFE413A309B64E900EB2C5F /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = CFFE4139309B64E900EB2C5F /* Shimmer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFFE413A309B64E900EB2C5F /* Shimmer in Frameworks */,
 				CF7089EE309A4D0400C368FB /* Noctis in Frameworks */,
 				860F26A42CBC31D6004E8D40 /* MarkdownUI in Frameworks */,
 			);
@@ -95,6 +97,7 @@
 			packageProductDependencies = (
 				860F26A32CBC31D6004E8D40 /* MarkdownUI */,
 				CF7089ED309A4D0400C368FB /* Noctis */,
+				CFFE4139309B64E900EB2C5F /* Shimmer */,
 			);
 			productName = fullmoon;
 			productReference = 860E9CCE2CB055B000C5BB52 /* fullmoon.app */;
@@ -127,6 +130,7 @@
 			packageReferences = (
 				860F26A22CBC31D6004E8D40 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				CF7089EC309A4D0400C368FB /* XCLocalSwiftPackageReference "../NoctisAi" */,
+				CFFE4138309B64E900EB2C5F /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 860E9CCF2CB055B000C5BB52 /* Products */;
@@ -404,6 +408,14 @@
 				minimumVersion = 2.4.1;
 			};
 		};
+		CFFE4138309B64E900EB2C5F /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -416,6 +428,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF7089EC309A4D0400C368FB /* XCLocalSwiftPackageReference "../NoctisAi" */;
 			productName = Noctis;
+		};
+		CFFE4139309B64E900EB2C5F /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFFE4138309B64E900EB2C5F /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

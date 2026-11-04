@@ -6,6 +6,7 @@
 //
 
 import MarkdownUI
+import Shimmer
 import SwiftUI
 
 struct ConversationView: View {
@@ -24,8 +25,14 @@ struct ConversationView: View {
                     ForEach(thread.sortedMessages) { message in
                         VStack(alignment: .leading) {
                             if message.id == generatingMessageID && message.content.isEmpty {
-                                ProgressView("Noctis réfléchit…")
-                                    .controlSize(.small)
+                                Text("Noctis réfléchit…")
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                                    .shimmering(
+                                        active: !reduceMotion && !appManager.appearance.reduceAnimations,
+                                        animation: .linear(duration: 2.4).repeatForever(autoreverses: false),
+                                        gradient: Gradient(colors: [.black.opacity(0.7), .black, .black.opacity(0.7)])
+                                    )
                             } else {
                                 MessageView(message: message, onRegenerate: message.role == .assistant && generatingMessageID == nil ? onRegenerate.map { action in { action(message) } } : nil)
                             }
