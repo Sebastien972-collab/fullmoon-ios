@@ -35,6 +35,7 @@ struct NoctisContactPicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
+        picker.predicateForSelectionOfContact = NSPredicate(value: true)
         picker.displayedPropertyKeys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactNicknameKey]
         return picker
     }
