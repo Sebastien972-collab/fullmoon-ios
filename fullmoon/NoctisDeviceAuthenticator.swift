@@ -65,9 +65,9 @@ final class NoctisLockController {
 
     var mode: String { authenticator.mode }
 
-    init(defaults: UserDefaults = .standard, authenticator: any NoctisAuthenticating = NoctisDeviceAuthenticator()) {
+    init(defaults: UserDefaults = .standard, authenticator: (any NoctisAuthenticating)? = nil) {
         self.defaults = defaults
-        self.authenticator = authenticator
+        self.authenticator = authenticator ?? NoctisDeviceAuthenticator()
         let initiallyEnabled = defaults.bool(forKey: "noctis.lock.enabled")
         enabled = initiallyEnabled
         unlocked = !initiallyEnabled
