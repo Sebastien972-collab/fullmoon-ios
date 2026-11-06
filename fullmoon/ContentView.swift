@@ -63,7 +63,7 @@ struct ContentView: View {
                 }
         }
         .sheet(isPresented: $showSettings) {
-            SettingsView(currentThread: $currentThread)
+            SettingsView(currentThread: $currentThread, viewModel: chatViewModel)
                 .environment(appManager)
                 .presentationDragIndicator(.hidden)
                 .if(appManager.userInterfaceIdiom == .phone) { view in

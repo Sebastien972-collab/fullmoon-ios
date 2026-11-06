@@ -11,6 +11,16 @@ struct SettingsView: View {
     @Environment(AppManager.self) private var appManager
     @Environment(\.dismiss) var dismiss
     @Binding var currentThread: Thread?
+    @Bindable var viewModel: ChatView.ViewModel
+
+    private var modelStatus: ModelStatus {
+        ModelStatus(
+            isConnected: viewModel.isConnected,
+            isLoading: viewModel.isLoading,
+            isDownloading: viewModel.loadPhase == .downloading,
+            error: viewModel.submissionError
+        )
+    }
 
     var body: some View {
         NavigationStack {
@@ -23,6 +33,36 @@ struct SettingsView: View {
                     NavigationLink(destination: ChatsSettingsView(currentThread: $currentThread)) {
                         Label("settings.row.conversations", systemImage: "message")
                     }
+                }
+
+                Section {
+                    LabeledContent("Moteur", value: "Noctis")
+                    LabeledContent("État") {
+                        HStack {
+                            if modelStatus.isBusy {
+                                ProgressView()
+                                    .controlSize(.small)
+                                    .accessibilityHidden(true)
+                            }
+                            Text(modelStatus.title)
+                                .foregroundStyle(.secondary)
+                                .accessibilityIdentifier("modelStatus")
+                        }
+                    }
+                    if case .failed(let message) = modelStatus {
+                        Text(message)
+                            .font(.footnote)
+                            .foregroundStyle(.red)
+                    }
+                    if modelStatus.canLoad {
+                        Button(viewModel.submissionError == nil ? "Charger le modèle" : "Réessayer") {
+                            Task { await viewModel.loadModel() }
+                        }
+                    }
+                } header: {
+                    Text("Modèle IA")
+                } footer: {
+                    Text("Le modèle est défini par Noctis et ne peut pas être changé ici.")
                 }
 
                 Section {
@@ -91,6 +131,6 @@ extension Bundle {
 }
 
 #Preview {
-    SettingsView(currentThread: .constant(nil))
+    SettingsView(currentThread: .constant(nil), viewModel: ChatView.ViewModel())
         .environment(AppManager())
 }
