@@ -1,42 +1,40 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "CFBundleDisplayName": {
-      "comment": "Bundle display name",
-      "extractionState": "extracted_with_value",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noctis Chat"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis Chat"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noctis Chat"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis Chat"
           }
         }
       }
     },
-    "CFBundleName": {
-      "comment": "Bundle name",
-      "extractionState": "extracted_with_value",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "fullmoon"
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fullmoon"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "fullmoon"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fullmoon"
           }
         }
       }
     }
   },
-  "version": "1.3"
+  "version" : "1.3"
 }
