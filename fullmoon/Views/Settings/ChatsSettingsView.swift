@@ -5,6 +5,7 @@
 //  Created by Jordan Singer on 10/6/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ChatsSettingsView: View {
@@ -18,14 +19,14 @@ struct ChatsSettingsView: View {
         @Bindable var appManager = appManager
 
         Form {
-            Section(header: Text("system prompt")) {
+            Section(header: Text("chat_settings.system_prompt.title")) {
                 TextEditor(text: $appManager.systemPrompt)
                     .textEditorStyle(.plain)
             }
             
             if appManager.userInterfaceIdiom == .phone {
                 Section {
-                    Toggle("haptics", isOn: $appManager.shouldPlayHaptics)
+                    Toggle("chat_settings.toggle.haptics", isOn: $appManager.shouldPlayHaptics)
                         .tint(.green)
                 }
             }
@@ -34,14 +35,14 @@ struct ChatsSettingsView: View {
                 Button {
                     deleteAllChats.toggle()
                 } label: {
-                    Label("delete all chats", systemImage: "trash")
+                    Label("chat_settings.button.delete_all", systemImage: "trash")
                         .foregroundStyle(.red)
                 }
-                .alert("are you sure?", isPresented: $deleteAllChats) {
-                    Button("cancel", role: .cancel) {
+                .alert("chat_settings.delete_all.confirmation.title", isPresented: $deleteAllChats) {
+                    Button("common.button.cancel", role: .cancel) {
                         deleteAllChats = false
                     }
-                    Button("delete", role: .destructive) {
+                    Button("common.button.delete", role: .destructive) {
                         deleteChats()
                     }
                 }
@@ -49,7 +50,7 @@ struct ChatsSettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .navigationTitle("chats")
+        .navigationTitle("chat_settings.navigation.title")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

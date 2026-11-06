@@ -4,6 +4,16 @@ import SwiftUI
 enum AppearanceTheme: String, CaseIterable, Codable {
     case system = "Automatique", light = "Clair", dark = "Sombre", midnight = "Noir profond"
     case dusk = "Crépuscule", forest = "Forêt"
+    var title: LocalizedStringResource {
+        switch self {
+        case .system: "appearance.theme.system"
+        case .light: "appearance.theme.light"
+        case .dark: "appearance.theme.dark"
+        case .midnight: "appearance.theme.midnight"
+        case .dusk: "appearance.theme.dusk"
+        case .forest: "appearance.theme.forest"
+        }
+    }
     var scheme: ColorScheme? { switch self { case .system: nil; case .light, .forest: .light; case .dark, .midnight, .dusk: .dark } }
     var background: Color {
         switch self {
@@ -16,46 +26,78 @@ enum AppearanceTheme: String, CaseIterable, Codable {
 }
 enum ChatDensity: String, CaseIterable, Codable {
     case compact = "Compacte", standard = "Standard", comfortable = "Confortable"
+    var title: LocalizedStringResource {
+        switch self {
+        case .compact: "appearance.density.compact"
+        case .standard: "appearance.density.standard"
+        case .comfortable: "appearance.density.comfortable"
+        }
+    }
     var spacing: CGFloat { switch self { case .compact: 8; case .standard: 16; case .comfortable: 24 } }
 }
-enum MessageStyle: String, CaseIterable, Codable { case bubbles = "Bulles", minimal = "Minimaliste" }
+enum MessageStyle: String, CaseIterable, Codable {
+    case bubbles = "Bulles", minimal = "Minimaliste"
+    var title: LocalizedStringResource {
+        switch self {
+        case .bubbles: "appearance.message_style.bubbles"
+        case .minimal: "appearance.message_style.minimal"
+        }
+    }
+}
 enum VisualIntensity: String, CaseIterable, Codable {
     case subtle = "Discrète", balanced = "Équilibrée", expressive = "Expressive"
+    var title: LocalizedStringResource {
+        switch self {
+        case .subtle: "appearance.intensity.subtle"
+        case .balanced: "appearance.intensity.balanced"
+        case .expressive: "appearance.intensity.expressive"
+        }
+    }
     var opacity: Double { switch self { case .subtle: 0.06; case .balanced: 0.12; case .expressive: 0.20 } }
 }
 
 enum AITextRenderingMode: String, CaseIterable, Codable, Identifiable {
     case markdown, animatedText
     var id: Self { self }
-    var title: String { self == .markdown ? "Markdown" : "Texte animé" }
+    var title: LocalizedStringResource {
+        self == .markdown ? "appearance.ai_rendering.markdown" : "appearance.ai_rendering.animated"
+    }
 }
 
 enum AIStreamEffect: String, CaseIterable, Codable, Identifiable {
     case none, trailingShimmer, typewriter, wordReveal, tokenChunks, fadeRise, blurFocus
     case shimmerWipe, skeleton, scramble, letterDrop, lineCascade
     var id: Self { self }
-    var title: String {
+    var title: LocalizedStringResource {
         switch self {
-        case .none: "Aucun effet"; case .trailingShimmer: "Scintillement final"; case .typewriter: "Machine à écrire"
-        case .wordReveal: "Révélation par mots"; case .tokenChunks: "Fragments successifs"; case .fadeRise: "Fondu ascendant"
-        case .blurFocus: "Mise au point"; case .shimmerWipe: "Balayage lumineux"; case .skeleton: "Squelette"
-        case .scramble: "Brouillage"; case .letterDrop: "Chute de lettres"; case .lineCascade: "Cascade de lignes"
+        case .none: "appearance.stream_effect.none"
+        case .trailingShimmer: "appearance.stream_effect.trailing_shimmer"
+        case .typewriter: "appearance.stream_effect.typewriter"
+        case .wordReveal: "appearance.stream_effect.word_reveal"
+        case .tokenChunks: "appearance.stream_effect.token_chunks"
+        case .fadeRise: "appearance.stream_effect.fade_rise"
+        case .blurFocus: "appearance.stream_effect.blur_focus"
+        case .shimmerWipe: "appearance.stream_effect.shimmer_wipe"
+        case .skeleton: "appearance.stream_effect.skeleton"
+        case .scramble: "appearance.stream_effect.scramble"
+        case .letterDrop: "appearance.stream_effect.letter_drop"
+        case .lineCascade: "appearance.stream_effect.line_cascade"
         }
     }
-    var detail: String {
+    var detail: LocalizedStringResource {
         switch self {
-        case .none: "Affiche immédiatement le texte reçu."
-        case .trailingShimmer: "Une lueur discrète suit les derniers caractères."
-        case .typewriter: "Le texte progresse avec un curseur optionnel."
-        case .wordReveal: "Les mots apparaissent progressivement."
-        case .tokenChunks: "Les fragments se fondent par petits groupes."
-        case .fadeRise: "Chaque mot monte doucement en apparaissant."
-        case .blurFocus: "Les mots passent du flou à la netteté."
-        case .shimmerWipe: "Une lumière révèle chaque mot."
-        case .skeleton: "Un espace réservé précède brièvement le texte."
-        case .scramble: "Les caractères se stabilisent depuis un brouillage."
-        case .letterDrop: "Les lettres se déposent en place."
-        case .lineCascade: "Les lignes arrivent en cascade."
+        case .none: "appearance.stream_effect.none.description"
+        case .trailingShimmer: "appearance.stream_effect.trailing_shimmer.description"
+        case .typewriter: "appearance.stream_effect.typewriter.description"
+        case .wordReveal: "appearance.stream_effect.word_reveal.description"
+        case .tokenChunks: "appearance.stream_effect.token_chunks.description"
+        case .fadeRise: "appearance.stream_effect.fade_rise.description"
+        case .blurFocus: "appearance.stream_effect.blur_focus.description"
+        case .shimmerWipe: "appearance.stream_effect.shimmer_wipe.description"
+        case .skeleton: "appearance.stream_effect.skeleton.description"
+        case .scramble: "appearance.stream_effect.scramble.description"
+        case .letterDrop: "appearance.stream_effect.letter_drop.description"
+        case .lineCascade: "appearance.stream_effect.line_cascade.description"
         }
     }
 }
@@ -63,7 +105,14 @@ enum AIStreamEffect: String, CaseIterable, Codable, Identifiable {
 enum IntelligenceGlowPalette: String, CaseIterable, Codable, Identifiable {
     case noctis, ocean, sunset, monochrome
     var id: Self { self }
-    var title: String { switch self { case .noctis: "Noctis"; case .ocean: "Océan"; case .sunset: "Crépuscule"; case .monochrome: "Monochrome" } }
+    var title: LocalizedStringResource {
+        switch self {
+        case .noctis: "appearance.glow_palette.noctis"
+        case .ocean: "appearance.glow_palette.ocean"
+        case .sunset: "appearance.glow_palette.sunset"
+        case .monochrome: "appearance.glow_palette.monochrome"
+        }
+    }
     var colors: [Color] {
         switch self {
         case .noctis: [.indigo, .purple, .pink, .indigo]

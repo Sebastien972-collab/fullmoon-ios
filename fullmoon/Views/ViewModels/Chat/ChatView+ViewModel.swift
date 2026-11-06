@@ -19,7 +19,7 @@ extension ChatView {
         private(set) var isLoading = false
         private(set) var isSending = false
         private(set) var isStopping = false
-        private(set) var submissionError: String?
+        var submissionError: String?
         private(set) var lastFailedPrompt: String?
         private(set) var generatingMessageID: UUID?
         private(set) var generationPhase = AIPhase.idle
@@ -42,7 +42,7 @@ extension ChatView {
         @ObservationIgnored private var drafts: [UUID: String] = [:]
         @ObservationIgnored private var currentTrackedThreadID: UUID?
         private var sessionThreadID: UUID?
-        private var needsNewSession = false
+        var needsNewSession = false
 
         init(makeService: @escaping @MainActor () throws -> any AIModelService = {
             #if os(macOS)
@@ -57,51 +57,6 @@ extension ChatView {
             #endif
         }) {
             self.makeService = makeService
-        }
-
-        var hasMeaningfulPrompt: Bool {
-            prompt.contains { !$0.isWhitespace }
-        }
-
-        var isInputEnabled: Bool { isConnected && !isLoading }
-
-        var connectionMessage: String {
-            guard isLoading else { return "Noctis n’est pas encore connecté." }
-            switch loadPhase {
-            case .downloading: return "Téléchargement…"
-            case .loading: return "Chargement du modèle…"
-            case .ready: return "Prêt"
-            }
-        }
-
-        func chatTitle(for thread: Thread?) -> String {
-            thread?.title ?? thread?.sortedMessages.first.map { String($0.content.prefix(70)) } ?? "Nouvelle conversation"
-        }
-
-        // MARK: - Draft Management
-
-        func updateThreadSelection(_ newThread: Thread?) {
-            if let currentID = currentTrackedThreadID {
-                if prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    drafts.removeValue(forKey: currentID)
-                } else {
-                    drafts[currentID] = prompt
-                }
-            }
-            currentTrackedThreadID = newThread?.id
-            if let newID = newThread?.id {
-                prompt = drafts[newID] ?? ""
-            } else {
-                let emptyThreadDraftKey = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
-                prompt = drafts[emptyThreadDraftKey] ?? ""
-            }
-        }
-
-        func restoreLastFailedPrompt() {
-            guard let failed = lastFailedPrompt, !failed.isEmpty else { return }
-            prompt = failed
-            lastFailedPrompt = nil
-            submissionError = nil
         }
 
         // MARK: - Model Loading
@@ -199,7 +154,7 @@ extension ChatView {
             )
         }
 
-        private func startGeneration(
+        func startGeneration(
             text: String,
             thread: Thread,
             history: [AIChatMessage],
@@ -222,39 +177,7 @@ extension ChatView {
             generationTask = Task {
                 let started = Date()
                 let clock = ContinuousClock()
-                defer {
-                    flushTask?.cancel()
-                    flushTask = nil
-                    flushPendingResponse()
-                    if let responseStarted {
-                        let elapsed = Self.seconds(responseStarted.duration(to: clock.now))
-                        firstTextDelay = firstText.map { Self.seconds(responseStarted.duration(to: $0)) }
-                        if let firstText {
-                            let generationSeconds = Self.seconds(firstText.duration(to: clock.now))
-                            charactersPerSecond = generationSeconds > 0 ? Double(characterCount) / generationSeconds : nil
-                        }
-                        Self.logger.info("Response: first text \(self.firstTextDelay ?? -1) s, total \(elapsed) s, \(self.characterCount) characters, \(self.charactersPerSecond ?? 0) characters/s")
-                    }
-                    if !response.isDeleted, !thread.isDeleted, response.modelContext != nil {
-                        if response.content.isEmpty {
-                            response.hasError = true
-                            response.content = "La réponse n’a pas pu être générée."
-                        } else {
-                            response.generatingTime = Date().timeIntervalSince(started)
-                        }
-                        do {
-                            try context.save()
-                        } catch {
-                            submissionError = error.localizedDescription
-                        }
-                    }
-                    if case .error = generationPhase {} else { generationPhase = .done }
-                    streamingMessage = nil
-                    generatingMessageID = nil
-                    isSending = false
-                    isStopping = false
-                    generationTask = nil
-                }
+                defer { finishGeneration(response: response, thread: thread, context: context, started: started) }
 
                 do {
                     try Task.checkCancellation()
@@ -328,148 +251,97 @@ extension ChatView {
             Double(duration.components.seconds) + Double(duration.components.attoseconds) / 1e18
         }
 
-        // MARK: - In-Place Regeneration & Retrying
-
-        /// Regenerate an assistant message in place within the current conversation
-        func regenerate(_ message: Message, in thread: Thread, context: ModelContext) {
-            guard !isSending, isConnected else { return }
-            let sorted = thread.sortedMessages
-            guard let index = sorted.firstIndex(where: { $0.id == message.id }) else { return }
-
-            let userMessage: Message
-            let historyMessages: [Message]
-
-            if message.role == .assistant {
-                guard let userIndex = sorted[..<index].lastIndex(where: { $0.role == .user }) else { return }
-                userMessage = sorted[userIndex]
-                historyMessages = Array(sorted[..<userIndex])
-            } else {
-                userMessage = message
-                historyMessages = Array(sorted[..<index])
-            }
-
-            let history = historyMessages.map { msg in
-                let role: AIChatMessage.Role = switch msg.role {
-                case .user: .user
-                case .assistant: .assistant
-                case .system: .system
-                }
-                return AIChatMessage(role: role, content: msg.content)
-            }
-
-            let targetResponse: Message
-            if message.role == .assistant {
-                targetResponse = message
-                targetResponse.content = ""
-                targetResponse.isInterrupted = false
-                targetResponse.hasError = false
-                targetResponse.timestamp = Date()
-            } else {
-                if index + 1 < sorted.count, sorted[index + 1].role == .assistant {
-                    targetResponse = sorted[index + 1]
-                    targetResponse.content = ""
-                    targetResponse.isInterrupted = false
-                    targetResponse.hasError = false
-                    targetResponse.timestamp = Date()
-                } else {
-                    targetResponse = Message(role: .assistant, content: "")
-                    context.insert(targetResponse)
-                    thread.messages.append(targetResponse)
-                }
-            }
-
-            do {
-                try context.save()
-            } catch {
-                submissionError = error.localizedDescription
-                return
-            }
-
-            needsNewSession = true
-            submissionError = nil
-            startGeneration(
-                text: userMessage.content,
-                thread: thread,
-                history: history,
-                response: targetResponse,
-                context: context
-            )
-        }
-
-        /// Create a branch in a separate conversation from a given message
-        func createBranch(from message: Message, in thread: Thread, context: ModelContext, select: (Thread) -> Void) {
-            guard !isSending, isConnected,
-                  let index = thread.sortedMessages.firstIndex(where: { $0.id == message.id }),
-                  let userIndex = thread.sortedMessages[..<index].lastIndex(where: { $0.role == .user }) else { return }
-            let messages = thread.sortedMessages
-            let branch = Thread()
-            branch.title = "Variante · " + String(messages[userIndex].content.prefix(60))
-            context.insert(branch)
-            for original in messages[..<userIndex] {
-                let copy = Message(role: original.role, content: original.content)
-                context.insert(copy)
-                branch.messages.append(copy)
-            }
-            let draft = prompt
-            prompt = messages[userIndex].content
-            needsNewSession = true
-            send(to: branch, in: context, select: select)
-            prompt = draft
-        }
-
-        // MARK: - Edit & Delete Messages
-
-        /// Puts the user message content back into the prompt and cleans up the subsequent exchange for re-submission
-        func editUserMessage(_ message: Message, in thread: Thread, context: ModelContext) {
-            guard message.role == .user else { return }
-            if isSending { stop() }
-            prompt = message.content
-
-            let sorted = thread.sortedMessages
-            if let userIndex = sorted.firstIndex(where: { $0.id == message.id }) {
-                // Remove following assistant message if present
-                if userIndex + 1 < sorted.count && sorted[userIndex + 1].role == .assistant {
-                    let assistantMsg = sorted[userIndex + 1]
-                    if let aIndex = thread.messages.firstIndex(where: { $0.id == assistantMsg.id }) {
-                        thread.messages.remove(at: aIndex)
-                    }
-                    context.delete(assistantMsg)
-                }
-                if let uIndex = thread.messages.firstIndex(where: { $0.id == message.id }) {
-                    thread.messages.remove(at: uIndex)
-                }
-                context.delete(message)
-            }
-            needsNewSession = true
-            do {
-                try context.save()
-            } catch {
-                submissionError = error.localizedDescription
-            }
-        }
-
-        /// Deletes a single message
-        func deleteMessage(_ message: Message, in thread: Thread, context: ModelContext) {
-            if generatingMessageID == message.id {
-                stop()
-            }
-            if let index = thread.messages.firstIndex(where: { $0.id == message.id }) {
-                thread.messages.remove(at: index)
-            }
-            context.delete(message)
-            needsNewSession = true
-            do {
-                try context.save()
-            } catch {
-                submissionError = error.localizedDescription
-            }
-        }
-
         func stop() {
             guard isSending, !isStopping else { return }
             isStopping = true
             // withResponse waits for the engine to clean up after task cancellation.
             generationTask?.cancel()
         }
+    }
+}
+
+extension ChatView.ViewModel {
+    var hasMeaningfulPrompt: Bool {
+        prompt.contains { !$0.isWhitespace }
+    }
+
+    var isInputEnabled: Bool { isConnected && !isLoading }
+
+    var connectionMessage: LocalizedStringResource {
+        guard isLoading else { return "chat.connection.status.disconnected" }
+        switch loadPhase {
+        case .downloading: return "chat.connection.status.downloading"
+        case .loading: return "chat.connection.status.loading"
+        case .ready: return "chat.connection.status.ready"
+        }
+    }
+
+    func chatTitle(for thread: Thread?) -> String {
+        thread?.title ?? thread?.sortedMessages.first.map { String($0.content.prefix(70)) }
+            ?? String(localized: "chats.default_title")
+    }
+
+    // MARK: - Draft Management
+
+    func updateThreadSelection(_ newThread: Thread?) {
+        if let currentID = currentTrackedThreadID {
+            if prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                drafts.removeValue(forKey: currentID)
+            } else {
+                drafts[currentID] = prompt
+            }
+        }
+        currentTrackedThreadID = newThread?.id
+        if let newID = newThread?.id {
+            prompt = drafts[newID] ?? ""
+        } else {
+            let emptyThreadDraftKey = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+            prompt = drafts[emptyThreadDraftKey] ?? ""
+        }
+    }
+
+    func restoreLastFailedPrompt() {
+        guard let failed = lastFailedPrompt, !failed.isEmpty else { return }
+        prompt = failed
+        lastFailedPrompt = nil
+        submissionError = nil
+    }
+
+    private func finishGeneration(response: Message, thread: Thread, context: ModelContext, started: Date) {
+        let clock = ContinuousClock()
+        flushTask?.cancel()
+        flushTask = nil
+        flushPendingResponse()
+        if let responseStarted {
+            let elapsed = Self.seconds(responseStarted.duration(to: clock.now))
+            firstTextDelay = firstText.map { Self.seconds(responseStarted.duration(to: $0)) }
+            if let firstText {
+                let generationSeconds = Self.seconds(firstText.duration(to: clock.now))
+                charactersPerSecond = generationSeconds > 0 ? Double(characterCount) / generationSeconds : nil
+            }
+            Self.logger.info("""
+                Response: first text \(self.firstTextDelay ?? -1) s, total \(elapsed) s, \
+                \(self.characterCount) characters, \(self.charactersPerSecond ?? 0) characters/s
+                """)
+        }
+        if !response.isDeleted, !thread.isDeleted, response.modelContext != nil {
+            if response.content.isEmpty {
+                response.hasError = true
+                response.content = String(localized: "chat.error.response_generation_failed")
+            } else {
+                response.generatingTime = Date().timeIntervalSince(started)
+            }
+            do {
+                try context.save()
+            } catch {
+                submissionError = error.localizedDescription
+            }
+        }
+        if case .error = generationPhase {} else { generationPhase = .done }
+        streamingMessage = nil
+        generatingMessageID = nil
+        isSending = false
+        isStopping = false
+        generationTask = nil
     }
 }

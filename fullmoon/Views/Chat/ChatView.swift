@@ -84,7 +84,7 @@ struct ChatView: View {
                             .lineLimit(2)
                         Spacer()
                         if viewModel.lastFailedPrompt != nil {
-                            Button("Restaurer le texte") {
+                            Button("chat.error.button.restore_prompt") {
                                 viewModel.restoreLastFailedPrompt()
                                 isPromptFocused = true
                             }
@@ -168,7 +168,7 @@ struct ChatView: View {
                     .font(.caption2.weight(.medium))
                     .foregroundStyle(.secondary)
                 if !viewModel.isLoading && viewModel.submissionError != nil {
-                    Button("Réessayer") {
+                    Button("common.button.retry") {
                         Task { await viewModel.loadModel() }
                     }
                     .font(.caption2.weight(.semibold))
@@ -196,7 +196,7 @@ struct ChatView: View {
                 } label: {
                     Image(systemName: "list.bullet")
                 }
-                .accessibilityLabel("Liste des conversations")
+                .accessibilityLabel("chat.toolbar.chats.accessibility.label")
             }
         }
 
@@ -217,9 +217,9 @@ struct ChatView: View {
             appManager.playHaptic()
             showSettings.toggle()
         } label: {
-            Label("Réglages", systemImage: "slider.horizontal.3")
+            Label("settings.navigation.title", systemImage: "slider.horizontal.3")
         }
-        .accessibilityLabel("Ouvrir les réglages")
+        .accessibilityLabel("chat.toolbar.settings.accessibility.label")
         .keyboardShortcut(",", modifiers: .command)
     }
 }

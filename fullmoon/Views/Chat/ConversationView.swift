@@ -78,10 +78,10 @@ struct ConversationView: View {
                             Image(systemName: "arrow.down")
                                 .font(.caption.weight(.bold))
                             if isGenerating {
-                                Text("Nouveaux messages")
+                                Text("conversation.scroll_button.new_messages")
                                     .font(.caption.weight(.medium))
                             } else {
-                                Text("Dernier message")
+                                Text("conversation.scroll_button.last_message")
                                     .font(.caption.weight(.medium))
                             }
                         }
@@ -101,7 +101,11 @@ struct ConversationView: View {
                     .buttonStyle(.plain)
                     .padding(.bottom, 12)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .accessibilityLabel(isGenerating ? "Nouveaux messages reçus, faire défiler vers le bas" : "Faire défiler vers le bas")
+                    .accessibilityLabel(
+                        isGenerating
+                            ? LocalizedStringResource("conversation.scroll_button.new_messages.accessibility.label")
+                            : LocalizedStringResource("conversation.scroll_button.accessibility.label")
+                    )
                 }
             }
             .onChange(of: thread.id) {
