@@ -11,6 +11,9 @@ import SwiftUI
 struct ContentView: View {
     @Environment(AppManager.self) private var appManager
     @Environment(\.modelContext) var modelContext
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(NoctisCloudSync.self) private var cloud
+    @State private var syncClientID = UUID()
     @State var showSettings = false
     @State var showChats = false
     @State var currentThread: Thread?
@@ -38,6 +41,28 @@ struct ContentView: View {
             }
         }
         .environment(appManager)
+        .task(id: scenePhase) {
+            guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else { return }
+            guard scenePhase == .active else {
+                await cloud.pause()
+                return
+            }
+            cloud.configure(context: modelContext)
+            while !Task.isCancelled {
+                await cloud.synchronize()
+                do { try await Task.sleep(for: .seconds(30)) } catch { break }
+            }
+        }
+        .onChange(of: chatViewModel.isSending) { _, sending in
+            cloud.setGenerating(sending, client: syncClientID)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: ModelContext.didSave)) { _ in
+            cloud.refreshStatus()
+        }
+        .onDisappear {
+            cloud.setGenerating(false, client: syncClientID)
+            Task { await cloud.pause() }
+        }
         .onChange(of: appManager.hasCompletedOnboarding) { _, completed in
             isPromptFocused = completed
         }
@@ -56,6 +81,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showChats) {
             ChatsListView(currentThread: $currentThread, isPromptFocused: $isPromptFocused)
+                .noctisAppLock()
                 .environment(appManager)
                 .presentationDragIndicator(.hidden)
                 .if(appManager.userInterfaceIdiom == .phone) { view in
@@ -64,6 +90,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showSettings) {
             SettingsView(currentThread: $currentThread, viewModel: chatViewModel)
+                .noctisAppLock()
                 .environment(appManager)
                 .presentationDragIndicator(.hidden)
                 .if(appManager.userInterfaceIdiom == .phone) { view in
@@ -91,6 +118,8 @@ extension View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Thread.self, Message.self], inMemory: true)
+        .modelContainer(for: [Thread.self, Message.self, NoctisUserProfile.self, NoctisSyncRecord.self], inMemory: true)
         .environment(AppManager())
+        .environment(NoctisCloudSync())
+        .environment(NoctisLockController())
 }
