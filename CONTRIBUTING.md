@@ -103,3 +103,18 @@ formatage sans rapport avec le sujet.
 Ne pas commiter de secrets, `.env`, profils de signature, trousseaux, poids de modèles,
 runtimes ou artefacts de build. Respecter la [licence MIT du projet d'origine](LICENSE)
 et conserver les licences et notices des dépendances distribuées.
+
+## Tests de l'état du modèle
+
+Les tests de présentation de l'état Noctis s'exécutent sans télécharger de poids :
+
+```sh
+swiftc fullmoon/Domain/ModelStatus.swift tests/ModelStatusTests.swift -o /tmp/noctis-model-status-tests
+/tmp/noctis-model-status-tests
+```
+
+Ils vérifient les états initial, téléchargement, chargement, prêt, erreur et reprise,
+ainsi que la priorité du modèle connecté sur les erreurs de conversation.
+L'API Noctis actuelle expose les phases sans pourcentage ni inspection publique du
+cache. L'état initial est donc « Non chargé » et la progression reste indéterminée.
+Ces tests ne remplacent pas une compilation iOS ni un essai d'inférence sur appareil.

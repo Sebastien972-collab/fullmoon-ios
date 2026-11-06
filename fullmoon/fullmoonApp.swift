@@ -48,7 +48,7 @@ struct fullmoonApp: App {
         #if os(macOS)
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button("Show Main Window") {
+                Button("app.command.show_main_window") {
                     if let mainWindow = NSApp.windows.first {
                         mainWindow.makeKeyAndOrderFront(nil)
                     }

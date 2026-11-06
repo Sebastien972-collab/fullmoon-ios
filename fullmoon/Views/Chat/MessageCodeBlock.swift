@@ -13,7 +13,7 @@ struct MessageCodeBlock: View {
                     Image(systemName: "curlybraces")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
-                    Text(configuration.language?.uppercased() ?? "CODE")
+                    Text(configuration.language?.uppercased() ?? String(localized: "code_block.language.default"))
                         .font(.caption2.weight(.semibold).monospaced())
                         .foregroundStyle(.secondary)
                 }
@@ -32,7 +32,11 @@ struct MessageCodeBlock: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: copied ? "checkmark" : "doc.on.doc")
-                        Text(copied ? "Copié" : "Copier")
+                        Text(
+                            copied
+                                ? LocalizedStringResource("common.status.copied")
+                                : LocalizedStringResource("common.button.copy")
+                        )
                     }
                     .font(.caption2.weight(.medium))
                     .foregroundStyle(copied ? Color.green : Color.secondary)
@@ -42,7 +46,11 @@ struct MessageCodeBlock: View {
                 }
                 .buttonStyle(.plain)
                 .contentShape(Rectangle())
-                .accessibilityLabel(copied ? "Code copié" : "Copier le bloc de code")
+                .accessibilityLabel(
+                    copied
+                        ? LocalizedStringResource("code_block.copy.success.accessibility.label")
+                        : LocalizedStringResource("code_block.copy.accessibility.label")
+                )
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)

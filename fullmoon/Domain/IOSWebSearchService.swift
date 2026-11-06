@@ -145,9 +145,9 @@ final class IOSWebSearchService: WebSearchService, @unchecked Sendable {
 
         var errorDescription: String? {
             switch self {
-            case .invalidQuery: "La requête de recherche est invalide."
-            case .runtimeUnavailable: "Le runtime SearXNG iOS embarqué est indisponible."
-            case .searchFailed: "La recherche SearXNG sur l’appareil a échoué."
+            case .invalidQuery: String(localized: "web_search.error.invalid_query")
+            case .runtimeUnavailable: String(localized: "web_search.error.runtime_unavailable")
+            case .searchFailed: String(localized: "web_search.error.search_failed")
             }
         }
     }

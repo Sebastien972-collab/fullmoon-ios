@@ -151,3 +151,13 @@ violations sont bloquantes. Ne pas la régénérer pour masquer une régression.
 
 Les règles de contribution et les commandes de validation sont décrites dans
 [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Premier démarrage
+
+Le parcours d’accueil reprend la présentation et la préparation du modèle du projet
+Fullmoon d’origine, adaptées au moteur Noctis et aux réglages actuels. Il s’affiche
+jusqu’à la première préparation réussie, puis à la validation « Commencer la conversation ».
+Le téléchargement éventuel ne commence qu’après « Préparer Noctis ». Un modèle en cache
+est réutilisé et le moteur chargé est conservé lors de l’ouverture du chat.
+Les erreurs restent visibles avec la possibilité de réessayer. L’apparence peut être
+personnalisée depuis l’accueil, sans charger le modèle.

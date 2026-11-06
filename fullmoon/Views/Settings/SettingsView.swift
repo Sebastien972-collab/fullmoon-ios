@@ -11,17 +11,27 @@ struct SettingsView: View {
     @Environment(AppManager.self) private var appManager
     @Environment(\.dismiss) var dismiss
     @Binding var currentThread: Thread?
+    @Bindable var viewModel: ChatView.ViewModel
+
+    private var modelStatus: ModelStatus {
+        ModelStatus(
+            isConnected: viewModel.isConnected,
+            isLoading: viewModel.isLoading,
+            isDownloading: viewModel.loadPhase == .downloading,
+            error: viewModel.submissionError
+        )
+    }
 
     var body: some View {
         NavigationStack {
             Form {
                 Section {
                     NavigationLink(destination: AppearanceSettingsView()) {
-                        Label("Apparence et personnalisation", systemImage: "paintpalette")
+                        Label("settings.row.appearance", systemImage: "paintpalette")
                     }
 
                     NavigationLink(destination: ChatsSettingsView(currentThread: $currentThread)) {
-                        Label("Conversations", systemImage: "message")
+                        Label("settings.row.conversations", systemImage: "message")
                     }
                 }
 
@@ -35,8 +45,38 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    LabeledContent("Moteur", value: "Noctis")
+                    LabeledContent("État") {
+                        HStack {
+                            if modelStatus.isBusy {
+                                ProgressView()
+                                    .controlSize(.small)
+                                    .accessibilityHidden(true)
+                            }
+                            Text(modelStatus.title)
+                                .foregroundStyle(.secondary)
+                                .accessibilityIdentifier("modelStatus")
+                        }
+                    }
+                    if case .failed(let message) = modelStatus {
+                        Text(message)
+                            .font(.footnote)
+                            .foregroundStyle(.red)
+                    }
+                    if modelStatus.canLoad {
+                        Button(viewModel.submissionError == nil ? "Charger le modèle" : "Réessayer") {
+                            Task { await viewModel.loadModel() }
+                        }
+                    }
+                } header: {
+                    Text("Modèle IA")
+                } footer: {
+                    Text("Le modèle est défini par Noctis et ne peut pas être changé ici.")
+                }
+
+                Section {
                     NavigationLink(destination: CreditsView()) {
-                        Text("Crédits")
+                        Text("settings.row.credits")
                     }
                 }
 
@@ -46,7 +86,12 @@ struct SettingsView: View {
                         VStack(spacing: 4) {
                             Image(systemName: appManager.getMoonPhaseIcon())
                                 .foregroundStyle(.quaternary)
-                            Text("v\(Bundle.main.releaseVersionNumber ?? "0").\(Bundle.main.buildVersionNumber ?? "0")")
+                            Text(
+                                verbatim: """
+                                v\(Bundle.main.releaseVersionNumber ?? "0").\
+                                \(Bundle.main.buildVersionNumber ?? "0")
+                                """
+                            )
                                 .font(.footnote)
                                 .foregroundStyle(.tertiary)
                         }
@@ -56,7 +101,7 @@ struct SettingsView: View {
                 }
             }
             .formStyle(.grouped)
-            .navigationTitle("Réglages")
+            .navigationTitle("settings.navigation.title")
             #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
             #endif
@@ -65,12 +110,13 @@ struct SettingsView: View {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: { dismiss() }) {
                             Image(systemName: "xmark")
+                                .accessibilityLabel("common.button.close")
                         }
                     }
                     #elseif os(macOS)
                     ToolbarItem(placement: .destructiveAction) {
                         Button(action: { dismiss() }) {
-                            Text("close")
+                            Text("common.button.close")
                         }
                     }
                     #endif
@@ -94,7 +140,7 @@ extension Bundle {
 }
 
 #Preview {
-    SettingsView(currentThread: .constant(nil))
+    SettingsView(currentThread: .constant(nil), viewModel: ChatView.ViewModel())
         .environment(AppManager())
         .environment(NoctisCloudSync())
         .environment(NoctisLockController())
