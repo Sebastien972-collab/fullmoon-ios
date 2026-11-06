@@ -17,17 +17,17 @@ struct SettingsView: View {
             Form {
                 Section {
                     NavigationLink(destination: AppearanceSettingsView()) {
-                        Label("Apparence et personnalisation", systemImage: "paintpalette")
+                        Label("settings.row.appearance", systemImage: "paintpalette")
                     }
 
                     NavigationLink(destination: ChatsSettingsView(currentThread: $currentThread)) {
-                        Label("Conversations", systemImage: "message")
+                        Label("settings.row.conversations", systemImage: "message")
                     }
                 }
 
                 Section {
                     NavigationLink(destination: CreditsView()) {
-                        Text("Crédits")
+                        Text("settings.row.credits")
                     }
                 }
 
@@ -37,7 +37,12 @@ struct SettingsView: View {
                         VStack(spacing: 4) {
                             Image(systemName: appManager.getMoonPhaseIcon())
                                 .foregroundStyle(.quaternary)
-                            Text("v\(Bundle.main.releaseVersionNumber ?? "0").\(Bundle.main.buildVersionNumber ?? "0")")
+                            Text(
+                                verbatim: """
+                                v\(Bundle.main.releaseVersionNumber ?? "0").\
+                                \(Bundle.main.buildVersionNumber ?? "0")
+                                """
+                            )
                                 .font(.footnote)
                                 .foregroundStyle(.tertiary)
                         }
@@ -47,7 +52,7 @@ struct SettingsView: View {
                 }
             }
             .formStyle(.grouped)
-            .navigationTitle("Réglages")
+            .navigationTitle("settings.navigation.title")
             #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
             #endif
@@ -56,12 +61,13 @@ struct SettingsView: View {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: { dismiss() }) {
                             Image(systemName: "xmark")
+                                .accessibilityLabel("common.button.close")
                         }
                     }
                     #elseif os(macOS)
                     ToolbarItem(placement: .destructiveAction) {
                         Button(action: { dismiss() }) {
-                            Text("close")
+                            Text("common.button.close")
                         }
                     }
                     #endif

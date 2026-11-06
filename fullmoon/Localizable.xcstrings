@@ -1,0 +1,3950 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "app.command.show_main_window": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher Noctis"
+          }
+        }
+      }
+    },
+    "app.name": {
+      "comment": "Created by Sébastien DAGUIN",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis"
+          }
+        }
+      }
+    },
+    "appearance.accessibility.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effects respect the system’s Reduce Motion and Reduce Transparency settings."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les effets respectent les réglages système Réduire les animations et Réduire la transparence."
+          }
+        }
+      }
+    },
+    "appearance.ai_rendering.animated": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animated text"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte animé"
+          }
+        }
+      }
+    },
+    "appearance.ai_rendering.markdown": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown"
+          }
+        }
+      }
+    },
+    "appearance.button.reset_effects": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset effects"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser les effets"
+          }
+        }
+      }
+    },
+    "appearance.control.duration": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duration"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée"
+          }
+        }
+      }
+    },
+    "appearance.control.intensity": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intensity"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intensité"
+          }
+        }
+      }
+    },
+    "appearance.control.interval": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interval"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intervalle"
+          }
+        }
+      }
+    },
+    "appearance.control.period": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Period"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Période"
+          }
+        }
+      }
+    },
+    "appearance.control.probability": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probability"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probabilité"
+          }
+        }
+      }
+    },
+    "appearance.control.radius": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corner radius"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rayon des angles"
+          }
+        }
+      }
+    },
+    "appearance.control.size": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Size"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taille"
+          }
+        }
+      }
+    },
+    "appearance.control.spacing": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spacing"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espacement"
+          }
+        }
+      }
+    },
+    "appearance.control.stabilization": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stabilization"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stabilisation"
+          }
+        }
+      }
+    },
+    "appearance.control.thickness": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thickness"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Épaisseur"
+          }
+        }
+      }
+    },
+    "appearance.density.comfortable": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comfortable"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confortable"
+          }
+        }
+      }
+    },
+    "appearance.density.compact": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compact"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compacte"
+          }
+        }
+      }
+    },
+    "appearance.density.standard": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        }
+      }
+    },
+    "appearance.font_design.monospaced": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monospaced"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chasse fixe"
+          }
+        }
+      }
+    },
+    "appearance.font_design.rounded": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rounded"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrondie"
+          }
+        }
+      }
+    },
+    "appearance.font_design.serif": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serif"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec empattements"
+          }
+        }
+      }
+    },
+    "appearance.font_design.standard": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        }
+      }
+    },
+    "appearance.font_width.compressed": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compressed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprimée"
+          }
+        }
+      }
+    },
+    "appearance.font_width.condensed": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condensed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condensée"
+          }
+        }
+      }
+    },
+    "appearance.font_width.expanded": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expanded"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Élargie"
+          }
+        }
+      }
+    },
+    "appearance.font_width.standard": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        }
+      }
+    },
+    "appearance.glow_palette.monochrome": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monochrome"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monochrome"
+          }
+        }
+      }
+    },
+    "appearance.glow_palette.noctis": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis"
+          }
+        }
+      }
+    },
+    "appearance.glow_palette.ocean": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocean"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Océan"
+          }
+        }
+      }
+    },
+    "appearance.glow_palette.sunset": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coucher de soleil"
+          }
+        }
+      }
+    },
+    "appearance.intelligence_glow.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A glowing border follows the assistant’s activity."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une bordure lumineuse accompagne l’activité de l’assistant."
+          }
+        }
+      }
+    },
+    "appearance.intensity.balanced": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balanced"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Équilibrée"
+          }
+        }
+      }
+    },
+    "appearance.intensity.expressive": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expressive"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expressive"
+          }
+        }
+      }
+    },
+    "appearance.intensity.subtle": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subtle"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discrète"
+          }
+        }
+      }
+    },
+    "appearance.message_style.bubbles": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bubbles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bulles"
+          }
+        }
+      }
+    },
+    "appearance.message_style.minimal": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimaliste"
+          }
+        }
+      }
+    },
+    "appearance.navigation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appearance"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparence"
+          }
+        }
+      }
+    },
+    "appearance.picker.accent": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accent color"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur d’accent"
+          }
+        }
+      }
+    },
+    "appearance.picker.density": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Density"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Densité"
+          }
+        }
+      }
+    },
+    "appearance.picker.font": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Font design"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Police"
+          }
+        }
+      }
+    },
+    "appearance.picker.font_width": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Font width"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Largeur de police"
+          }
+        }
+      }
+    },
+    "appearance.picker.intensity": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intensity"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intensité"
+          }
+        }
+      }
+    },
+    "appearance.picker.messages": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messages"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messages"
+          }
+        }
+      }
+    },
+    "appearance.picker.palette": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palette"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palette"
+          }
+        }
+      }
+    },
+    "appearance.picker.reading_width": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading width"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Largeur de lecture"
+          }
+        }
+      }
+    },
+    "appearance.picker.response_rendering": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Response rendering"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rendu des réponses"
+          }
+        }
+      }
+    },
+    "appearance.picker.text_animation": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text animation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animation du texte"
+          }
+        }
+      }
+    },
+    "appearance.picker.theme": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theme"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème"
+          }
+        }
+      }
+    },
+    "appearance.preview.button.replay": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replay"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rejouer"
+          }
+        }
+      }
+    },
+    "appearance.preview.phase.done": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé"
+          }
+        }
+      }
+    },
+    "appearance.preview.phase.error": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erreur"
+          }
+        }
+      }
+    },
+    "appearance.preview.phase.generating": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generating"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Génération"
+          }
+        }
+      }
+    },
+    "appearance.preview.phase.ready": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prêt"
+          }
+        }
+      }
+    },
+    "appearance.preview.phase.thinking": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thinking"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réflexion"
+          }
+        }
+      }
+    },
+    "appearance.preview.sample": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis helps you turn your ideas into clear, useful answers."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis vous aide à transformer vos idées en réponses claires et utiles."
+          }
+        }
+      }
+    },
+    "appearance.reading_width.narrow": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Narrow"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étroite"
+          }
+        }
+      }
+    },
+    "appearance.reading_width.standard": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        }
+      }
+    },
+    "appearance.reading_width.wide": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wide"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Large"
+          }
+        }
+      }
+    },
+    "appearance.section.ai_effects": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI effects"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effets IA"
+          }
+        }
+      }
+    },
+    "appearance.section.ai_preview": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preview"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperçu"
+          }
+        }
+      }
+    },
+    "appearance.section.conversations": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        }
+      }
+    },
+    "appearance.section.theme": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theme and colors"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème et couleurs"
+          }
+        }
+      }
+    },
+    "appearance.section.typography": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Typography"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Typographie"
+          }
+        }
+      }
+    },
+    "appearance.section.visual_effects": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visual effects"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effets visuels"
+          }
+        }
+      }
+    },
+    "appearance.shimmer.window %lld": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shimmer window: %lld characters"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fenêtre de scintillement : %lld caractères"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.blur_focus": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blur to focus"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mise au point"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.blur_focus.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bring text progressively into focus."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rend le texte progressivement net."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.fade_rise": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fade and rise"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fondu ascendant"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.fade_rise.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fade text in with an upward motion."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fait apparaître le texte en fondu vers le haut."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.letter_drop": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letter drop"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chute de lettres"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.letter_drop.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drop letters into place."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fait tomber les lettres à leur place."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.line_cascade": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Line cascade"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cascade de lignes"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.line_cascade.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal text line by line."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Révèle le texte ligne par ligne."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.none": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.none.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display text without an animation."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affiche le texte sans animation."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.scramble": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scramble"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déchiffrement"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.scramble.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resolve changing characters into text."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transforme des caractères changeants en texte."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.shimmer_wipe": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shimmer wipe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayage lumineux"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.shimmer_wipe.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal text with a sweep of light."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Révèle le texte par un balayage lumineux."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.skeleton": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skeleton"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte provisoire"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.skeleton.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show placeholders while text stabilizes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affiche des espaces réservés pendant la stabilisation du texte."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.token_chunks": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text chunks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fragments de texte"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.token_chunks.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal text in small groups."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Révèle le texte par petits groupes."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.trailing_shimmer": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trailing shimmer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scintillement final"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.trailing_shimmer.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Highlight the most recent characters."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Met en lumière les caractères les plus récents."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.typewriter": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Typewriter"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Machine à écrire"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.typewriter.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal text character by character."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Révèle le texte caractère par caractère."
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.word_reveal": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word reveal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mot par mot"
+          }
+        }
+      }
+    },
+    "appearance.stream_effect.word_reveal.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal one word at a time."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Révèle un mot à la fois."
+          }
+        }
+      }
+    },
+    "appearance.text_size.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text size"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taille du texte"
+          }
+        }
+      }
+    },
+    "appearance.theme.dark": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sombre"
+          }
+        }
+      }
+    },
+    "appearance.theme.dusk": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dusk"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crépuscule"
+          }
+        }
+      }
+    },
+    "appearance.theme.forest": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forest"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forêt"
+          }
+        }
+      }
+    },
+    "appearance.theme.light": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clair"
+          }
+        }
+      }
+    },
+    "appearance.theme.midnight": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Midnight"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noir profond"
+          }
+        }
+      }
+    },
+    "appearance.theme.system": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique"
+          }
+        }
+      }
+    },
+    "appearance.thinking_indicator.dots %lld": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dots: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Points : %lld"
+          }
+        }
+      }
+    },
+    "appearance.tint.blue": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blue"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu"
+          }
+        }
+      }
+    },
+    "appearance.tint.brown": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brown"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marron"
+          }
+        }
+      }
+    },
+    "appearance.tint.gray": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gray"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gris"
+          }
+        }
+      }
+    },
+    "appearance.tint.green": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Green"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vert"
+          }
+        }
+      }
+    },
+    "appearance.tint.indigo": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indigo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indigo"
+          }
+        }
+      }
+    },
+    "appearance.tint.mint": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mint"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menthe"
+          }
+        }
+      }
+    },
+    "appearance.tint.monochrome": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monochrome"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monochrome"
+          }
+        }
+      }
+    },
+    "appearance.tint.orange": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orange"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orange"
+          }
+        }
+      }
+    },
+    "appearance.tint.pink": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pink"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rose"
+          }
+        }
+      }
+    },
+    "appearance.tint.purple": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purple"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violet"
+          }
+        }
+      }
+    },
+    "appearance.tint.red": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rouge"
+          }
+        }
+      }
+    },
+    "appearance.tint.teal": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu sarcelle"
+          }
+        }
+      }
+    },
+    "appearance.tint.yellow": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yellow"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaune"
+          }
+        }
+      }
+    },
+    "appearance.toggle.ai_effects": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable AI effects"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer les effets IA"
+          }
+        }
+      }
+    },
+    "appearance.toggle.avatars": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show avatars"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les avatars"
+          }
+        }
+      }
+    },
+    "appearance.toggle.intelligence_glow": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glowing border"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bordure lumineuse"
+          }
+        }
+      }
+    },
+    "appearance.toggle.liquid_glass": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liquid Glass"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liquid Glass"
+          }
+        }
+      }
+    },
+    "appearance.toggle.reduce_animations": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reduce animations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réduire les animations"
+          }
+        }
+      }
+    },
+    "appearance.toggle.thinking_indicator": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thinking indicator"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indicateur de réflexion"
+          }
+        }
+      }
+    },
+    "appearance.toggle.timestamps": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show timestamps"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les heures"
+          }
+        }
+      }
+    },
+    "appearance.toggle.typewriter_caret": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show typing caret"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher le curseur de saisie"
+          }
+        }
+      }
+    },
+    "chat.branch.title %@": {
+      "comment": "Titre de la conversation d’origine.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variant: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variante : %@"
+          }
+        }
+      }
+    },
+    "chat.connection.status.disconnected": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disconnected"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déconnecté"
+          }
+        }
+      }
+    },
+    "chat.connection.status.downloading": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloading…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargement…"
+          }
+        }
+      }
+    },
+    "chat.connection.status.loading": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading model…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement du modèle…"
+          }
+        }
+      }
+    },
+    "chat.connection.status.ready": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prêt"
+          }
+        }
+      }
+    },
+    "chat.error.button.restore_prompt": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récupérer le message"
+          }
+        }
+      }
+    },
+    "chat.error.response_generation_failed": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unable to generate a response. Please try again."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de générer une réponse. Réessayez."
+          }
+        }
+      }
+    },
+    "chat.input.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message to Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message à Noctis"
+          }
+        }
+      }
+    },
+    "chat.input.placeholder": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message Noctis…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écrire à Noctis…"
+          }
+        }
+      }
+    },
+    "chat.input.send.accessibility.hint": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sends your message to Noctis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoie votre message à Noctis."
+          }
+        }
+      }
+    },
+    "chat.input.send.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyer le message"
+          }
+        }
+      }
+    },
+    "chat.input.stop.accessibility.hint": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stops the current response."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrête la réponse en cours."
+          }
+        }
+      }
+    },
+    "chat.input.stop.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop response"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter la réponse"
+          }
+        }
+      }
+    },
+    "chat.status.thinking": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thinking…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réflexion…"
+          }
+        }
+      }
+    },
+    "chat.toolbar.chats.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les conversations"
+          }
+        }
+      }
+    },
+    "chat.toolbar.settings.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open settings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les réglages"
+          }
+        }
+      }
+    },
+    "chat.welcome.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask a question or choose an idea to get started."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posez une question ou choisissez une idée pour commencer."
+          }
+        }
+      }
+    },
+    "chat.welcome.prompt.clarify": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help me clarify an idea."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aide-moi à clarifier une idée."
+          }
+        }
+      }
+    },
+    "chat.welcome.prompt.explain": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explain a concept to me simply."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explique-moi un concept simplement."
+          }
+        }
+      }
+    },
+    "chat.welcome.prompt.plan": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggest a plan for my next project."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Propose un plan pour mon prochain projet."
+          }
+        }
+      }
+    },
+    "chat.welcome.suggestion.clarify": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clarify an idea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clarifier une idée"
+          }
+        }
+      }
+    },
+    "chat.welcome.suggestion.explain": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Understand a concept"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprendre un concept"
+          }
+        }
+      }
+    },
+    "chat.welcome.suggestion.plan": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan a project"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifier un projet"
+          }
+        }
+      }
+    },
+    "chat.welcome.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How can I help you?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment puis-je vous aider ?"
+          }
+        }
+      }
+    },
+    "chat_settings.button.delete_all": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete all conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toutes les conversations"
+          }
+        }
+      }
+    },
+    "chat_settings.delete_all.confirmation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete all conversations? This cannot be undone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toutes les conversations ? Cette action est irréversible."
+          }
+        }
+      }
+    },
+    "chat_settings.navigation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        }
+      }
+    },
+    "chat_settings.system_prompt.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System prompt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instructions système"
+          }
+        }
+      }
+    },
+    "chat_settings.toggle.haptics": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haptic feedback"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour haptique"
+          }
+        }
+      }
+    },
+    "chats.button.new": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New conversation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle conversation"
+          }
+        }
+      }
+    },
+    "chats.context_menu.delete": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete conversation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer la conversation"
+          }
+        }
+      }
+    },
+    "chats.default_title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New conversation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle conversation"
+          }
+        }
+      }
+    },
+    "chats.delete.confirmation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this conversation?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer cette conversation ?"
+          }
+        }
+      }
+    },
+    "chats.delete.error.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unable to delete conversation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de supprimer la conversation"
+          }
+        }
+      }
+    },
+    "chats.empty.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start a conversation with Noctis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencez une conversation avec Noctis."
+          }
+        }
+      }
+    },
+    "chats.empty.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos conversations"
+          }
+        }
+      }
+    },
+    "chats.search.empty.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try another search."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essayez une autre recherche."
+          }
+        }
+      }
+    },
+    "chats.search.empty.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No conversations found"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune conversation trouvée"
+          }
+        }
+      }
+    },
+    "chats.search.placeholder": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher une conversation"
+          }
+        }
+      }
+    },
+    "chats.section.last_seven_days": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous seven days"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sept derniers jours"
+          }
+        }
+      }
+    },
+    "chats.section.older": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Older"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus anciennes"
+          }
+        }
+      }
+    },
+    "chats.section.today": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd’hui"
+          }
+        }
+      }
+    },
+    "code_block.copy.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy code"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier le code"
+          }
+        }
+      }
+    },
+    "code_block.copy.success.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code copied"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code copié"
+          }
+        }
+      }
+    },
+    "code_block.language.default": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CODE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CODE"
+          }
+        }
+      }
+    },
+    "common.button.cancel": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        }
+      }
+    },
+    "common.button.close": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        }
+      }
+    },
+    "common.button.continue": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
+          }
+        }
+      }
+    },
+    "common.button.copy": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier"
+          }
+        }
+      }
+    },
+    "common.button.delete": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
+          }
+        }
+      }
+    },
+    "common.button.ok": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "common.button.retry": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayer"
+          }
+        }
+      }
+    },
+    "common.button.share": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partager"
+          }
+        }
+      }
+    },
+    "common.status.copied": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copied"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié"
+          }
+        }
+      }
+    },
+    "conversation.scroll_button.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scroll to the last message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aller au dernier message"
+          }
+        }
+      }
+    },
+    "conversation.scroll_button.last_message": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernier message"
+          }
+        }
+      }
+    },
+    "conversation.scroll_button.new_messages": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New messages"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveaux messages"
+          }
+        }
+      }
+    },
+    "conversation.scroll_button.new_messages.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show new messages"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les nouveaux messages"
+          }
+        }
+      }
+    },
+    "credits.navigation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credits"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crédits"
+          }
+        }
+      }
+    },
+    "message.accessibility.default %@ %@": {
+      "comment": "Paramètres : auteur, contenu.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ : %2$@"
+          }
+        }
+      }
+    },
+    "message.accessibility.error %@ %@": {
+      "comment": "Paramètres : auteur, contenu.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, error: %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, erreur : %2$@"
+          }
+        }
+      }
+    },
+    "message.accessibility.interrupted %@ %@": {
+      "comment": "Paramètres : auteur, contenu.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, interrupted: %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, interrompu : %2$@"
+          }
+        }
+      }
+    },
+    "message.accessibility.streaming %@ %@": {
+      "comment": "Paramètres : auteur, contenu.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, responding: %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, réponse en cours : %2$@"
+          }
+        }
+      }
+    },
+    "message.accessibility.with_time %@ %@ %@": {
+      "comment": "Paramètres : auteur, heure, contenu.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@: %3$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@ : %3$@"
+          }
+        }
+      }
+    },
+    "message.author.assistant": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis"
+          }
+        }
+      }
+    },
+    "message.author.user": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous"
+          }
+        }
+      }
+    },
+    "message.button.copy.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier le message"
+          }
+        }
+      }
+    },
+    "message.button.regenerate.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenerate response"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Régénérer la réponse"
+          }
+        }
+      }
+    },
+    "message.button.resume": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre"
+          }
+        }
+      }
+    },
+    "message.button.share.accessibility.label": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partager le message"
+          }
+        }
+      }
+    },
+    "message.context_menu.copy": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier le message"
+          }
+        }
+      }
+    },
+    "message.context_menu.create_variant": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a variant"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créer une variante"
+          }
+        }
+      }
+    },
+    "message.context_menu.edit_prompt": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit message"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier le message"
+          }
+        }
+      }
+    },
+    "message.context_menu.regenerate": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenerate response"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Régénérer la réponse"
+          }
+        }
+      }
+    },
+    "message.context_menu.resend": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resend"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renvoyer"
+          }
+        }
+      }
+    },
+    "message.delete.confirmation.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This action cannot be undone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette action est irréversible."
+          }
+        }
+      }
+    },
+    "message.delete.confirmation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this message?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer ce message ?"
+          }
+        }
+      }
+    },
+    "message.error.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The response could not be completed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La réponse n’a pas pu être terminée."
+          }
+        }
+      }
+    },
+    "message.interrupted.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Response interrupted"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réponse interrompue"
+          }
+        }
+      }
+    },
+    "onboarding.appearance.button.discover": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explore appearance settings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvrir les réglages d’apparence"
+          }
+        }
+      }
+    },
+    "onboarding.appearance.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose your theme, typography and response effects."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez votre thème, votre typographie et les effets des réponses."
+          }
+        }
+      }
+    },
+    "onboarding.appearance.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make Noctis your own"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personnalisez Noctis"
+          }
+        }
+      }
+    },
+    "onboarding.install.button.prepare": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prepare Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préparer Noctis"
+          }
+        }
+      }
+    },
+    "onboarding.install.button.start": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start chatting"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer la conversation"
+          }
+        }
+      }
+    },
+    "onboarding.install.download.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the model is not cached, preparing it downloads several gigabytes. Use Wi-Fi and keep enough free space."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si le modèle n’est pas en cache, sa préparation télécharge plusieurs gigaoctets. Utilisez le Wi-Fi et prévoyez suffisamment d’espace libre."
+          }
+        }
+      }
+    },
+    "onboarding.install.duration.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparation may take several minutes. Keep the app open."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La préparation peut prendre plusieurs minutes. Gardez l’application ouverte."
+          }
+        }
+      }
+    },
+    "onboarding.install.metal_unavailable.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis requires a device that supports Metal to run its model."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis nécessite un appareil compatible avec Metal pour exécuter son modèle."
+          }
+        }
+      }
+    },
+    "onboarding.install.model.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis uses Ministral 3, running directly on your device."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis utilise Ministral 3, exécuté directement sur votre appareil."
+          }
+        }
+      }
+    },
+    "onboarding.install.navigation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prepare Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préparer Noctis"
+          }
+        }
+      }
+    },
+    "onboarding.install.offline.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once installed, the model can respond offline."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois installé, le modèle peut répondre hors ligne."
+          }
+        }
+      }
+    },
+    "onboarding.install.ready.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your model is loaded. You can start chatting."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre modèle est chargé. Vous pouvez commencer la conversation."
+          }
+        }
+      }
+    },
+    "onboarding.install.retry.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check your connection and available storage, then try again."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifiez votre connexion et l’espace disponible, puis réessayez."
+          }
+        }
+      }
+    },
+    "onboarding.install.status.downloading": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloading model…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargement du modèle…"
+          }
+        }
+      }
+    },
+    "onboarding.install.status.failed": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparation failed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de la préparation"
+          }
+        }
+      }
+    },
+    "onboarding.install.status.finalizing": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finishing preparation…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finalisation de la préparation…"
+          }
+        }
+      }
+    },
+    "onboarding.install.status.loading": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading model…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement du modèle…"
+          }
+        }
+      }
+    },
+    "onboarding.install.status.prepare": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prepare your model"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préparez votre modèle"
+          }
+        }
+      }
+    },
+    "onboarding.install.status.ready": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis is ready"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis est prêt"
+          }
+        }
+      }
+    },
+    "onboarding.install.status.unavailable": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Device not supported"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appareil non pris en charge"
+          }
+        }
+      }
+    },
+    "onboarding.install.web_search.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web searches require an internet connection."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les recherches Web nécessitent une connexion Internet."
+          }
+        }
+      }
+    },
+    "onboarding.local_model.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis runs its model locally, directly on your device."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noctis exécute son modèle localement, directement sur votre appareil."
+          }
+        }
+      }
+    },
+    "onboarding.local_model.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An AI on your device"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une IA sur votre appareil"
+          }
+        }
+      }
+    },
+    "onboarding.privacy.description": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your conversations are stored on your device. Web searches send queries to search engines."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos conversations sont stockées sur votre appareil. Les recherches Web transmettent des requêtes aux moteurs de recherche."
+          }
+        }
+      }
+    },
+    "onboarding.privacy.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des conversations locales"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.subtitle": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your personal AI, on your device."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre IA personnelle, sur votre appareil."
+          }
+        }
+      }
+    },
+    "onboarding.welcome.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to Noctis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bienvenue dans Noctis"
+          }
+        }
+      }
+    },
+    "settings.navigation.title": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
+          }
+        }
+      }
+    },
+    "settings.row.appearance": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appearance"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparence"
+          }
+        }
+      }
+    },
+    "settings.row.conversations": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        }
+      }
+    },
+    "settings.row.credits": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credits"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crédits"
+          }
+        }
+      }
+    },
+    "web_search.error.invalid_query": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The search query is invalid."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La requête de recherche est invalide."
+          }
+        }
+      }
+    },
+    "web_search.error.runtime_unavailable": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The embedded iOS SearXNG runtime is unavailable."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le runtime SearXNG iOS embarqué est indisponible."
+          }
+        }
+      }
+    },
+    "web_search.error.search_failed": {
+      "comment": "Texte de l’interface Noctis.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The web search failed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La recherche Web a échoué."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

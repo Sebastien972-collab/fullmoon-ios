@@ -11,14 +11,18 @@ struct CreditsView: View {
     var body: some View {
         Form {
             Section {
-                Link("MLX Swift", destination: URL(string: "https://github.com/ml-explore/mlx-swift")!)
+                Link(destination: URL(string: "https://github.com/ml-explore/mlx-swift")!) {
+                    Text(verbatim: "MLX Swift")
+                }
                     .badge(Text(Image(systemName: "arrow.up.right")))
-                Link("Mainframe", destination: URL(string: "https://mainfra.me")!)
+                Link(destination: URL(string: "https://mainfra.me")!) {
+                    Text(verbatim: "Mainframe")
+                }
                     .badge(Text(Image(systemName: "arrow.up.right")))
             }
         }
         .formStyle(.grouped)
-        .navigationTitle("credits")
+        .navigationTitle("credits.navigation.title")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

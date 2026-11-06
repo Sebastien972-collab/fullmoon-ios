@@ -40,8 +40,8 @@ struct MessageView: View {
         reduceMotion || appManager.appearance.reduceAnimations
     }
 
-    private var authorName: String {
-        isUser ? "Vous" : "Fullmoon"
+    private var authorName: LocalizedStringResource {
+        isUser ? "message.author.user" : "message.author.assistant"
     }
 
     var body: some View {
@@ -114,16 +114,16 @@ struct MessageView: View {
             }
         }
         .confirmationDialog(
-            "Supprimer ce message ?",
+            "message.delete.confirmation.title",
             isPresented: $showDeleteConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Supprimer", role: .destructive) {
+            Button("common.button.delete", role: .destructive) {
                 onDelete?()
             }
-            Button("Annuler", role: .cancel) {}
+            Button("common.button.cancel", role: .cancel) {}
         } message: {
-            Text("Ce message sera définitivement retiré de la conversation.")
+            Text("message.delete.confirmation.description")
         }
         .onChange(of: message.content, initial: true) { _, content in
             if !isUser {
@@ -189,14 +189,14 @@ struct MessageView: View {
                             spacing: appearance.thinkingSpacing,
                             period: .milliseconds(appearance.thinkingPeriodMilliseconds)
                         )
-                        Text("Noctis réfléchit…").font(.subheadline).foregroundStyle(.secondary)
+                        Text("chat.status.thinking").font(.subheadline).foregroundStyle(.secondary)
                     }
                     .aiState(effectState)
                     .padding(.vertical, 4)
                 } else {
                     HStack(spacing: 8) {
                         ProgressView().controlSize(.small)
-                        Text("Noctis réfléchit…").font(.subheadline).foregroundStyle(.secondary)
+                        Text("chat.status.thinking").font(.subheadline).foregroundStyle(.secondary)
                     }
                     .padding(.vertical, 4)
                 }
@@ -278,7 +278,7 @@ struct MessageView: View {
             Image(systemName: "exclamationmark.triangle.fill")
                 .foregroundStyle(.orange)
                 .font(.caption)
-            Text("La réponse n’a pas pu aboutir")
+            Text("message.error.description")
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer()
@@ -286,7 +286,7 @@ struct MessageView: View {
                 Button(action: retryAction) {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.clockwise")
-                        Text("Réessayer")
+                        Text("common.button.retry")
                     }
                     .font(.caption.weight(.medium))
                 }
@@ -304,11 +304,11 @@ struct MessageView: View {
         HStack(spacing: 6) {
             Image(systemName: "stop.circle")
                 .font(.caption2)
-            Text("Génération interrompue")
+            Text("message.interrupted.description")
                 .font(.caption2)
             Spacer()
             if let onRegenerate {
-                Button("Reprendre", action: onRegenerate)
+                Button("message.button.resume", action: onRegenerate)
                     .font(.caption2.weight(.medium))
             }
         }
@@ -329,7 +329,7 @@ struct MessageView: View {
                 HStack(spacing: 4) {
                     Image(systemName: copied ? "checkmark" : "doc.on.doc")
                     if copied {
-                        Text("Copié").font(.caption2)
+                        Text("common.status.copied").font(.caption2)
                     }
                 }
                 .font(.caption)
@@ -338,7 +338,7 @@ struct MessageView: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Copier le message")
+            .accessibilityLabel("message.button.copy.accessibility.label")
 
             // Regenerate
             if let onRegenerate {
@@ -350,7 +350,7 @@ struct MessageView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Régénérer la réponse")
+                .accessibilityLabel("message.button.regenerate.accessibility.label")
             }
 
             // Share
@@ -362,7 +362,7 @@ struct MessageView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Partager ce message")
+            .accessibilityLabel("message.button.share.accessibility.label")
         }
         .padding(.horizontal, 4)
     }
@@ -374,33 +374,33 @@ struct MessageView: View {
         Button {
             copyContent()
         } label: {
-            Label("Copier le texte", systemImage: "doc.on.doc")
+            Label("message.context_menu.copy", systemImage: "doc.on.doc")
         }
 
         ShareLink(item: message.content) {
-            Label("Partager", systemImage: "square.and.arrow.up")
+            Label("common.button.share", systemImage: "square.and.arrow.up")
         }
 
         if isUser {
             if let onEdit {
                 Button(action: onEdit) {
-                    Label("Modifier la demande", systemImage: "pencil")
+                    Label("message.context_menu.edit_prompt", systemImage: "pencil")
                 }
             }
             if let onRetry {
                 Button(action: onRetry) {
-                    Label("Renvoyer", systemImage: "arrow.clockwise")
+                    Label("message.context_menu.resend", systemImage: "arrow.clockwise")
                 }
             }
         } else {
             if let onRegenerate {
                 Button(action: onRegenerate) {
-                    Label("Régénérer", systemImage: "arrow.clockwise")
+                    Label("message.context_menu.regenerate", systemImage: "arrow.clockwise")
                 }
             }
             if let onBranch {
                 Button(action: onBranch) {
-                    Label("Créer une variante", systemImage: "arrow.triangle.branch")
+                    Label("message.context_menu.create_variant", systemImage: "arrow.triangle.branch")
                 }
             }
         }
@@ -411,7 +411,7 @@ struct MessageView: View {
             Button(role: .destructive) {
                 showDeleteConfirmation = true
             } label: {
-                Label("Supprimer", systemImage: "trash")
+                Label("common.button.delete", systemImage: "trash")
             }
         }
     }
@@ -436,20 +436,20 @@ struct MessageView: View {
     }
 
     private var accessibilityDescription: String {
-        var desc = "\(authorName)"
+        let author = String(localized: authorName)
         if appManager.appearance.showTimestamps {
-            desc += ", à \(message.timestamp.formatted(date: .omitted, time: .shortened))"
+            let time = message.timestamp.formatted(date: .omitted, time: .shortened)
+            return String(localized: "message.accessibility.with_time \(author) \(time) \(message.content)")
         }
         if isStreaming {
-            desc += ", en cours de réponse: \(message.content)"
+            return String(localized: "message.accessibility.streaming \(author) \(message.content)")
         } else if message.hasError {
-            desc += ", échec: \(message.content)"
+            return String(localized: "message.accessibility.error \(author) \(message.content)")
         } else if message.isInterrupted {
-            desc += ", interrompu: \(message.content)"
+            return String(localized: "message.accessibility.interrupted \(author) \(message.content)")
         } else {
-            desc += ": \(message.content)"
+            return String(localized: "message.accessibility.default \(author) \(message.content)")
         }
-        return desc
     }
 }
 

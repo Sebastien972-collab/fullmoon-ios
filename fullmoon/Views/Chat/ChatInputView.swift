@@ -17,7 +17,7 @@ struct ChatInputView: View {
     var isSending = false
     var isStopping = false
     var isLoading = false
-    var status: String
+    var status: LocalizedStringResource
     var onSend: () -> Void
     var onStop: (() -> Void)? = nil
     var focusState: FocusState<Bool>.Binding
@@ -30,7 +30,7 @@ struct ChatInputView: View {
         let appearance = appManager.appearance
 
         HStack(alignment: .bottom, spacing: 10) {
-            TextField("Écrivez à Fullmoon…", text: $prompt, axis: .vertical)
+            TextField("chat.input.placeholder", text: $prompt, axis: .vertical)
                 .font(.system(size: appearance.fontSize * textScale))
                 .lineLimit(1...6)
                 .textFieldStyle(.plain)
@@ -38,7 +38,7 @@ struct ChatInputView: View {
                 .disabled(!isEnabled && !isSending)
                 .padding(.leading, 14)
                 .padding(.vertical, 10)
-                .accessibilityLabel("Message")
+                .accessibilityLabel("chat.input.accessibility.label")
                 .accessibilityHint(status)
                 .onSubmit {
                     if sendEnabled {
@@ -99,9 +99,17 @@ struct ChatInputView: View {
             }
             .buttonStyle(.plain)
             .disabled(isSending ? (isStopping || onStop == nil) : !sendEnabled)
-            .accessibilityLabel(isSending ? "Arrêter la génération" : "Envoyer le message")
+            .accessibilityLabel(
+                isSending
+                    ? LocalizedStringResource("chat.input.stop.accessibility.label")
+                    : LocalizedStringResource("chat.input.send.accessibility.label")
+            )
             .accessibilityValue(status)
-            .accessibilityHint(isSending ? "Arrête la réponse en cours." : "Envoie votre demande au modèle local.")
+            .accessibilityHint(
+                isSending
+                    ? LocalizedStringResource("chat.input.stop.accessibility.hint")
+                    : LocalizedStringResource("chat.input.send.accessibility.hint")
+            )
             #if os(macOS)
             .keyboardShortcut(.return, modifiers: .command)
             #endif
@@ -155,7 +163,7 @@ private struct ComposerPreview: View {
     var isSending = false
     var isStopping = false
     var isLoading = false
-    var status = "Prêt"
+    var status: LocalizedStringResource = "chat.connection.status.ready"
 
     init(prompt: String = "", isSending: Bool = false) {
         _prompt = State(initialValue: prompt)

@@ -19,7 +19,10 @@ struct ContentView: View {
 
     var body: some View {
         Group {
-            if appManager.userInterfaceIdiom == .pad || appManager.userInterfaceIdiom == .mac || appManager.userInterfaceIdiom == .vision {
+            if !appManager.hasCompletedOnboarding {
+                OnboardingView(viewModel: chatViewModel)
+            } else if appManager.userInterfaceIdiom == .pad || appManager.userInterfaceIdiom == .mac
+                || appManager.userInterfaceIdiom == .vision {
                 // iPad
                 NavigationSplitView {
                     ChatsListView(currentThread: $currentThread, isPromptFocused: $isPromptFocused)
@@ -35,12 +38,16 @@ struct ContentView: View {
             }
         }
         .environment(appManager)
+        .onChange(of: appManager.hasCompletedOnboarding) { _, completed in
+            isPromptFocused = completed
+        }
         .if(appManager.userInterfaceIdiom == .phone) { view in
             view
                 .gesture(
                     DragGesture()
                         .onChanged { gesture in
-                            if !showChats && gesture.startLocation.x < 20 && gesture.translation.width > 100 {
+                            if appManager.hasCompletedOnboarding && !showChats
+                                && gesture.startLocation.x < 20 && gesture.translation.width > 100 {
                                 appManager.playHaptic()
                                 showChats = true
                             }

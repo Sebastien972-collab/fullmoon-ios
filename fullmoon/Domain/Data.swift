@@ -12,6 +12,10 @@ import SwiftData
 @MainActor
 @Observable
 final class AppManager {
+    var hasCompletedOnboarding: Bool {
+        didSet { defaults.set(hasCompletedOnboarding, forKey: "hasCompletedNoctisOnboarding") }
+    }
+
     var systemPrompt: String {
         didSet { defaults.set(systemPrompt, forKey: "systemPrompt") }
     }
@@ -43,6 +47,7 @@ final class AppManager {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
+        hasCompletedOnboarding = defaults.bool(forKey: "hasCompletedNoctisOnboarding")
         appearance = defaults.data(forKey: "chatAppearance")
             .flatMap { try? JSONDecoder().decode(ChatAppearance.self, from: $0) } ?? ChatAppearance()
         systemPrompt = defaults.string(forKey: "systemPrompt") ?? "you are a helpful assistant"
@@ -125,6 +130,24 @@ enum Role: String, Codable {
 
 enum AppTintColor: String, CaseIterable {
     case monochrome, blue, brown, gray, green, indigo, mint, orange, pink, purple, red, teal, yellow
+
+    var title: LocalizedStringResource {
+        switch self {
+        case .monochrome: "appearance.tint.monochrome"
+        case .blue: "appearance.tint.blue"
+        case .brown: "appearance.tint.brown"
+        case .gray: "appearance.tint.gray"
+        case .green: "appearance.tint.green"
+        case .indigo: "appearance.tint.indigo"
+        case .mint: "appearance.tint.mint"
+        case .orange: "appearance.tint.orange"
+        case .pink: "appearance.tint.pink"
+        case .purple: "appearance.tint.purple"
+        case .red: "appearance.tint.red"
+        case .teal: "appearance.tint.teal"
+        case .yellow: "appearance.tint.yellow"
+        }
+    }
     
     func getColor() -> Color {
         switch self {
@@ -160,6 +183,15 @@ enum AppTintColor: String, CaseIterable {
 
 enum AppFontDesign: String, CaseIterable {
     case standard, monospaced, rounded, serif
+
+    var title: LocalizedStringResource {
+        switch self {
+        case .standard: "appearance.font_design.standard"
+        case .monospaced: "appearance.font_design.monospaced"
+        case .rounded: "appearance.font_design.rounded"
+        case .serif: "appearance.font_design.serif"
+        }
+    }
     
     func getFontDesign() -> Font.Design {
         switch self {
@@ -177,6 +209,15 @@ enum AppFontDesign: String, CaseIterable {
 
 enum AppFontWidth: String, CaseIterable {
     case compressed, condensed, expanded, standard
+
+    var title: LocalizedStringResource {
+        switch self {
+        case .compressed: "appearance.font_width.compressed"
+        case .condensed: "appearance.font_width.condensed"
+        case .expanded: "appearance.font_width.expanded"
+        case .standard: "appearance.font_width.standard"
+        }
+    }
     
     func getFontWidth() -> Font.Width {
         switch self {
