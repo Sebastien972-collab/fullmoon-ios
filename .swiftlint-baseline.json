@@ -1,0 +1,1158 @@
+[
+  {
+    "_comment": "Created by Sébastien DAGUIN",
+    "text": "            if appManager.userInterfaceIdiom == .pad || appManager.userInterfaceIdiom == .mac || appManager.userInterfaceIdiom == .vision {",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 139 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/ContentView.swift",
+        "character": 1,
+        "line": 22
+      }
+    }
+  },
+  {
+    "text": "                    ChatView(currentThread: $currentThread, isPromptFocused: $isPromptFocused, showChats: $showChats, showSettings: $showSettings, viewModel: chatViewModel)",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 172 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/ContentView.swift",
+        "character": 1,
+        "line": 30
+      }
+    }
+  },
+  {
+    "text": "                ChatView(currentThread: $currentThread, isPromptFocused: $isPromptFocused, showChats: $showChats, showSettings: $showSettings, viewModel: chatViewModel)",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 168 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/ContentView.swift",
+        "character": 1,
+        "line": 34
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 55
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 67
+      }
+    }
+  },
+  {
+    "text": "        ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 71
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 80
+      }
+    }
+  },
+  {
+    "text": "        ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 84
+      }
+    }
+  },
+  {
+    "text": "        ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 87
+      }
+    }
+  },
+  {
+    "text": "        ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 90
+      }
+    }
+  },
+  {
+    "text": "        ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 94
+      }
+    }
+  },
+  {
+    "text": "",
+    "violation": {
+      "ruleIdentifier": "vertical_whitespace",
+      "reason": "Limit vertical whitespace to a single empty line; currently 2",
+      "ruleName": "Vertical Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Limit vertical whitespace to a single empty line",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 125
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 128
+      }
+    }
+  },
+  {
+    "text": "    func getColor() -> Color {",
+    "violation": {
+      "ruleIdentifier": "cyclomatic_complexity",
+      "reason": "Function should have complexity 10 or less; currently complexity is 13",
+      "ruleName": "Cyclomatic Complexity",
+      "severity": "warning",
+      "ruleDescription": "Complexity of function bodies should be limited.",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 5,
+        "line": 129
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 163
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 180
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Data.swift",
+        "character": 1,
+        "line": 197
+      }
+    }
+  },
+  {
+    "text": "            try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[SearchResult], any Error>) in",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 121 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Domain/IOSWebSearchService.swift",
+        "character": 1,
+        "line": 34
+      }
+    }
+  },
+  {
+    "text": "              let scriptURL = Bundle.main.url(forResource: \"ios_searxng\", withExtension: \"py\", subdirectory: \"SearXNG\") else {",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 126 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Domain/IOSWebSearchService.swift",
+        "character": 1,
+        "line": 96
+      }
+    }
+  },
+  {
+    "text": "            guard PyStatus_Exception(Py_InitializeFromConfig(&config)) == 0 else { throw SearchError.runtimeUnavailable }",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 121 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Domain/IOSWebSearchService.swift",
+        "character": 1,
+        "line": 123
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Message.swift",
+        "character": 1,
+        "line": 20
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Message.swift",
+        "character": 1,
+        "line": 22
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Thread.swift",
+        "character": 1,
+        "line": 15
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Thread.swift",
+        "character": 1,
+        "line": 17
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Domain/Thread.swift",
+        "character": 1,
+        "line": 21
+      }
+    }
+  },
+  {
+    "text": "    var onStop: (() -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ChatInputView.swift",
+        "character": 9,
+        "line": 22
+      }
+    }
+  },
+  {
+    "text": "            reduceMotion || appManager.appearance.reduceAnimations ? nil : .spring(response: 0.3, dampingFraction: 0.75),",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 121 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ChatInputView.swift",
+        "character": 1,
+        "line": 110
+      }
+    }
+  },
+  {
+    "text": "                    viewModel.createBranch(from: message, in: currentThread, context: modelContext) { self.currentThread = $0 }",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 127 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ChatView.swift",
+        "character": 1,
+        "line": 136
+      }
+    }
+  },
+  {
+    "text": "        Message(role: .assistant, content: \"Le protocole `Sendable` indique qu'un type peut être partagé en toute sécurité à travers des limites concurrentes.\\n\\n```swift\\nstruct UserProfile: Sendable {\\n    let id: UUID\\n    let username: String\\n}\\n```\")",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 200 characters or less; currently it has 256 characters",
+      "ruleName": "Line Length",
+      "severity": "error",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ChatView.swift",
+        "character": 1,
+        "line": 245
+      }
+    }
+  },
+  {
+    "text": "            ConversationGroup(title: \"7 derniers jours\", threads: matches.filter { !calendar.isDateInToday($0.timestamp) && $0.timestamp >= weekAgo }),",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 151 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ChatsListView.swift",
+        "character": 1,
+        "line": 24
+      }
+    }
+  },
+  {
+    "text": "                                           description: Text(search.isEmpty ? \"Vos conversations apparaîtront ici.\" : \"Essayez d’autres mots.\"))",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 144 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ChatsListView.swift",
+        "character": 1,
+        "line": 51
+      }
+    }
+  },
+  {
+    "text": "                    do { try modelContext.save() }",
+    "violation": {
+      "ruleIdentifier": "statement_position",
+      "reason": "Else and catch should be on the same line, one space after the previous declaration",
+      "ruleName": "Statement Position",
+      "severity": "warning",
+      "ruleDescription": "Else and catch should be on the same line, one space after the previous declaration",
+      "location": {
+        "file": "fullmoon/Views/Chat/ChatsListView.swift",
+        "character": 50,
+        "line": 81
+      }
+    }
+  },
+  {
+    "text": "    var onRegenerate: ((Message) -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 9,
+        "line": 15
+      }
+    }
+  },
+  {
+    "text": "    var onRetry: ((Message) -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 9,
+        "line": 16
+      }
+    }
+  },
+  {
+    "text": "    var onEdit: ((Message) -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 9,
+        "line": 17
+      }
+    }
+  },
+  {
+    "text": "    var onDelete: ((Message) -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 9,
+        "line": 18
+      }
+    }
+  },
+  {
+    "text": "    var onBranch: ((Message) -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 9,
+        "line": 19
+      }
+    }
+  },
+  {
+    "text": "    var generatingMessageID: UUID? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 9,
+        "line": 20
+      }
+    }
+  },
+  {
+    "text": "                .modifier(ConversationScrollTracking(followsResponse: $followsResponse, isUserScrolling: $isUserScrolling))",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 123 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 1,
+        "line": 61
+      }
+    }
+  },
+  {
+    "text": "                    .accessibilityLabel(isGenerating ? \"Nouveaux messages reçus, faire défiler vers le bas\" : \"Faire défiler vers le bas\")",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 138 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 1,
+        "line": 101
+      }
+    }
+  },
+  {
+    "text": "        Message(role: .assistant, content: \"Commencez par **une idée par note**.\\n\\n- Capturez sans trier.\\n- Relisez chaque semaine.\\n- Choisissez une prochaine action.\\n\\n```swift\\nlet prochaineAction = \\\"Faire un premier pas\\\"\\n```\")",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 200 characters or less; currently it has 236 characters",
+      "ruleName": "Line Length",
+      "severity": "error",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Chat/ConversationView.swift",
+        "character": 1,
+        "line": 150
+      }
+    }
+  },
+  {
+    "text": "                ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageCodeBlock.swift",
+        "character": 1,
+        "line": 20
+      }
+    }
+  },
+  {
+    "text": "                ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageCodeBlock.swift",
+        "character": 1,
+        "line": 22
+      }
+    }
+  },
+  {
+    "text": "struct MessageView: View {",
+    "violation": {
+      "ruleIdentifier": "type_body_length",
+      "reason": "Struct body should span 250 lines or less excluding comments and whitespace: currently spans 339 lines",
+      "ruleName": "Type Body Length",
+      "severity": "warning",
+      "ruleDescription": "Type bodies should not span too many lines",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageView.swift",
+        "character": 1,
+        "line": 11
+      }
+    }
+  },
+  {
+    "text": "    var onRegenerate: (() -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageView.swift",
+        "character": 9,
+        "line": 19
+      }
+    }
+  },
+  {
+    "text": "    var onRetry: (() -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageView.swift",
+        "character": 9,
+        "line": 20
+      }
+    }
+  },
+  {
+    "text": "    var onEdit: (() -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageView.swift",
+        "character": 9,
+        "line": 21
+      }
+    }
+  },
+  {
+    "text": "    var onDelete: (() -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageView.swift",
+        "character": 9,
+        "line": 22
+      }
+    }
+  },
+  {
+    "text": "    var onBranch: (() -> Void)? = nil",
+    "violation": {
+      "ruleIdentifier": "implicit_optional_initialization",
+      "reason": "Optional should be implicitly initialized without nil",
+      "ruleName": "Implicit Optional Initialization",
+      "severity": "warning",
+      "ruleDescription": "Optionals should be consistently initialized, either with `= nil` or without.",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageView.swift",
+        "character": 9,
+        "line": 23
+      }
+    }
+  },
+  {
+    "text": "}",
+    "violation": {
+      "ruleIdentifier": "file_length",
+      "reason": "File should contain 400 lines or less: currently contains 405",
+      "ruleName": "File Length",
+      "severity": "warning",
+      "ruleDescription": "Files should not span too many lines.",
+      "location": {
+        "file": "fullmoon/Views/Chat/MessageView.swift",
+        "character": 1,
+        "line": 405
+      }
+    }
+  },
+  {
+    "text": "                Text(\"Les préférences système de mouvement, transparence et contraste restent prioritaires. Le verre natif nécessite un système 26 ou ultérieur.\")",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 162 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/Settings/AppearanceSettingsView.swift",
+        "character": 1,
+        "line": 46
+      }
+    }
+  },
+  {
+    "text": "        switch self { case .compact: 8; case .standard: 16; case .comfortable: 24 }",
+    "violation": {
+      "ruleIdentifier": "switch_case_alignment",
+      "reason": "Case statements should vertically aligned with their closing brace",
+      "ruleName": "Switch and Case Statement Alignment",
+      "severity": "warning",
+      "ruleDescription": "Case statements should vertically align with their closing brace, or indented if configured otherwise.",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatAppearance.swift",
+        "character": 23,
+        "line": 26
+      }
+    }
+  },
+  {
+    "text": "        switch self { case .compact: 8; case .standard: 16; case .comfortable: 24 }",
+    "violation": {
+      "ruleIdentifier": "switch_case_alignment",
+      "reason": "Case statements should vertically aligned with their closing brace",
+      "ruleName": "Switch and Case Statement Alignment",
+      "severity": "warning",
+      "ruleDescription": "Case statements should vertically align with their closing brace, or indented if configured otherwise.",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatAppearance.swift",
+        "character": 41,
+        "line": 26
+      }
+    }
+  },
+  {
+    "text": "        switch self { case .compact: 8; case .standard: 16; case .comfortable: 24 }",
+    "violation": {
+      "ruleIdentifier": "switch_case_alignment",
+      "reason": "Case statements should vertically aligned with their closing brace",
+      "ruleName": "Switch and Case Statement Alignment",
+      "severity": "warning",
+      "ruleDescription": "Case statements should vertically align with their closing brace, or indented if configured otherwise.",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatAppearance.swift",
+        "character": 61,
+        "line": 26
+      }
+    }
+  },
+  {
+    "text": "        switch self { case .subtle: 0.06; case .balanced: 0.12; case .expressive: 0.20 }",
+    "violation": {
+      "ruleIdentifier": "switch_case_alignment",
+      "reason": "Case statements should vertically aligned with their closing brace",
+      "ruleName": "Switch and Case Statement Alignment",
+      "severity": "warning",
+      "ruleDescription": "Case statements should vertically align with their closing brace, or indented if configured otherwise.",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatAppearance.swift",
+        "character": 23,
+        "line": 35
+      }
+    }
+  },
+  {
+    "text": "        switch self { case .subtle: 0.06; case .balanced: 0.12; case .expressive: 0.20 }",
+    "violation": {
+      "ruleIdentifier": "switch_case_alignment",
+      "reason": "Case statements should vertically aligned with their closing brace",
+      "ruleName": "Switch and Case Statement Alignment",
+      "severity": "warning",
+      "ruleDescription": "Case statements should vertically align with their closing brace, or indented if configured otherwise.",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatAppearance.swift",
+        "character": 43,
+        "line": 35
+      }
+    }
+  },
+  {
+    "text": "        switch self { case .subtle: 0.06; case .balanced: 0.12; case .expressive: 0.20 }",
+    "violation": {
+      "ruleIdentifier": "switch_case_alignment",
+      "reason": "Case statements should vertically aligned with their closing brace",
+      "ruleName": "Switch and Case Statement Alignment",
+      "severity": "warning",
+      "ruleDescription": "Case statements should vertically align with their closing brace, or indented if configured otherwise.",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatAppearance.swift",
+        "character": 65,
+        "line": 35
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatsSettingsView.swift",
+        "character": 1,
+        "line": 16
+      }
+    }
+  },
+  {
+    "text": "            ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatsSettingsView.swift",
+        "character": 1,
+        "line": 25
+      }
+    }
+  },
+  {
+    "text": "            ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatsSettingsView.swift",
+        "character": 1,
+        "line": 32
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/Views/Settings/ChatsSettingsView.swift",
+        "character": 1,
+        "line": 57
+      }
+    }
+  },
+  {
+    "text": "                        Button(action: { dismiss() }) {",
+    "violation": {
+      "ruleIdentifier": "multiple_closures_with_trailing_closure",
+      "reason": "Trailing closure syntax should not be used when passing more than one closure argument",
+      "ruleName": "Multiple Closures with Trailing Closure",
+      "severity": "warning",
+      "ruleDescription": "Trailing closure syntax should not be used when passing more than one closure argument",
+      "location": {
+        "file": "fullmoon/Views/Settings/SettingsView.swift",
+        "character": 55,
+        "line": 57
+      }
+    }
+  },
+  {
+    "text": "                        Button(action: { dismiss() }) {",
+    "violation": {
+      "ruleIdentifier": "multiple_closures_with_trailing_closure",
+      "reason": "Trailing closure syntax should not be used when passing more than one closure argument",
+      "ruleName": "Multiple Closures with Trailing Closure",
+      "severity": "warning",
+      "ruleDescription": "Trailing closure syntax should not be used when passing more than one closure argument",
+      "location": {
+        "file": "fullmoon/Views/Settings/SettingsView.swift",
+        "character": 55,
+        "line": 63
+      }
+    }
+  },
+  {
+    "text": "    @MainActor final class ViewModel {",
+    "violation": {
+      "ruleIdentifier": "type_body_length",
+      "reason": "Class body should span 350 lines or less excluding comments and whitespace: currently spans 404 lines",
+      "ruleName": "Type Body Length",
+      "severity": "error",
+      "ruleDescription": "Type bodies should not span too many lines",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 22,
+        "line": 15
+      }
+    }
+  },
+  {
+    "text": "            thread?.title ?? thread?.sortedMessages.first.map { String($0.content.prefix(70)) } ?? \"Nouvelle conversation\"",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 122 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 1,
+        "line": 76
+      }
+    }
+  },
+  {
+    "text": "        private func startGeneration(",
+    "violation": {
+      "ruleIdentifier": "cyclomatic_complexity",
+      "reason": "Function should have complexity 10 or less; currently complexity is 12",
+      "ruleName": "Cyclomatic Complexity",
+      "severity": "warning",
+      "ruleDescription": "Complexity of function bodies should be limited.",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 17,
+        "line": 200
+      }
+    }
+  },
+  {
+    "text": "        private func startGeneration(",
+    "violation": {
+      "ruleIdentifier": "function_body_length",
+      "reason": "Function body should span 50 lines or less excluding comments and whitespace: currently spans 77 lines",
+      "ruleName": "Function Body Length",
+      "severity": "warning",
+      "ruleDescription": "Function bodies should not span too many lines",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 17,
+        "line": 200
+      }
+    }
+  },
+  {
+    "text": "                            charactersPerSecond = generationSeconds > 0 ? Double(characterCount) / generationSeconds : nil",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 122 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 1,
+        "line": 231
+      }
+    }
+  },
+  {
+    "text": "                        Self.logger.info(\"Response: first text \\(self.firstTextDelay ?? -1) s, total \\(elapsed) s, \\(self.characterCount) characters, \\(self.charactersPerSecond ?? 0) characters/s\")",
+    "violation": {
+      "ruleIdentifier": "line_length",
+      "reason": "Line should be 120 characters or less; currently it has 197 characters",
+      "ruleName": "Line Length",
+      "severity": "warning",
+      "ruleDescription": "Lines should not span too many characters.",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 1,
+        "line": 233
+      }
+    }
+  },
+  {
+    "text": "                    do { try await Task.sleep(for: .milliseconds(100)) }",
+    "violation": {
+      "ruleIdentifier": "statement_position",
+      "reason": "Else and catch should be on the same line, one space after the previous declaration",
+      "ruleName": "Statement Position",
+      "severity": "warning",
+      "ruleDescription": "Else and catch should be on the same line, one space after the previous declaration",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 72,
+        "line": 304
+      }
+    }
+  },
+  {
+    "text": "        func regenerate(_ message: Message, in thread: Thread, context: ModelContext) {",
+    "violation": {
+      "ruleIdentifier": "function_body_length",
+      "reason": "Function body should span 50 lines or less excluding comments and whitespace: currently spans 56 lines",
+      "ruleName": "Function Body Length",
+      "severity": "warning",
+      "ruleDescription": "Function bodies should not span too many lines",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 9,
+        "line": 327
+      }
+    }
+  },
+  {
+    "text": "}",
+    "violation": {
+      "ruleIdentifier": "file_length",
+      "reason": "File should contain 400 lines or less: currently contains 468",
+      "ruleName": "File Length",
+      "severity": "warning",
+      "ruleDescription": "Files should not span too many lines.",
+      "location": {
+        "file": "fullmoon/Views/ViewModels/Chat/ChatView+ViewModel.swift",
+        "character": 1,
+        "line": 468
+      }
+    }
+  },
+  {
+    "text": "struct fullmoonApp: App {",
+    "violation": {
+      "ruleIdentifier": "type_name",
+      "reason": "Type name 'fullmoonApp' should start with an uppercase character",
+      "ruleName": "Type Name",
+      "severity": "error",
+      "ruleDescription": "Type name should only contain alphanumeric characters, start with an uppercase character and span between 3 and 40 characters in length.\nPrivate types may start with an underscore.",
+      "location": {
+        "file": "fullmoon/fullmoonApp.swift",
+        "character": 8,
+        "line": 11
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/fullmoonApp.swift",
+        "character": 1,
+        "line": 16
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/fullmoonApp.swift",
+        "character": 1,
+        "line": 51
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/fullmoonApp.swift",
+        "character": 1,
+        "line": 56
+      }
+    }
+  },
+  {
+    "text": "    ",
+    "violation": {
+      "ruleIdentifier": "trailing_whitespace",
+      "reason": "Lines should not have trailing whitespace",
+      "ruleName": "Trailing Whitespace",
+      "severity": "warning",
+      "ruleDescription": "Lines should not have trailing whitespace",
+      "location": {
+        "file": "fullmoon/fullmoonApp.swift",
+        "character": 1,
+        "line": 69
+      }
+    }
+  }
+]
