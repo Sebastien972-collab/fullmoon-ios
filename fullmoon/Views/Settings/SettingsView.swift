@@ -27,10 +27,10 @@ struct SettingsView: View {
 
                 Section {
                     NavigationLink(destination: NoctisIdentitySettingsView()) {
-                        Label("Mon identité", systemImage: "person.crop.circle")
+                        Label("identity.title", systemImage: "person.crop.circle")
                     }
                     NavigationLink(destination: NoctisPrivacySettingsView()) {
-                        Label("Confidentialité et iCloud", systemImage: "lock.icloud")
+                        Label("privacy.title", systemImage: "lock.icloud")
                     }
                 }
 
@@ -96,4 +96,6 @@ extension Bundle {
 #Preview {
     SettingsView(currentThread: .constant(nil))
         .environment(AppManager())
+        .environment(NoctisCloudSync())
+        .environment(NoctisLockController())
 }

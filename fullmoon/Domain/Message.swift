@@ -8,6 +8,12 @@
 import Foundation
 import SwiftData
 
+enum Role: String, Codable {
+    case assistant
+    case user
+    case system
+}
+
 @Model
 class Message {
     @Attribute(.unique) var id: UUID

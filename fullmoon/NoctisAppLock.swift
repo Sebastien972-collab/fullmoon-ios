@@ -1,72 +1,43 @@
+// Created by Sébastien DAGUIN
+
 import SwiftUI
 
 struct NoctisAppLock: ViewModifier {
-    @AppStorage("noctis.lock.enabled") private var lockEnabled = false
+    @Environment(NoctisLockController.self) private var lock
     @Environment(\.scenePhase) private var scenePhase
-    @State private var unlocked = false
-    @State private var authenticating = false
-    @State private var errorMessage: String?
 
     func body(content: Content) -> some View {
         ZStack {
-            if !lockEnabled || unlocked {
+            if !lock.enabled || lock.unlocked {
                 content
             } else {
                 VStack(spacing: 18) {
-                    Image(systemName: "lock.shield")
-                        .font(.system(size: 42))
-                    Text("Noctis est verrouillé")
-                        .font(.title2.bold())
-                    Button("Déverrouiller") {
-                        Task { await authenticate() }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(authenticating)
-                    if let errorMessage {
-                        Text(errorMessage)
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                    }
+                    Image(systemName: "lock.shield").font(.system(size: 42))
+                    Text("security.locked").font(.title2.bold())
+                    Button("security.unlock") { Task { await lock.unlock() } }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(lock.authenticating)
+                    if let error = lock.errorMessage { Text(error).font(.footnote) }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.regularMaterial)
+            }
+            // Authentication can make the scene inactive. Shield it without
+            // invalidating a successful unlock or starting another prompt.
+            if lock.enabled && scenePhase != .active {
+                Rectangle().fill(.background).ignoresSafeArea()
+                    .overlay { Image(systemName: "lock.shield").font(.largeTitle) }
+                    .accessibilityHidden(true)
             }
         }
-        .task(id: lockEnabled) {
-            if lockEnabled {
-                unlocked = false
-                await authenticate()
-            } else {
-                unlocked = true
-            }
-        }
-        .onChange(of: scenePhase) { _, newPhase in
-            if newPhase != .active && lockEnabled {
-                unlocked = false
-            } else if newPhase == .active && lockEnabled {
-                Task { await authenticate() }
-            }
-        }
-    }
-
-    @MainActor
-    private func authenticate() async {
-        guard lockEnabled, !unlocked, !authenticating else { return }
-        authenticating = true
-        defer { authenticating = false }
-        do {
-            try await NoctisDeviceAuthenticator().unlock()
-            unlocked = true
-            errorMessage = nil
-        } catch {
-            unlocked = false
-            errorMessage = error.localizedDescription
+        .background(.background)
+        .task { await lock.unlock(automatically: true) }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background { lock.enterBackground() }
+            if phase == .active { Task { await lock.unlock(automatically: true) } }
         }
     }
 }
 
 extension View {
-    func noctisAppLock() -> some View {
-        modifier(NoctisAppLock())
-    }
+    func noctisAppLock() -> some View { modifier(NoctisAppLock()) }
 }

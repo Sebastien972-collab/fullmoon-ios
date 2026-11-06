@@ -116,13 +116,6 @@ final class AppManager {
     }
 }
 
-enum Role: String, Codable {
-    case assistant
-    case user
-    case system
-}
-
-
 enum AppTintColor: String, CaseIterable {
     case monochrome, blue, brown, gray, green, indigo, mint, orange, pink, purple, red, teal, yellow
     

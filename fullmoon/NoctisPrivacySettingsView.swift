@@ -1,85 +1,59 @@
+// Created by Sébastien DAGUIN
+
 import SwiftUI
 
-/// Local preference only. Cloud synchronization is deliberately not enabled until
-/// the existing SwiftData store has a verified, lossless CloudKit migration.
 struct NoctisPrivacySettingsView: View {
-    @AppStorage("noctis.lock.enabled") private var lockEnabled = false
-    @AppStorage("noctis.icloud.requested") private var iCloudRequested = false
-    @State private var errorMessage: String?
-    @State private var showingCloudExplanation = false
-    @State private var showingDisableConfirmation = false
+    @Environment(NoctisLockController.self) private var lock
+    @Environment(NoctisCloudSync.self) private var cloud
+    @State private var confirmEnable = false
+    @State private var confirmErase = false
 
     var body: some View {
+        @Bindable var cloud = cloud
         Form {
-            Section("Sécurité") {
-                Toggle("Verrouiller Noctis", isOn: Binding(
-                    get: { lockEnabled },
-                    set: { enabled in
-                        if !enabled {
-                            showingDisableConfirmation = true
-                        } else {
-                            Task {
-                                do {
-                                    try await NoctisDeviceAuthenticator().unlock(
-                                        reason: "Activer le verrouillage de Noctis"
-                                    )
-                                    lockEnabled = true
-                                } catch {
-                                    errorMessage = error.localizedDescription
-                                }
-                            }
-                        }
-                    }
-                ))
-                Text("Face ID, Touch ID ou code de l’appareil selon la disponibilité.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
+            Section {
+                Toggle("security.enable", isOn: Binding(
+                    get: { lock.enabled }, set: { value in Task { await lock.setEnabled(value) } }
+                )).disabled(lock.authenticating)
+                LabeledContent("security.available", value: lock.mode)
+                if let error = lock.errorMessage { Text(error).foregroundStyle(.red) }
+            } header: { Text("security.title") } footer: { Text("security.explanation") }
 
-            Section("Synchronisation iCloud") {
-                Toggle("Synchroniser avec iCloud", isOn: Binding(
-                    get: { iCloudRequested },
-                    set: { enabled in
-                        if enabled {
-                            showingCloudExplanation = true
-                        } else {
-                            iCloudRequested = false
-                        }
+            Section {
+                Toggle("cloud.enable", isOn: Binding(
+                    get: { cloud.enabled }, set: { value in
+                        if value {
+                            Task { if await cloud.checkAvailability() { confirmEnable = true } }
+                        } else { Task { await cloud.disable() } }
                     }
                 ))
-                .disabled(true)
-                Label("Non disponible dans cette version", systemImage: "icloud.slash")
-                    .foregroundStyle(.secondary)
-                Text("Les données restent locales. La synchronisation sera proposée après validation de la migration CloudKit et des règles de suppression.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-        }
-        .navigationTitle("Confidentialité")
-        .confirmationDialog("Désactiver le verrouillage ?", isPresented: $showingDisableConfirmation) {
-            Button("Confirmer avec Face ID ou le code") {
-                Task {
-                    do {
-                        try await NoctisDeviceAuthenticator().unlock(reason: "Désactiver le verrouillage Noctis")
-                        lockEnabled = false
-                    } catch {
-                        errorMessage = error.localizedDescription
-                    }
+                .disabled(cloud.isWorking && !cloud.enabled)
+                Toggle("cloud.include.profile", isOn: $cloud.includeProfile).disabled(cloud.isWorking)
+                Text("cloud.profile.explanation").font(.footnote).foregroundStyle(.secondary)
+                LabeledContent("cloud.state", value: cloud.state.title)
+                if let date = cloud.lastSuccess {
+                    LabeledContent("cloud.last.success") { Text(date, format: .dateTime) }
                 }
-            }
+                if cloud.state == .syncing {
+                    if cloud.total > 0 {
+                        ProgressView(value: Double(cloud.completed), total: Double(cloud.total))
+                    } else { ProgressView() }
+                }
+                Button("cloud.sync.now") { Task { await cloud.synchronize() } }
+                    .disabled(!cloud.enabled || cloud.isWorking || cloud.isGenerating)
+                Button("cloud.erase", role: .destructive) { confirmErase = true }
+                    .disabled(cloud.isWorking)
+            } header: { Text("cloud.title") } footer: { Text("cloud.explanation") }
         }
-        .alert("Authentification impossible", isPresented: Binding(
-            get: { errorMessage != nil },
-            set: { if !$0 { errorMessage = nil } }
-        )) {
-            Button("OK", role: .cancel) { errorMessage = nil }
-        } message: {
-            Text(errorMessage ?? "")
-        }
-        .alert("iCloud indisponible", isPresented: $showingCloudExplanation) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("La synchronisation n'est pas encore activée. Aucune donnée n'est envoyée.")
-        }
+        .formStyle(.grouped)
+        .navigationTitle("privacy.title")
+        .confirmationDialog("cloud.enable.confirm", isPresented: $confirmEnable, titleVisibility: .visible) {
+            Button("common.confirm") { Task { await cloud.enable() } }
+            Button("common.cancel", role: .cancel) {}
+        } message: { Text("cloud.enable.explanation") }
+        .confirmationDialog("cloud.erase.confirm", isPresented: $confirmErase, titleVisibility: .visible) {
+            Button("cloud.erase", role: .destructive) { Task { await cloud.eraseRemote() } }
+            Button("common.cancel", role: .cancel) {}
+        } message: { Text("cloud.erase.explanation") }
     }
 }
