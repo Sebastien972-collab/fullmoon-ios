@@ -39,12 +39,16 @@ enum Role: String, Codable { case assistant, user, system }
 
 @main struct LegacyStoreFixture {
     @MainActor static func main() throws {
-        let schema = Schema([Thread.self, Message.self, NoctisUserProfile.self])
+        let includeProfile = !CommandLine.arguments.contains("--without-profile")
+        let schema = includeProfile ? Schema([Thread.self, Message.self, NoctisUserProfile.self])
+            : Schema([Thread.self, Message.self])
         let configuration = ModelConfiguration(schema: schema, url: URL(fileURLWithPath: CommandLine.arguments[1]),
                                                cloudKitDatabase: .none)
         let container = try ModelContainer(for: schema, configurations: [configuration])
         let context = container.mainContext
         let thread = Thread()
+        thread.id = UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
+        thread.timestamp = Date(timeIntervalSince1970: 1_700_000_000)
         thread.title = "Legacy conversation"
         context.insert(thread)
         for (role, text) in [(Role.user, "Legacy question"), (.assistant, "Legacy answer")] {
@@ -52,9 +56,11 @@ enum Role: String, Codable { case assistant, user, system }
             context.insert(message)
             message.thread = thread
         }
-        let profile = NoctisUserProfile()
-        profile.displayName = "Legacy test profile"
-        context.insert(profile)
+        if includeProfile {
+            let profile = NoctisUserProfile()
+            profile.displayName = "Legacy test profile"
+            context.insert(profile)
+        }
         try context.save()
         print("Legacy store fixture created")
     }

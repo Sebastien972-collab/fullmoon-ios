@@ -27,6 +27,7 @@ cd "$scratch"
     -Xfrontend -disable-sandbox -module-cache-path "$scratch/cache" \
     LegacyStoreFixture.swift -o "$scratch/legacy"
 "$scratch/legacy" "$scratch/legacy.store"
+"$scratch/legacy" "$scratch/conversations-only.store" --without-profile
 "$compiler" -emit-module -emit-library -swift-version 6 -strict-concurrency=complete \
     -target arm64-apple-macos14.0 -sdk "$sdk" -module-name Noctis \
     -module-cache-path "$scratch/cache" -emit-module-path "$scratch/Noctis.swiftmodule" \
@@ -42,4 +43,4 @@ cd "$scratch"
     NoctisAppLock.swift NoctisIdentitySettingsView.swift NoctisPrivacySettingsView.swift \
     -I "$scratch" -L "$scratch" -lNoctis -Xlinker -rpath -Xlinker "$scratch" \
     NoctisIdentityTests.swift -o "$scratch/tests"
-"$scratch/tests" "$scratch/legacy.store"
+"$scratch/tests" "$scratch/legacy.store" "$scratch/conversations-only.store"

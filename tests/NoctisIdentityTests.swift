@@ -121,7 +121,8 @@ actor TestCloud: NoctisCloudTransport {
         await authentication()
         try await synchronization()
         try await profileAndRemoteReset()
-        try migration()
+        try migration(path: CommandLine.arguments[1], includesProfile: true)
+        try migration(path: CommandLine.arguments[2], includesProfile: false)
         print("Identity, contact consent, context, lock, sync, conflict, deletion, retry and migration tests passed")
     }
 
@@ -405,16 +406,19 @@ actor TestCloud: NoctisCloudTransport {
         check(lock.unlocked)
     }
 
-    @MainActor static func migration() throws {
-        guard CommandLine.arguments.count > 1 else { preconditionFailure("Pass the legacy fixture store URL") }
-        let container = try NoctisPersistence.makeContainer(url: URL(fileURLWithPath: CommandLine.arguments[1]))
+    @MainActor static func migration(path: String, includesProfile: Bool) throws {
+        let container = try NoctisPersistence.makeContainer(url: URL(fileURLWithPath: path))
         let context = container.mainContext
         let threads = try context.fetch(FetchDescriptor<Thread>())
         let profiles = try context.fetch(FetchDescriptor<NoctisUserProfile>())
         check(threads.count == 1 && threads[0].title == "Legacy conversation")
         check(Set(threads[0].messages.map(\.content)) == Set(["Legacy question", "Legacy answer"]))
-        check(profiles.count == 1 && profiles[0].displayName == "Legacy test profile")
-        check(!profiles[0].personalizationEnabled && !profiles[0].allowName)
+        check(threads[0].id == UUID(uuidString: "11111111-1111-1111-1111-111111111111"))
+        check(threads[0].timestamp == Date(timeIntervalSince1970: 1_700_000_000))
+        if includesProfile {
+            check(profiles.count == 1 && profiles[0].displayName == "Legacy test profile")
+            check(!profiles[0].personalizationEnabled && !profiles[0].allowName)
+        } else { check(profiles.isEmpty, "Migration must not invent a profile or consent") }
         check(try context.fetchCount(FetchDescriptor<NoctisSyncRecord>()) == 0)
     }
 }
