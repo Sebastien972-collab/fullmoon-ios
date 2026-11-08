@@ -13,8 +13,6 @@ struct NoctisIdentitySettingsView: View {
     @State private var hasConflict = false
     #if os(iOS) || os(visionOS)
     @State private var showingContactPicker = false
-    @State private var contact: NoctisContactImport?
-    @State private var showingImportConfirmation = false
     #endif
 
     var body: some View {
@@ -80,49 +78,19 @@ struct NoctisIdentitySettingsView: View {
             Button("common.cancel", role: .cancel) {}
         }
         #if os(iOS) || os(visionOS)
-        .sheet(isPresented: $showingContactPicker, onDismiss: {
-            if contact != nil { showingImportConfirmation = true }
-        }, content: {
+        .sheet(isPresented: $showingContactPicker) {
             NoctisContactPicker { selection in
-                contact = selection
+                draft = selection.applying(to: draft)
                 showingContactPicker = false
-            } onCancel: { contact = nil; showingContactPicker = false }
-        })
-        .sheet(isPresented: $showingImportConfirmation, onDismiss: { contact = nil }, content: {
-            importConfirmation
-        })
+            } onCancel: {
+                showingContactPicker = false
+            }
+        }
         #endif
         .alert("common.error", isPresented: Binding(
             get: { errorMessage != nil }, set: { if !$0 { errorMessage = nil } }
         )) { Button("common.ok", role: .cancel) {} } message: { Text(errorMessage ?? "") }
     }
-
-    #if os(iOS) || os(visionOS)
-    private var importConfirmation: some View {
-        NavigationStack {
-            Form {
-                if let selection = contact {
-                    Toggle(selection.givenName, isOn: Binding(
-                        get: { contact?.useGivenName ?? false }, set: { contact?.useGivenName = $0 }
-                    ))
-                    Toggle(selection.familyName, isOn: Binding(
-                        get: { contact?.useFamilyName ?? false }, set: { contact?.useFamilyName = $0 }
-                    ))
-                    Toggle(selection.nickname, isOn: Binding(
-                        get: { contact?.useNickname ?? false }, set: { contact?.useNickname = $0 }
-                    ))
-                }
-                Text("identity.contact.confirm.explanation")
-                Button("common.confirm") {
-                    if let contact { draft = contact.applying(to: draft) }
-                    showingImportConfirmation = false
-                }.disabled(contact?.hasSelection != true)
-                Button("common.cancel", role: .cancel) { showingImportConfirmation = false }
-            }
-            .navigationTitle("identity.contact.confirm")
-        }
-    }
-    #endif
 
     private func load() {
         do {
