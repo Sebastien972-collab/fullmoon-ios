@@ -1,22 +1,24 @@
 #!/bin/sh
 # Created by Sébastien DAGUIN
 set -eu
+
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-compiler="${SWIFTC:-$(xcrun --find swiftc)}"
-sdk="${NOCTIS_TEST_SDK:-$(xcrun --sdk macosx --show-sdk-path)}"
 noctis="${NOCTIS_SOURCE_ROOT:-$root/../NoctisAi}"
-scratch=$(mktemp -d "${TMPDIR:-/tmp}/noctis-identity-tests.XXXXXX")
-trap 'rm -rf "$scratch"' EXIT HUP INT TERM
+scratch=$(mktemp -d "${TMPDIR:-/tmp}/noctis-identity-XXXXXX")
+trap 'rm -rf "$scratch"' EXIT INT TERM
+compiler="${SWIFTC:-$(xcrun --find swiftc)}"
+sdk="${NOCTIS_TEST_SDK:-$(xcrun --show-sdk-path --sdk macosx)}"
+
 cd "$root"
 # Compile a stable snapshot outside a potentially synchronized Documents folder.
 cp tests/LegacyStoreFixture.swift tests/NoctisIdentityTests.swift "$scratch/"
 cp fullmoon/Domain/Thread.swift fullmoon/Domain/Message.swift "$scratch/"
-cp fullmoon/NoctisUserProfile.swift fullmoon/NoctisDeviceAuthenticator.swift "$scratch/"
-cp fullmoon/NoctisSyncDocument.swift fullmoon/NoctisSyncStore.swift "$scratch/"
-cp fullmoon/NoctisCloudTransport.swift fullmoon/NoctisCloudSync.swift "$scratch/"
-cp fullmoon/NoctisPersistence.swift fullmoon/NoctisContactPicker.swift "$scratch/"
-cp fullmoon/NoctisIdentitySession.swift fullmoon/NoctisAppLock.swift "$scratch/"
-cp fullmoon/NoctisIdentitySettingsView.swift fullmoon/NoctisPrivacySettingsView.swift "$scratch/"
+cp fullmoon/Domain/NoctisUserProfile.swift fullmoon/Domain/NoctisDeviceAuthenticator.swift "$scratch/"
+cp fullmoon/Domain/NoctisSyncDocument.swift fullmoon/Domain/NoctisSyncStore.swift "$scratch/"
+cp fullmoon/Domain/NoctisCloudTransport.swift fullmoon/Domain/NoctisCloudSync.swift "$scratch/"
+cp fullmoon/Domain/NoctisPersistence.swift fullmoon/Domain/NoctisIdentitySession.swift "$scratch/"
+cp fullmoon/Views/Settings/NoctisContactPicker.swift fullmoon/Views/Settings/NoctisAppLock.swift "$scratch/"
+cp fullmoon/Views/Settings/NoctisIdentitySettingsView.swift fullmoon/Views/Settings/NoctisPrivacySettingsView.swift "$scratch/"
 # Use the existing Noctis protocol sources, not a replacement API or an MLX model.
 cp "$noctis/Sources/Noctis/Core/AI/Domain/AIChatMessage.swift" "$scratch/"
 cp "$noctis/Sources/Noctis/Core/AI/AIModelService.swift" "$scratch/"

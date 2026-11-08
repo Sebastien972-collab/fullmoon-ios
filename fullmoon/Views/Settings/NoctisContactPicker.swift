@@ -6,15 +6,17 @@ struct NoctisContactImport: Equatable, Sendable {
     var givenName: String
     var familyName: String
     var nickname: String
+    var useGivenName = false
+    var useFamilyName = false
+    var useNickname = false
+
+    var hasSelection: Bool { useGivenName || useFamilyName || useNickname }
 
     func applying(to draft: NoctisProfileSnapshot) -> NoctisProfileSnapshot {
         var result = draft
-        result.givenName = givenName
-        result.familyName = familyName
-        result.displayName = [givenName, familyName]
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
-        result.preferredName = nickname.isEmpty ? givenName : nickname
+        if useGivenName { result.givenName = givenName }
+        if useFamilyName { result.familyName = familyName }
+        if useNickname { result.preferredName = nickname }
         return result
     }
 }

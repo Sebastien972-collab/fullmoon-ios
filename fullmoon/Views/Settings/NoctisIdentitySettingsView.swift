@@ -14,6 +14,8 @@ struct NoctisIdentitySettingsView: View {
     @State private var hasConflict = false
     #if os(iOS) || os(visionOS)
     @State private var showingContactPicker = false
+    @State private var contact: NoctisContactImport?
+    @State private var showingImportConfirmation = false
     #endif
 
     var body: some View {
@@ -81,7 +83,9 @@ struct NoctisIdentitySettingsView: View {
             Button("common.cancel", role: .cancel) {}
         }
         #if os(iOS) || os(visionOS)
-        .sheet(isPresented: $showingContactPicker) {
+        .sheet(isPresented: $showingContactPicker, onDismiss: {
+            if contact != nil { showingImportConfirmation = true }
+        }, content: {
             NoctisContactPicker { selection in
                 contact = selection
                 showingContactPicker = false
