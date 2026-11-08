@@ -7,6 +7,7 @@ struct NoctisIdentitySettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var draft = NoctisProfileSnapshot()
     @State private var loadedSnapshot = NoctisProfileSnapshot()
+    @State private var hasLoadedProfile = false
     @State private var errorMessage: String?
     @State private var saved = false
     @State private var confirmClear = false
@@ -66,7 +67,9 @@ struct NoctisIdentitySettingsView: View {
         }
         .formStyle(.grouped)
         .navigationTitle("identity.title")
-        .onAppear(perform: load)
+        .onAppear {
+            if !hasLoadedProfile { load() }
+        }
         .onChange(of: draft) { _, value in
             if value != loadedSnapshot { saved = false }
         }
@@ -80,17 +83,46 @@ struct NoctisIdentitySettingsView: View {
         #if os(iOS) || os(visionOS)
         .sheet(isPresented: $showingContactPicker) {
             NoctisContactPicker { selection in
-                draft = selection.applying(to: draft)
+                contact = selection
                 showingContactPicker = false
-            } onCancel: {
-                showingContactPicker = false
-            }
+            } onCancel: { contact = nil; showingContactPicker = false }
+        })
+        .navigationDestination(isPresented: $showingImportConfirmation) {
+            importConfirmation
+        }
+        .onChange(of: showingImportConfirmation) { _, showing in
+            if !showing { contact = nil }
         }
         #endif
         .alert("common.error", isPresented: Binding(
             get: { errorMessage != nil }, set: { if !$0 { errorMessage = nil } }
         )) { Button("common.ok", role: .cancel) {} } message: { Text(errorMessage ?? "") }
     }
+
+    #if os(iOS) || os(visionOS)
+    private var importConfirmation: some View {
+        Form {
+            if let selection = contact {
+                Toggle(selection.givenName, isOn: Binding(
+                    get: { contact?.useGivenName ?? false }, set: { contact?.useGivenName = $0 }
+                ))
+                Toggle(selection.familyName, isOn: Binding(
+                    get: { contact?.useFamilyName ?? false }, set: { contact?.useFamilyName = $0 }
+                ))
+                Toggle(selection.nickname, isOn: Binding(
+                    get: { contact?.useNickname ?? false }, set: { contact?.useNickname = $0 }
+                ))
+            }
+            Text("identity.contact.confirm.explanation")
+            Button("common.confirm") {
+                if let contact { draft = contact.applying(to: draft) }
+                showingImportConfirmation = false
+            }.disabled(contact?.hasSelection != true)
+            Button("common.cancel", role: .cancel) { showingImportConfirmation = false }
+        }
+        .navigationTitle("identity.contact.confirm")
+    }
+    #endif
 
     private func load() {
         do {
@@ -102,6 +134,7 @@ struct NoctisIdentitySettingsView: View {
             loadedSnapshot = draft
             hasConflict = try NoctisSyncStore(context: modelContext, device: "")
                 .entries(includeProfile: true)["profile"]?.conflicts.isEmpty == false
+            hasLoadedProfile = true
         } catch { errorMessage = NoctisText.value("identity.save.error") }
     }
 
