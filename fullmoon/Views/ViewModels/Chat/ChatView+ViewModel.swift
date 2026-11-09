@@ -41,7 +41,7 @@ extension ChatView {
         @ObservationIgnored private var characterCount = 0
         @ObservationIgnored private var drafts: [UUID: String] = [:]
         @ObservationIgnored private var currentTrackedThreadID: UUID?
-        private var sessionThreadID: UUID?
+        private let identitySession = NoctisIdentitySession()
         var needsNewSession = false
 
         init(makeService: @escaping @MainActor () throws -> any AIModelService = {
@@ -182,12 +182,12 @@ extension ChatView {
                 do {
                     try Task.checkCancellation()
                     guard let service = noctisService else { return }
-                    if needsNewSession || sessionThreadID != threadID {
-                        try await service.resetConversation(history: history)
+                    if try needsNewSession || identitySession.changed(thread: threadID, in: context) {
+                        try await identitySession.reset(service, history: history, in: context)
                         needsNewSession = false
                     }
                     try Task.checkCancellation()
-                    sessionThreadID = threadID
+                    identitySession.confirm(thread: threadID)
                     responseStarted = clock.now
                     try await service.withResponse(prompt: text) { [weak self] stream in
                         for try await chunk in stream {
