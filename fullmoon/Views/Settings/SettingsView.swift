@@ -36,6 +36,15 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    NavigationLink(destination: NoctisIdentitySettingsView()) {
+                        Label("identity.title", systemImage: "person.crop.circle")
+                    }
+                    NavigationLink(destination: NoctisPrivacySettingsView()) {
+                        Label("privacy.title", systemImage: "lock.icloud")
+                    }
+                }
+
+                Section {
                     LabeledContent("Moteur", value: "Noctis")
                     LabeledContent("État") {
                         HStack {
@@ -133,4 +142,6 @@ extension Bundle {
 #Preview {
     SettingsView(currentThread: .constant(nil), viewModel: ChatView.ViewModel())
         .environment(AppManager())
+        .environment(NoctisCloudSync())
+        .environment(NoctisLockController())
 }

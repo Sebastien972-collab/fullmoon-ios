@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct fullmoonApp: App {
@@ -13,11 +14,24 @@ struct fullmoonApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
     @State private var appManager = AppManager()
+    @State private var lock = NoctisLockController()
+    @State private var cloud = NoctisCloudSync()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .modelContainer(for: [Thread.self, Message.self])
+            Group {
+                switch NoctisPersistence.store {
+                case .success(let container):
+                    ContentView()
+                        .noctisAppLock()
+                        .modelContainer(container)
+                case .failure:
+                    ContentUnavailableView("storage.unavailable", systemImage: "externaldrive.badge.exclamationmark",
+                                           description: Text("storage.recovery"))
+                }
+            }
+                .environment(lock)
+                .environment(cloud)
                 .environment(appManager)
                 #if os(macOS) || os(visionOS)
                 .frame(minWidth: 640, maxWidth: .infinity, minHeight: 420, maxHeight: .infinity)
