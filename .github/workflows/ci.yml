@@ -63,6 +63,7 @@ jobs:
           xcodebuild -project fullmoon.xcodeproj -scheme fullmoon
           -configuration Debug -destination 'generic/platform=macOS'
           -derivedDataPath build/DerivedData -skipPackageUpdates -skipMacroValidation
+          -skipPackagePluginValidation
           ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build
       - name: Prepare the iOS SearXNG runtime
         run: >-
@@ -73,4 +74,5 @@ jobs:
           xcodebuild -project fullmoon.xcodeproj -scheme fullmoon
           -configuration Debug -destination 'generic/platform=iOS Simulator'
           -derivedDataPath build/DerivedData -skipPackageUpdates -skipMacroValidation
+          -skipPackagePluginValidation
           ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build

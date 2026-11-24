@@ -81,10 +81,12 @@ Une fois les runtimes préparés, depuis la racine du dépôt :
 ```sh
 xcodebuild -project fullmoon.xcodeproj -scheme fullmoon -configuration Debug \
   -destination 'generic/platform=macOS' -skipPackageUpdates -skipMacroValidation \
+  -skipPackagePluginValidation \
   ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build
 
 xcodebuild -project fullmoon.xcodeproj -scheme fullmoon -configuration Debug \
   -destination 'generic/platform=iOS Simulator' -skipPackageUpdates -skipMacroValidation \
+  -skipPackagePluginValidation \
   ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build
 ```
 
