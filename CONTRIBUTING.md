@@ -9,6 +9,9 @@ local du moteur Noctis.
 
 Utiliser un Mac Apple Silicon, Xcode avec Swift 6.4 ou ultérieur et le composant Metal.
 Les minima de plateforme sont ceux du projet Xcode et du package Noctis.
+La cible macOS est limitée à `arm64` en Debug et Release, en cohérence avec Noctis et le
+runtime Python embarqué. Le réglage `ARCHS[sdk=macosx*]` s’applique aussi aux archives
+Xcode Cloud ; il ne modifie pas les architectures iOS.
 
 Noctis est une dépendance Swift distante, résolue par Xcode depuis son dépôt GitHub.
 Les scripts SearXNG utilisent encore les outils de préparation du dépôt voisin :
@@ -81,10 +84,12 @@ Une fois les runtimes préparés, depuis la racine du dépôt :
 ```sh
 xcodebuild -project fullmoon.xcodeproj -scheme fullmoon -configuration Debug \
   -destination 'generic/platform=macOS' -skipPackageUpdates -skipMacroValidation \
+  -skipPackagePluginValidation \
   ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build
 
 xcodebuild -project fullmoon.xcodeproj -scheme fullmoon -configuration Debug \
   -destination 'generic/platform=iOS Simulator' -skipPackageUpdates -skipMacroValidation \
+  -skipPackagePluginValidation \
   ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build
 ```
 
@@ -93,6 +98,30 @@ comportement sur un iPhone physique. Pour un changement d'interface, contrôler 
 thèmes clair/sombre, le texte long, la génération, l'arrêt et le défilement manuel.
 Ajouter des captures pertinentes à la pull request et distinguer ce qui a été
 compilé de ce qui a été réellement testé dans l'application.
+
+## Dépendances verrouillées et Xcode Cloud
+
+Versionner `fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`.
+Ce fichier doit être généré par Xcode et rester cohérent avec les références du projet :
+
+```sh
+xcodebuild -resolvePackageDependencies -project fullmoon.xcodeproj -scheme fullmoon \
+  -skipMacroValidation -skipPackagePluginValidation
+```
+
+Lors d'une modification de dépendance, vérifier puis commiter le projet et le lockfile
+ensemble. La CI vérifie la résolution et refuse un fichier absent ou modifié par Xcode.
+Les autres fichiers locaux du workspace restent ignorés.
+
+Xcode Cloud exécute `ci_scripts/ci_post_clone.sh` avant le build. Ce script vérifie la
+révision Noctis du lockfile, prépare le checkout voisin attendu par le packaging, installe
+les outils nécessaires et prépare SearXNG. L'action iOS prépare aussi le runtime Mac,
+utilisé comme hôte de compilation des dépendances Python. Les validations de plugins et
+macros utilisent les mêmes réglages que GitHub Actions dans le runner éphémère.
+
+Le script exige un environnement Xcode Cloud Apple Silicon. Il conserve les protections
+contre l'écrasement d'un runtime ou d'un checkout différent, et ne modifie ni le lockfile
+ni la configuration de signature. Les runtimes générés restent exclus de Git.
 
 ## Contenu de la pull request
 
