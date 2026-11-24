@@ -62,9 +62,10 @@ L’app ne dépend ni de Docker, ni du Python installé sur le Mac de l’utilis
 Si le runtime manque, une erreur est affichée au lieu de se connecter au port Docker 8888.
 Un accès Internet reste nécessaire pour interroger les moteurs de recherche.
 
-Le runtime préparé est propre à une architecture : compiler et préparer séparément les
-distributions Apple Silicon et Intel. La notarisation et la validation App Store restent
-des étapes de distribution distinctes.
+La distribution macOS cible les Mac Apple Silicon (`arm64`), en Debug comme en Release.
+La cible Xcode applique cette architecture au SDK macOS pour correspondre au moteur Noctis
+et au runtime Python embarqué, y compris lors des archives Xcode Cloud.
+La notarisation et la validation App Store restent des étapes de distribution distinctes.
 
 ### Recherche Web embarquée sur iOS
 

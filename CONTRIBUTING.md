@@ -9,6 +9,9 @@ local du moteur Noctis.
 
 Utiliser un Mac Apple Silicon, Xcode avec Swift 6.4 ou ultérieur et le composant Metal.
 Les minima de plateforme sont ceux du projet Xcode et du package Noctis.
+La cible macOS est limitée à `arm64` en Debug et Release, en cohérence avec Noctis et le
+runtime Python embarqué. Le réglage `ARCHS[sdk=macosx*]` s’applique aussi aux archives
+Xcode Cloud ; il ne modifie pas les architectures iOS.
 
 Noctis est une dépendance Swift distante, résolue par Xcode depuis son dépôt GitHub.
 Les scripts SearXNG utilisent encore les outils de préparation du dépôt voisin :
