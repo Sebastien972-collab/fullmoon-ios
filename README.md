@@ -2,11 +2,15 @@
 
 # Interface Noctis — base Fullmoon
 
-Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécuté sur le Mac.
+Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécuté sur Mac ou iOS.
 
 ## Développement
 
-Le projet Xcode résout le package Noctis depuis son dépôt GitHub. Les scripts de préparation
+Le projet Xcode résout le package Noctis depuis son dépôt GitHub, à la révision
+`8ab611e2d4479a4cef768c8fc1cd726b472d79d4` de la
+[PR Noctis #26](https://github.com/Sebastien972-collab/NoctisAi/pull/26).
+Cette révision fournit le service iOS automatique utilisé par l’application.
+Les scripts de préparation
 et de packaging SearXNG utilisent encore `../NoctisAi` ; conserver les deux dépôts côte à côte :
 
 ```text
@@ -16,7 +20,26 @@ NoctisAI/
 ```
 
 Ouvrir `fullmoon.xcodeproj`, sélectionner la cible Mac et lancer l’application. Le modèle reste
-`mlx-community/Ministral-3-14B-Instruct-2512-4bit` ; aucune version de dépendance n’a été changée.
+`mlx-community/Ministral-3-14B-Instruct-2512-4bit` sur macOS.
+
+### Inférence locale sur iOS
+
+Fullmoon crée `IOSModelService(preference: .automatic)` uniquement sur iOS, avec le même
+service de recherche Web embarqué. Lors de « Préparer Noctis », le service sélectionne :
+
+- **Foundation Models** si le modèle Apple sur l’appareil est disponible ;
+- **MLX Ministral 3B** sinon, avec le modèle
+  `mlx-community/Ministral-3-3B-Instruct-2512-4bit` et un téléchargement si le cache est incomplet.
+
+Le moteur Apple utilise explicitement `SystemLanguageModel.default`. L’inférence reste sur
+l’appareil et aucun fournisseur Private Cloud Compute n’est configuré. Les recherches Web
+restent des requêtes réseau, quel que soit le moteur d’inférence.
+
+Les réglages affichent le moteur effectivement chargé et, pour un repli vers MLX, la raison
+de l’indisponibilité du modèle Apple. La sélection reste stable pendant la vie du moteur ;
+une erreur de génération ne déclenche pas de repli ni de répétition automatique du message.
+Le parcours iOS laisse le service vérifier la disponibilité du modèle Apple avant d’exiger
+un téléchargement MLX. La configuration macOS conserve `MLXModelService` et Ministral 14B.
 
 ### Recherche Web sur Mac, sans Docker
 
@@ -81,14 +104,17 @@ La validation sur un iPhone physique et la distribution App Store restent à eff
 
 ## Chargement et conversations
 
-- Les fichiers du modèle sont conservés dans le cache Hugging Face utilisé par l’application.
+- Les fichiers des modèles MLX sont conservés dans le cache Hugging Face utilisé par l’application.
 - Une installation complète est recherchée localement avant tout accès réseau. Une installation
-  absente ou incomplète passe par le téléchargement Hugging Face, qui réutilise les fichiers présents.
+  MLX absente ou incomplète passe par le téléchargement Hugging Face, qui réutilise les fichiers présents.
+- Le modèle Apple est géré par le système et ne nécessite pas de téléchargement Hugging Face.
 - L’interface distingue « Téléchargement… », « Chargement du modèle… » et « Prêt ».
 - Chaque fenêtre conserve son moteur pendant sa durée de vie. Changer de chat ou interrompre
   une réponse réinitialise uniquement la conversation, après le nettoyage de la génération.
-- L’historique complet est transmis avec ses rôles ; il n’est pas injecté comme JSON dans un prompt.
-- Après fermeture complète, les poids doivent être rechargés du disque en mémoire. Un cache
+- L’historique SwiftData et le contexte d’identité sont transmis au service avec leurs rôles.
+  Noctis adapte ensuite le contexte au fournisseur : messages natifs pour MLX, historique structuré
+  et contexte limité pour Foundation Models. Les conversations sauvegardées restent complètes.
+- Après fermeture complète, les poids MLX doivent être rechargés du disque en mémoire. Un cache
   supprimé par l’utilisateur ou le système nécessite une nouvelle installation.
 
 ## Interaction
@@ -159,5 +185,7 @@ Fullmoon d’origine, adaptées au moteur Noctis et aux réglages actuels. Il s�
 jusqu’à la première préparation réussie, puis à la validation « Commencer la conversation ».
 Le téléchargement éventuel ne commence qu’après « Préparer Noctis ». Un modèle en cache
 est réutilisé et le moteur chargé est conservé lors de l’ouverture du chat.
+Sur iOS, les textes expliquent le choix automatique Apple/MLX 3B ; la préparation du modèle
+Apple n’est pas bloquée par un contrôle préalable de disponibilité Metal.
 Les erreurs restent visibles avec la possibilité de réessayer. L’apparence peut être
 personnalisée depuis l’accueil, sans charger le modèle.

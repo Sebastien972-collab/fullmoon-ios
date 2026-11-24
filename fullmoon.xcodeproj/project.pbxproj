@@ -487,8 +487,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Sebastien972-collab/NoctisAi.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 8ab611e2d4479a4cef768c8fc1cd726b472d79d4;
 			};
 		};
 		CF9AC157309D414600515FF2 /* XCRemoteSwiftPackageReference "AIEffectsKit" */ = {

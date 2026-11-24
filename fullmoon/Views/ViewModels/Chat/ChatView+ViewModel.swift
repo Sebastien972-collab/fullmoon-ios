@@ -24,6 +24,8 @@ extension ChatView {
         private(set) var generatingMessageID: UUID?
         private(set) var generationPhase = AIPhase.idle
         private(set) var loadPhase = AIModelLoadPhase.loading
+        private(set) var modelRuntime: ModelRuntime = .initial
+        private(set) var modelFallbackReason: LocalizedStringResource?
         private(set) var loadDuration: TimeInterval?
         private(set) var firstTextDelay: TimeInterval?
         private(set) var charactersPerSecond: Double?
@@ -51,7 +53,7 @@ extension ChatView {
             }
             return MLXModelService(webSearchService: search)
             #elseif os(iOS)
-            return MLXModelService(webSearchService: IOSWebSearchService.shared)
+            return IOSModelService(preference: .automatic, webSearchService: IOSWebSearchService.shared)
             #else
             return MLXModelService()
             #endif
@@ -94,6 +96,9 @@ extension ChatView {
             }
             do {
                 try await loading.value
+                #if os(iOS)
+                await updateModelRuntime(from: service)
+                #endif
                 try Task.checkCancellation()
                 loadDuration = loadingSeconds
                 isConnected = true
@@ -261,6 +266,28 @@ extension ChatView {
 }
 
 extension ChatView.ViewModel {
+    #if os(iOS)
+    private func updateModelRuntime(from service: any AIModelService) async {
+        guard let localService = service as? IOSModelService,
+              let selection = await localService.selection else { return }
+        switch selection.provider {
+        case .foundationModels: modelRuntime = .foundationModels
+        case .mlx: modelRuntime = .mlx
+        }
+        modelFallbackReason = nil
+        guard selection.preference == .automatic, selection.provider == .mlx else { return }
+        switch selection.foundationModelsAvailability {
+        case .available: break
+        case .requiresIOS26: modelFallbackReason = "model.fallback.requires_ios26"
+        case .frameworkUnavailable: modelFallbackReason = "model.fallback.framework_unavailable"
+        case .appleIntelligenceNotEnabled: modelFallbackReason = "model.fallback.apple_intelligence_disabled"
+        case .deviceNotEligible: modelFallbackReason = "model.fallback.device_ineligible"
+        case .modelNotReady: modelFallbackReason = "model.fallback.model_not_ready"
+        case .unknown: modelFallbackReason = "model.fallback.unknown"
+        }
+    }
+    #endif
+
     var hasMeaningfulPrompt: Bool {
         prompt.contains { !$0.isWhitespace }
     }

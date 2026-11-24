@@ -34,12 +34,22 @@ struct OnboardingView: View {
                         Label {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("onboarding.local_model.title").font(.headline)
+                                #if os(iOS)
+                                Text("onboarding.ios.local_model.description")
+                                    .foregroundStyle(.secondary)
+                                #else
                                 Text("onboarding.local_model.description")
                                     .foregroundStyle(.secondary)
+                                #endif
                             }
                         } icon: {
+                            #if os(iOS)
+                            Image(systemName: "iphone")
+                                .frame(width: 28)
+                            #else
                             Image(systemName: "desktopcomputer")
                                 .frame(width: 28)
+                            #endif
                         }
 
                         Label {
