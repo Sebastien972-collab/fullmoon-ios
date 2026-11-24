@@ -178,6 +178,15 @@ violations sont bloquantes. Ne pas la régénérer pour masquer une régression.
 Les règles de contribution et les commandes de validation sont décrites dans
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+### Xcode Cloud
+
+Le fichier `Package.resolved` généré par Xcode est versionné avec le projet. La CI vérifie
+que les dépendances se résolvent à partir de ce verrou avant de compiler l'application.
+Le script `ci_scripts/ci_post_clone.sh` prépare Metal, les outils Python, le dépôt Noctis
+voisin à la révision verrouillée et les runtimes SearXNG requis par chaque action Cloud.
+Cette préparation permet aux builds Cloud d'utiliser les mêmes dépendances que les builds
+GitHub Actions, sans modifier les versions pendant le build.
+
 ## Premier démarrage
 
 Le parcours d’accueil reprend la présentation et la préparation du modèle du projet
