@@ -276,14 +276,18 @@ extension ChatView.ViewModel {
         }
         modelFallbackReason = nil
         guard selection.preference == .automatic, selection.provider == .mlx else { return }
-        switch selection.foundationModelsAvailability {
-        case .available: break
-        case .requiresIOS26: modelFallbackReason = "model.fallback.requires_ios26"
-        case .frameworkUnavailable: modelFallbackReason = "model.fallback.framework_unavailable"
-        case .appleIntelligenceNotEnabled: modelFallbackReason = "model.fallback.apple_intelligence_disabled"
-        case .deviceNotEligible: modelFallbackReason = "model.fallback.device_ineligible"
-        case .modelNotReady: modelFallbackReason = "model.fallback.model_not_ready"
-        case .unknown: modelFallbackReason = "model.fallback.unknown"
+        modelFallbackReason = Self.fallbackReason(for: selection.foundationModelsAvailability)
+    }
+
+    private static func fallbackReason(for availability: IOSFoundationModelsAvailability) -> LocalizedStringResource? {
+        switch availability {
+        case .available: nil
+        case .requiresIOS26: "model.fallback.requires_ios26"
+        case .frameworkUnavailable: "model.fallback.framework_unavailable"
+        case .appleIntelligenceNotEnabled: "model.fallback.apple_intelligence_disabled"
+        case .deviceNotEligible: "model.fallback.device_ineligible"
+        case .modelNotReady: "model.fallback.model_not_ready"
+        case .unknown: "model.fallback.unknown"
         }
     }
     #endif
