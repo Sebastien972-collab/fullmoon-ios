@@ -102,7 +102,13 @@ fi
 # Match the noninteractive plugin and macro settings used by GitHub Actions.
 defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
 defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
-xcodebuild -downloadComponent MetalToolchain
+if xcrun --sdk macosx metal --version >/dev/null 2>&1; then
+    echo "The Metal compiler is available."
+else
+    echo "Installing the Metal toolchain."
+    xcodebuild -downloadComponent MetalToolchain
+    xcrun --sdk macosx metal --version
+fi
 
 if ! command -v uv >/dev/null 2>&1; then
     brew install uv
