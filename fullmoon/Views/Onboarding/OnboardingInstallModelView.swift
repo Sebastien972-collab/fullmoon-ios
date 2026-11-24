@@ -6,7 +6,9 @@
 //
 //  Adapted from the Fullmoon model installation flow by Jordan Singer (Mainframe Computer, Inc., MIT).
 
+#if !os(iOS)
 import Metal
+#endif
 import Noctis
 import SwiftUI
 
@@ -14,11 +16,21 @@ struct OnboardingInstallModelView: View {
     @Environment(AppManager.self) private var appManager
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Bindable var viewModel: ChatView.ViewModel
+    #if !os(iOS)
     private let supportsMetal = MTLCreateSystemDefaultDevice() != nil
+    #endif
+
+    private var canPrepare: Bool {
+        #if os(iOS)
+        true
+        #else
+        supportsMetal
+        #endif
+    }
 
     private var status: LocalizedStringResource {
         if viewModel.isConnected { return "onboarding.install.status.ready" }
-        if !supportsMetal { return "onboarding.install.status.unavailable" }
+        if !canPrepare { return "onboarding.install.status.unavailable" }
         if viewModel.submissionError != nil { return "onboarding.install.status.failed" }
         guard viewModel.isLoading else { return "onboarding.install.status.prepare" }
         switch viewModel.loadPhase {
@@ -44,7 +56,7 @@ struct OnboardingInstallModelView: View {
                         .multilineTextAlignment(.center)
                         .accessibilityAddTraits(.updatesFrequently)
 
-                    if !supportsMetal {
+                    if !canPrepare {
                         Label("onboarding.install.metal_unavailable.description",
                               systemImage: "exclamationmark.triangle")
                     } else if viewModel.isConnected {
@@ -61,7 +73,7 @@ struct OnboardingInstallModelView: View {
             }
             .scrollBounceBehavior(.basedOnSize)
 
-            if supportsMetal {
+            if canPrepare {
                 Button(action: prepareOrFinish) {
                     Text(
                         viewModel.isConnected
@@ -89,24 +101,46 @@ struct OnboardingInstallModelView: View {
 
     private var preparationDetails: some View {
         VStack(spacing: 16) {
+            #if os(iOS)
+            Text("onboarding.ios.install.model.description")
+                .foregroundStyle(.secondary)
+            Text("onboarding.ios.install.download.description")
+            #else
             Text("onboarding.install.model.description")
                 .foregroundStyle(.secondary)
             Text("onboarding.install.download.description")
+            #endif
             if viewModel.isLoading {
                 ProgressView()
                     .accessibilityLabel(status)
+                #if os(iOS)
+                Text("onboarding.ios.install.duration.description")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                #else
                 Text("onboarding.install.duration.description")
                     .font(.callout)
                     .foregroundStyle(.secondary)
+                #endif
             } else if let error = viewModel.submissionError {
                 Label(error, systemImage: "exclamationmark.triangle")
                     .foregroundStyle(.red)
+                #if os(iOS)
+                Text("onboarding.ios.install.retry.description")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                #else
                 Text("onboarding.install.retry.description")
                     .font(.callout)
                     .foregroundStyle(.secondary)
+                #endif
             } else {
+                #if os(iOS)
+                Label("onboarding.ios.install.offline.description", systemImage: "wifi.slash")
+                #else
                 Label("onboarding.install.offline.description",
                       systemImage: "wifi.slash")
+                #endif
                 Text("onboarding.install.web_search.description")
                     .font(.callout)
                     .foregroundStyle(.secondary)

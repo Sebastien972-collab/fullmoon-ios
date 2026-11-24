@@ -1,6 +1,312 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "model.fallback.apple_intelligence_disabled" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence is not enabled on this device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence n’est pas activé sur cet appareil."
+          }
+        }
+      }
+    },
+    "model.fallback.device_ineligible" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This device does not support the local Apple model."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cet appareil n’est pas compatible avec le modèle Apple local."
+          }
+        }
+      }
+    },
+    "model.fallback.framework_unavailable" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This version of the app does not support Foundation Models."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette version de l’application ne prend pas en charge Foundation Models."
+          }
+        }
+      }
+    },
+    "model.fallback.model_not_ready" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The local Apple model is not ready on this device yet."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle Apple local n’est pas encore prêt sur cet appareil."
+          }
+        }
+      }
+    },
+    "model.fallback.requires_ios26" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The local Apple model requires iOS 26 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle Apple local nécessite iOS 26 ou une version ultérieure."
+          }
+        }
+      }
+    },
+    "model.fallback.unknown" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The local Apple model is currently unavailable."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle Apple local est actuellement indisponible."
+          }
+        }
+      }
+    },
+    "model.runtime.automatic.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic selection"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélection automatique"
+          }
+        }
+      }
+    },
+    "model.runtime.foundation_models.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Foundation Models"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Foundation Models"
+          }
+        }
+      }
+    },
+    "model.runtime.label" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local engine"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moteur local"
+          }
+        }
+      }
+    },
+    "model.runtime.mlx.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MLX"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MLX"
+          }
+        }
+      }
+    },
+    "model.runtime.mlx_ios.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MLX · Ministral 3B"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MLX · Ministral 3B"
+          }
+        }
+      }
+    },
+    "model.runtime.settings.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis uses the Apple model on compatible devices, or Ministral 3B with MLX. Responses are generated on this device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis utilise le modèle Apple sur les appareils compatibles, sinon Ministral 3B avec MLX. Les réponses sont générées sur cet appareil."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.download.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Apple model is managed by iOS. If MLX is needed, preparing it may download Ministral 3B; use Wi-Fi and leave enough storage available."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle Apple est géré par iOS. Si MLX est nécessaire, sa préparation peut télécharger Ministral 3B ; prévoyez du Wi-Fi et de l’espace libre."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.duration.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep the app open while Noctis prepares the local engine. An MLX download may take several minutes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gardez l’application ouverte pendant la préparation du moteur local. Un téléchargement MLX peut prendre plusieurs minutes."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.model.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis selects an available local engine: Apple Foundation Models on compatible devices, or Ministral 3B with MLX."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis sélectionne le moteur local disponible : Apple Foundation Models sur les appareils compatibles, sinon Ministral 3B avec MLX."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.offline.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once the local engine is ready, responses can be generated offline."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une fois le moteur local prêt, les réponses peuvent être générées hors ligne."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.retry.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check the error message, then try again. If MLX is downloading a model, check your connection and available storage."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consultez le message d’erreur, puis réessayez. Si MLX télécharge un modèle, vérifiez la connexion et l’espace disponible."
+          }
+        }
+      }
+    },
+    "onboarding.ios.local_model.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis uses Apple’s local model when available, or Ministral 3B with MLX. Responses are generated on your device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis utilise le modèle local d’Apple quand il est disponible, ou Ministral 3B avec MLX. Les réponses sont générées sur votre appareil."
+          }
+        }
+      }
+    },
     "app.command.show_main_window" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {

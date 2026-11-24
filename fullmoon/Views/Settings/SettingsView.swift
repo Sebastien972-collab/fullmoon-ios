@@ -45,7 +45,13 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    #if os(iOS)
+                    LabeledContent("model.runtime.label") {
+                        Text(viewModel.modelRuntime.title)
+                    }
+                    #else
                     LabeledContent("Moteur", value: "Noctis")
+                    #endif
                     LabeledContent("État") {
                         HStack {
                             if modelStatus.isBusy {
@@ -58,6 +64,13 @@ struct SettingsView: View {
                                 .accessibilityIdentifier("modelStatus")
                         }
                     }
+                    #if os(iOS)
+                    if let reason = viewModel.modelFallbackReason {
+                        Text(reason)
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                    #endif
                     if case .failed(let message) = modelStatus {
                         Text(message)
                             .font(.footnote)
@@ -71,7 +84,11 @@ struct SettingsView: View {
                 } header: {
                     Text("Modèle IA")
                 } footer: {
+                    #if os(iOS)
+                    Text("model.runtime.settings.description")
+                    #else
                     Text("Le modèle est défini par Noctis et ne peut pas être changé ici.")
+                    #endif
                 }
 
                 Section {
