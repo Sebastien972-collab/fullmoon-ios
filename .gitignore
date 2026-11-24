@@ -13,6 +13,13 @@ build/
 # Local Xcode configuration files
 xcuserdata/
 *.xcworkspace
+!fullmoon.xcodeproj/project.xcworkspace/
+fullmoon.xcodeproj/project.xcworkspace/*
+!fullmoon.xcodeproj/project.xcworkspace/xcshareddata/
+fullmoon.xcodeproj/project.xcworkspace/xcshareddata/*
+!fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/*
+!fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 *.xcuserstate
 *.xcuserdata
 *.xcconfig
