@@ -490,7 +490,7 @@
 			repositoryURL = "https://github.com/Sebastien972-collab/NoctisAi.git";
 			requirement = {
 				kind = revision;
-				revision = 44fbee730e4c8ea5a538238eb241da525ae0d90d;
+				revision = 06f9815b9e7259cbf6a99027fcbb1d5374e63a69;
 			};
 		};
 		CF9AC157309D414600515FF2 /* XCRemoteSwiftPackageReference "AIEffectsKit" */ = {

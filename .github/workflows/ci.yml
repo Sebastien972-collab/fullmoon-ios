@@ -76,7 +76,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: Sebastien972-collab/NoctisAi
-          ref: 44fbee730e4c8ea5a538238eb241da525ae0d90d
+          ref: 06f9815b9e7259cbf6a99027fcbb1d5374e63a69
           path: NoctisAi
           persist-credentials: false
       - name: Check toolchain and prepare Metal
