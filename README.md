@@ -7,7 +7,7 @@ Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécut�
 ## Développement
 
 Le projet Xcode résout le package Noctis depuis son dépôt GitHub, à la révision
-`06f9815b9e7259cbf6a99027fcbb1d5374e63a69` de la
+`c6120133d09f999234ccea8e9a9b0c2593deb748` de la
 [PR Noctis #27](https://github.com/Sebastien972-collab/NoctisAi/pull/27).
 Cette révision fournit le service iOS automatique et le correctif de recherche Web utilisé par l’application.
 Les scripts de préparation
