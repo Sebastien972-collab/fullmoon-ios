@@ -39,9 +39,13 @@ jobs:
           persist-credentials: false
       - name: Resolve package dependencies
         run: |
+          resolution_options=()
+          if [ -f fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved ]; then
+            resolution_options+=(-onlyUsePackageVersionsFromResolvedFile)
+          fi
           xcodebuild -resolvePackageDependencies -project fullmoon.xcodeproj -scheme fullmoon \
             -clonedSourcePackagesDirPath build/SourcePackages \
-            -skipMacroValidation -skipPackagePluginValidation
+            -skipMacroValidation -skipPackagePluginValidation "${resolution_options[@]}"
       - name: Verify the committed package lock
         run: |
           python3 - <<'PY'
