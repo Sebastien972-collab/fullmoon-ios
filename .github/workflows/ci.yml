@@ -39,13 +39,9 @@ jobs:
           persist-credentials: false
       - name: Resolve package dependencies
         run: |
-          resolution_options=()
-          if [ -f fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved ]; then
-            resolution_options+=(-onlyUsePackageVersionsFromResolvedFile)
-          fi
           xcodebuild -resolvePackageDependencies -project fullmoon.xcodeproj -scheme fullmoon \
             -clonedSourcePackagesDirPath build/SourcePackages \
-            -skipMacroValidation -skipPackagePluginValidation "${resolution_options[@]}"
+            -skipMacroValidation -skipPackagePluginValidation
       - name: Verify the committed package lock
         run: |
           python3 - <<'PY'
@@ -80,7 +76,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: Sebastien972-collab/NoctisAi
-          ref: 8ab611e2d4479a4cef768c8fc1cd726b472d79d4
+          ref: 44fbee730e4c8ea5a538238eb241da525ae0d90d
           path: NoctisAi
           persist-credentials: false
       - name: Check toolchain and prepare Metal
