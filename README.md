@@ -7,9 +7,9 @@ Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécut�
 ## Développement
 
 Le projet Xcode résout le package Noctis depuis son dépôt GitHub, à la révision
-`8ab611e2d4479a4cef768c8fc1cd726b472d79d4` de la
-[PR Noctis #26](https://github.com/Sebastien972-collab/NoctisAi/pull/26).
-Cette révision fournit le service iOS automatique utilisé par l’application.
+`c6120133d09f999234ccea8e9a9b0c2593deb748` de la
+[PR Noctis #27](https://github.com/Sebastien972-collab/NoctisAi/pull/27).
+Cette révision fournit le service iOS automatique et le correctif de recherche Web utilisé par l’application.
 Les scripts de préparation
 et de packaging SearXNG utilisent encore `../NoctisAi` ; conserver les deux dépôts côte à côte :
 
@@ -38,6 +38,13 @@ restent des requêtes réseau, quel que soit le moteur d’inférence.
 Les réglages affichent le moteur effectivement chargé et, pour un repli vers MLX, la raison
 de l’indisponibilité du modèle Apple. La sélection reste stable pendant la vie du moteur ;
 une erreur de génération ne déclenche pas de repli ni de répétition automatique du message.
+
+Avec le moteur Apple, les demandes courtes et explicites de recherche ou d’actualité déclenchent
+une recherche avant la synthèse. La relance « Tu peux utiliser web search ? » peut reprendre
+le sujet du message précédent lorsqu’aucune recherche n’avait encore été exécutée. Les rôles
+de conversation et la dernière demande sont présentés séparément au modèle. Le guide
+[de contribution](CONTRIBUTING.md#vérifier-la-recherche-web-sur-iphone) décrit le test sur appareil
+et les traces locales permettant de vérifier l’appel du service Web.
 Le parcours iOS laisse le service vérifier la disponibilité du modèle Apple avant d’exiger
 un téléchargement MLX. La configuration macOS conserve `MLXModelService` et Ministral 14B.
 
@@ -113,7 +120,7 @@ La validation sur un iPhone physique et la distribution App Store restent à eff
 - Chaque fenêtre conserve son moteur pendant sa durée de vie. Changer de chat ou interrompre
   une réponse réinitialise uniquement la conversation, après le nettoyage de la génération.
 - L’historique SwiftData et le contexte d’identité sont transmis au service avec leurs rôles.
-  Noctis adapte ensuite le contexte au fournisseur : messages natifs pour MLX, historique structuré
+  Noctis adapte ensuite le contexte au fournisseur : messages natifs pour MLX, transcript utilisateur/assistant
   et contexte limité pour Foundation Models. Les conversations sauvegardées restent complètes.
 - Après fermeture complète, les poids MLX doivent être rechargés du disque en mémoire. Un cache
   supprimé par l’utilisateur ou le système nécessite une nouvelle installation.
