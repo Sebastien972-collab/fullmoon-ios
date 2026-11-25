@@ -76,11 +76,27 @@ jobs:
         with:
           path: fullmoon-ios
           persist-credentials: false
+      - name: Read the locked Noctis revision
+        id: noctis
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import re
+
+          path = "fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+          pins = [pin for pin in json.loads(Path(path).read_text())["pins"] if pin["identity"] == "noctisai"]
+          if len(pins) != 1 or not re.fullmatch(r"[0-9a-f]{40}", pins[0]["state"]["revision"]):
+              raise SystemExit("Package.resolved must contain one valid NoctisAi revision.")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write("revision=" + pins[0]["state"]["revision"] + "\n")
+          PY
       - name: Check out the local Noctis package
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: Sebastien972-collab/NoctisAi
-          ref: c6120133d09f999234ccea8e9a9b0c2593deb748
+          ref: ${{ steps.noctis.outputs.revision }}
           path: NoctisAi
           persist-credentials: false
       - name: Check toolchain and prepare Metal

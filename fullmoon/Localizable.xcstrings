@@ -160,13 +160,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MLX"
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MLX"
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
           }
         }
       }
@@ -177,13 +177,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MLX · Ministral 3B"
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MLX · Ministral 3B"
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
           }
         }
       }
@@ -194,13 +194,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis uses the Apple model on compatible devices, or Ministral 3B with MLX. Responses are generated on this device."
+            "value" : "This test version uses Ternary Bonsai 2 (4B) with MLX. Responses are generated on this device."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis utilise le modèle Apple sur les appareils compatibles, sinon Ministral 3B avec MLX. Les réponses sont générées sur cet appareil."
+            "value" : "Cette version de test utilise Ternary Bonsai 2 (4B) avec MLX. Les réponses sont générées sur cet appareil."
           }
         }
       }
@@ -211,13 +211,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The Apple model is managed by iOS. If MLX is needed, preparing it may download Ministral 3B; use Wi-Fi and leave enough storage available."
+            "value" : "Preparing the model downloads Ternary Bonsai 2 (4B) if it is not cached. Use Wi-Fi and leave enough storage available."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le modèle Apple est géré par iOS. Si MLX est nécessaire, sa préparation peut télécharger Ministral 3B ; prévoyez du Wi-Fi et de l’espace libre."
+            "value" : "La préparation télécharge Ternary Bonsai 2 (4B) s’il n’est pas en cache. Utilisez le Wi-Fi et prévoyez suffisamment d’espace libre."
           }
         }
       }
@@ -245,13 +245,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis selects an available local engine: Apple Foundation Models on compatible devices, or Ministral 3B with MLX."
+            "value" : "Noctis uses Ternary Bonsai 2 (4B) with MLX, running directly on your device."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis sélectionne le moteur local disponible : Apple Foundation Models sur les appareils compatibles, sinon Ministral 3B avec MLX."
+            "value" : "Noctis utilise Ternary Bonsai 2 (4B) avec MLX, exécuté directement sur votre appareil."
           }
         }
       }
@@ -279,13 +279,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check the error message, then try again. If MLX is downloading a model, check your connection and available storage."
+            "value" : "Check the error message, your connection and available storage, then try again."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Consultez le message d’erreur, puis réessayez. Si MLX télécharge un modèle, vérifiez la connexion et l’espace disponible."
+            "value" : "Consultez le message d’erreur, vérifiez votre connexion et l’espace disponible, puis réessayez."
           }
         }
       }
@@ -296,13 +296,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis uses Apple’s local model when available, or Ministral 3B with MLX. Responses are generated on your device."
+            "value" : "Noctis runs Ternary Bonsai 2 (4B) locally with MLX. Responses are generated on your device."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis utilise le modèle local d’Apple quand il est disponible, ou Ministral 3B avec MLX. Les réponses sont générées sur votre appareil."
+            "value" : "Noctis exécute Ternary Bonsai 2 (4B) localement avec MLX. Les réponses sont générées sur votre appareil."
           }
         }
       }
@@ -4754,13 +4754,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If the model is not cached, preparing it downloads several gigabytes. Use Wi-Fi and keep enough free space."
+            "value" : "Preparing the model downloads Ternary Bonsai 2 (4B) if it is not cached. Use Wi-Fi and leave enough storage available."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si le modèle n’est pas en cache, sa préparation télécharge plusieurs gigaoctets. Utilisez le Wi-Fi et prévoyez suffisamment d’espace libre."
+            "value" : "La préparation télécharge Ternary Bonsai 2 (4B) s’il n’est pas en cache. Utilisez le Wi-Fi et prévoyez suffisamment d’espace libre."
           }
         }
       }
@@ -4805,13 +4805,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis uses Ministral 3, running directly on your device."
+            "value" : "Noctis uses Ternary Bonsai 2 (4B) with MLX, running directly on your device."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis utilise Ministral 3, exécuté directement sur votre appareil."
+            "value" : "Noctis utilise Ternary Bonsai 2 (4B) avec MLX, exécuté directement sur votre appareil."
           }
         }
       }
@@ -5026,13 +5026,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis runs its model locally, directly on your device."
+            "value" : "Noctis runs Ternary Bonsai 2 (4B) locally with MLX. Responses are generated on your device."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noctis exécute son modèle localement, directement sur votre appareil."
+            "value" : "Noctis exécute Ternary Bonsai 2 (4B) localement avec MLX. Les réponses sont générées sur votre appareil."
           }
         }
       }

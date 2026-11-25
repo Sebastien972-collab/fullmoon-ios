@@ -489,8 +489,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Sebastien972-collab/NoctisAi.git";
 			requirement = {
-				kind = revision;
-				revision = c6120133d09f999234ccea8e9a9b0c2593deb748;
+				branch = "test/ternary-bonsai-2-4b";
+				kind = branch;
 			};
 		};
 		CF9AC157309D414600515FF2 /* XCRemoteSwiftPackageReference "AIEffectsKit" */ = {
