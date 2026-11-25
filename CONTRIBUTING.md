@@ -99,6 +99,28 @@ thèmes clair/sombre, le texte long, la génération, l'arrêt et le défilement
 Ajouter des captures pertinentes à la pull request et distinguer ce qui a été
 compilé de ce qui a été réellement testé dans l'application.
 
+### Vérifier la recherche Web sur iPhone
+
+Sur un iPhone physique, relever le moteur affiché dans les réglages, puis demander
+les actualités IA du jour et relancer avec « Tu peux utiliser web search ? » dans
+la même conversation. Vérifier une recherche réelle, des sources consultables et
+une réponse fondée sur les résultats. Contrôler aussi l'absence de sources inventées
+en cas d'échec réseau, puis l'arrêt et la reprise d'une génération.
+
+Dans Console sur le Mac, sélectionner l'iPhone connecté, activer les messages
+d'information et filtrer sur le sous-système `com.sebastiendaguin.NoctisAi` et la
+catégorie `WebSearch`. `search_requested` confirme que le service a été appelé ;
+`python_ready` et `script_ready` confirment le chargement de l'interpréteur et du
+script, pas encore celui de SearXNG. `search_started` précède l'appel Python et
+`search_completed` confirme une réponse décodée, éventuellement sans résultat.
+Un échec indique uniquement son étape et une catégorie fermée, par exemple
+`stage=execute_search category=ImportError` ; aucune requête, URL, donnée utilisateur,
+message d'exception ou chemin n'est journalisé. Un appel Python déjà lancé peut
+terminer après une annulation, sans que sa réponse soit affichée.
+
+Une compilation iOS réussie ne remplace pas cet essai sur appareil. Mentionner
+explicitement dans la pull request lorsqu'il reste à effectuer.
+
 ## Dépendances verrouillées et Xcode Cloud
 
 Versionner `fullmoon.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`.
