@@ -3812,6 +3812,18 @@
         }
       }
     },
+    "credits.chat_ui.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chat interface" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Interface de discussion" } }
+      }
+    },
+    "credits.chat_ui.license" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "MIT license" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Licence MIT" } }
+      }
+    },
     "credits.navigation.title" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {

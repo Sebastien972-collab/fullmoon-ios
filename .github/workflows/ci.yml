@@ -127,3 +127,16 @@ jobs:
           -derivedDataPath build/DerivedData -skipPackageUpdates -skipMacroValidation
           -skipPackagePluginValidation
           ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build
+      - name: Capture the compiled iOS interface
+        id: capture_ios
+        timeout-minutes: 10
+        run: ./scripts/capture-ios-interface.sh
+      - name: Upload iOS interface captures
+        if: ${{ always() && steps.capture_ios.outcome != 'skipped' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ios-interface-${{ github.sha }}
+          path: fullmoon-ios/build/interface-captures
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0

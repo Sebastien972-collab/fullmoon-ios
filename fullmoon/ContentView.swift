@@ -21,38 +21,31 @@ struct ContentView: View {
     @FocusState var isPromptFocused: Bool
 
     var body: some View {
-        Group {
-            if !appManager.hasCompletedOnboarding {
-                OnboardingView(viewModel: chatViewModel)
-            } else if appManager.userInterfaceIdiom == .pad || appManager.userInterfaceIdiom == .mac
-                || appManager.userInterfaceIdiom == .vision {
-                // iPad
-                NavigationSplitView {
-                    ChatsListView(currentThread: $currentThread, isPromptFocused: $isPromptFocused)
-                    #if os(macOS)
-                    .navigationSplitViewColumnWidth(min: 240, ideal: 240, max: 320)
-                    #endif
-                } detail: {
-                    ChatView(currentThread: $currentThread, isPromptFocused: $isPromptFocused, showChats: $showChats, showSettings: $showSettings, viewModel: chatViewModel)
-                }
-            } else {
-                // iPhone
-                ChatView(currentThread: $currentThread, isPromptFocused: $isPromptFocused, showChats: $showChats, showSettings: $showSettings, viewModel: chatViewModel)
-            }
-        }
+        cloudManagedContent
         .environment(appManager)
-        .task(id: scenePhase) {
-            guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else { return }
-            guard scenePhase == .active else {
-                await cloud.pause()
-                return
-            }
-            cloud.configure(context: modelContext)
-            while !Task.isCancelled {
-                await cloud.synchronize()
-                do { try await Task.sleep(for: .seconds(30)) } catch { break }
-            }
+        .onChange(of: appManager.hasCompletedOnboarding) { _, completed in
+            isPromptFocused = completed
         }
+        #if !os(iOS)
+        .sheet(isPresented: $showChats) {
+            ChatsListView(currentThread: $currentThread, isPromptFocused: $isPromptFocused)
+                .noctisAppLock()
+                .environment(appManager)
+                .presentationDragIndicator(.hidden)
+        }
+        #endif
+        .sheet(isPresented: $showSettings) { settingsSheet }
+        #if !os(visionOS)
+        .tint(appManager.appTintColor.getColor())
+        #endif
+        .fontDesign(appManager.appFontDesign.getFontDesign())
+        .modifier(AppearanceRoot())
+        .fontWidth(appManager.appFontWidth.getFontWidth())
+    }
+
+    private var cloudManagedContent: some View {
+        appContent
+        .task(id: scenePhase) { await synchronizeCloud() }
         .onChange(of: chatViewModel.isSending) { _, sending in
             cloud.setGenerating(sending, client: syncClientID)
         }
@@ -63,46 +56,64 @@ struct ContentView: View {
             cloud.setGenerating(false, client: syncClientID)
             Task { await cloud.pause() }
         }
-        .onChange(of: appManager.hasCompletedOnboarding) { _, completed in
-            isPromptFocused = completed
-        }
-        .if(appManager.userInterfaceIdiom == .phone) { view in
-            view
-                .gesture(
-                    DragGesture()
-                        .onChanged { gesture in
-                            if appManager.hasCompletedOnboarding && !showChats
-                                && gesture.startLocation.x < 20 && gesture.translation.width > 100 {
-                                appManager.playHaptic()
-                                showChats = true
-                            }
-                        }
+    }
+
+    @ViewBuilder
+    private var appContent: some View {
+        if !appManager.hasCompletedOnboarding {
+            OnboardingView(viewModel: chatViewModel)
+        } else {
+            #if os(iOS)
+            NoctisChatWorkspace(
+                currentThread: $currentThread,
+                showSettings: $showSettings,
+                viewModel: chatViewModel
+            )
+            #else
+            NavigationSplitView {
+                ChatsListView(currentThread: $currentThread, isPromptFocused: $isPromptFocused)
+                #if os(macOS)
+                    .navigationSplitViewColumnWidth(min: 240, ideal: 240, max: 320)
+                #endif
+            } detail: {
+                ChatView(
+                    currentThread: $currentThread,
+                    isPromptFocused: $isPromptFocused,
+                    showChats: $showChats,
+                    showSettings: $showSettings,
+                    viewModel: chatViewModel
                 )
+            }
+            #endif
         }
-        .sheet(isPresented: $showChats) {
-            ChatsListView(currentThread: $currentThread, isPromptFocused: $isPromptFocused)
-                .noctisAppLock()
-                .environment(appManager)
-                .presentationDragIndicator(.hidden)
-                .if(appManager.userInterfaceIdiom == .phone) { view in
-                    view.presentationDetents([.medium, .large])
-                }
+    }
+
+    private var settingsSheet: some View {
+        SettingsView(currentThread: $currentThread, viewModel: chatViewModel)
+            .noctisAppLock()
+            .environment(appManager)
+            .presentationDragIndicator(.hidden)
+            .if(appManager.userInterfaceIdiom == .phone) { view in
+                view.presentationDetents([.medium, .large])
+            }
+    }
+
+    @MainActor
+    private func synchronizeCloud() async {
+        guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else { return }
+        guard scenePhase == .active else {
+            await cloud.pause()
+            return
         }
-        .sheet(isPresented: $showSettings) {
-            SettingsView(currentThread: $currentThread, viewModel: chatViewModel)
-                .noctisAppLock()
-                .environment(appManager)
-                .presentationDragIndicator(.hidden)
-                .if(appManager.userInterfaceIdiom == .phone) { view in
-                    view.presentationDetents([.medium, .large])
-                }
+        cloud.configure(context: modelContext)
+        while !Task.isCancelled {
+            await cloud.synchronize()
+            do {
+                try await Task.sleep(for: .seconds(30))
+            } catch {
+                break
+            }
         }
-        #if !os(visionOS)
-        .tint(appManager.appTintColor.getColor())
-        #endif
-        .fontDesign(appManager.appFontDesign.getFontDesign())
-        .modifier(AppearanceRoot())
-        .fontWidth(appManager.appFontWidth.getFontWidth())
     }
 }
 

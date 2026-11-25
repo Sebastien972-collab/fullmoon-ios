@@ -20,6 +20,7 @@ struct ConversationView: View {
     var onBranch: ((Message) -> Void)? = nil
     var generatingMessageID: UUID? = nil
     var generationPhase = AIPhase.idle
+    var usesChatGPTLayout = false
 
     @State private var followsResponse = true
     @State private var isUserScrolling = false
@@ -32,7 +33,7 @@ struct ConversationView: View {
         ScrollViewReader { proxy in
             ZStack(alignment: .bottom) {
                 ScrollView(.vertical) {
-                    LazyVStack(alignment: .leading, spacing: appManager.appearance.density.spacing) {
+                    LazyVStack(alignment: .leading, spacing: messageSpacing) {
                         ForEach(sorted) { message in
                             MessageView(
                                 message: message,
@@ -42,7 +43,8 @@ struct ConversationView: View {
                                 onRetry: onRetry.map { action in { action(message) } },
                                 onEdit: onEdit.map { action in { action(message) } },
                                 onDelete: onDelete.map { action in { action(message) } },
-                                onBranch: onBranch.map { action in { action(message) } }
+                                onBranch: onBranch.map { action in { action(message) } },
+                                usesChatGPTLayout: usesChatGPTLayout
                             )
                             .id(message.id)
                             .transition(.opacity)
@@ -69,7 +71,7 @@ struct ConversationView: View {
                 // Floating "Back to bottom" Pill
                 if !followsResponse {
                     Button {
-                        withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
+                        withAnimation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.82)) {
                             followsResponse = true
                             proxy.scrollTo(bottomAnchorID, anchor: .bottom)
                         }
@@ -118,6 +120,10 @@ struct ConversationView: View {
                 proxy.scrollTo(bottomAnchorID, anchor: .bottom)
             }
         }
+    }
+
+    private var messageSpacing: CGFloat {
+        usesChatGPTLayout ? 24 : appManager.appearance.density.spacing
     }
 }
 

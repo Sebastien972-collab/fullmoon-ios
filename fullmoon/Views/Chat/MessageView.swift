@@ -23,6 +23,7 @@ struct MessageView: View {
     var onEdit: (() -> Void)? = nil
     var onDelete: (() -> Void)? = nil
     var onBranch: (() -> Void)? = nil
+    var usesChatGPTLayout = false
 
     @State private var copied = false
     @State private var showDeleteConfirmation = false
@@ -50,34 +51,36 @@ struct MessageView: View {
         HStack(alignment: .top, spacing: 10) {
             if isUser {
                 Spacer(minLength: 32)
-            } else if appearance.showAvatars {
+            } else if appearance.showAvatars && !usesChatGPTLayout {
                 avatarView
             }
 
             VStack(alignment: isUser ? .trailing : .leading, spacing: 6) {
                 // Header (Author + Timestamp)
-                HStack(spacing: 6) {
-                    Text(authorName)
-                        .font(.caption.weight(.semibold))
-                    if appearance.showTimestamps {
-                        Text(message.timestamp, style: .time)
-                            .font(.caption2)
+                if !usesChatGPTLayout || appearance.showTimestamps {
+                    HStack(spacing: 6) {
+                        Text(authorName)
+                            .font(.caption.weight(.semibold))
+                        if appearance.showTimestamps {
+                            Text(message.timestamp, style: .time)
+                                .font(.caption2)
+                        }
+                        if isStreaming && !isUser {
+                            Image(systemName: "ellipsis")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(appManager.appTintColor.getColor())
+                                .symbolEffect(.variableColor.iterative, options: .repeating,
+                                              isActive: !reducesAnimations)
+                                .accessibilityHidden(true)
+                        }
                     }
-                    if isStreaming && !isUser {
-                        Image(systemName: "ellipsis")
-                            .font(.caption2.weight(.semibold))
-                            .foregroundStyle(appManager.appTintColor.getColor())
-                            .symbolEffect(.variableColor.iterative, options: .repeating,
-                                          isActive: !reducesAnimations)
-                            .accessibilityHidden(true)
-                    }
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, appearance.messageStyle == .bubbles ? 4 : 0)
                 }
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, appearance.messageStyle == .bubbles ? 4 : 0)
 
                 // Message Body Bubble / Canvas
                 messageBody
-                    .padding(appearance.messageStyle == .bubbles ? 14 : 4)
+                    .padding(messagePadding)
                     .background {
                         bubbleBackground
                     }
@@ -90,7 +93,8 @@ struct MessageView: View {
                         colors: appearance.intelligenceGlowPalette.colors,
                         lineWidth: appearance.intelligenceGlowLineWidth,
                         cornerRadius: appearance.intelligenceGlowCornerRadius,
-                        activeWhen: appearance.aiEffectsEnabled && appearance.intelligenceGlowEnabled
+                        activeWhen: !usesChatGPTLayout
+                            && appearance.aiEffectsEnabled && appearance.intelligenceGlowEnabled
                             && !isUser && isStreaming && (generationPhase?.isActive ?? false)
                     )
 
@@ -109,7 +113,7 @@ struct MessageView: View {
                 }
             }
 
-            if !isUser {
+            if !isUser && !usesChatGPTLayout {
                 Spacer(minLength: 24)
             }
         }
@@ -235,7 +239,12 @@ struct MessageView: View {
     private var bubbleBackground: some View {
         let appearance = appManager.appearance
 
-        if appearance.messageStyle == .bubbles {
+        if usesChatGPTLayout {
+            if isUser {
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .fill(assistantBubbleFill)
+            }
+        } else if appearance.messageStyle == .bubbles {
             if isUser {
                 RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous)
                     .fill(appManager.appTintColor.getColor().opacity(userBubbleOpacity))
@@ -248,6 +257,11 @@ struct MessageView: View {
                     }
             }
         }
+    }
+
+    private var messagePadding: CGFloat {
+        if usesChatGPTLayout { return isUser ? 14 : 0 }
+        return appManager.appearance.messageStyle == .bubbles ? 14 : 4
     }
 
     private var userBubbleOpacity: Double {
@@ -334,7 +348,7 @@ struct MessageView: View {
                 }
                 .font(.caption)
                 .foregroundStyle(copied ? Color.green : Color.secondary)
-                .frame(minWidth: 32, minHeight: 32)
+                .frame(minWidth: actionTargetSize, minHeight: actionTargetSize)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
@@ -346,7 +360,7 @@ struct MessageView: View {
                     Image(systemName: "arrow.clockwise")
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                        .frame(minWidth: 32, minHeight: 32)
+                        .frame(minWidth: actionTargetSize, minHeight: actionTargetSize)
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
@@ -358,7 +372,7 @@ struct MessageView: View {
                 Image(systemName: "square.and.arrow.up")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                    .frame(minWidth: 32, minHeight: 32)
+                    .frame(minWidth: actionTargetSize, minHeight: actionTargetSize)
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
@@ -417,6 +431,8 @@ struct MessageView: View {
     }
 
     // MARK: - Helpers
+
+    private var actionTargetSize: CGFloat { usesChatGPTLayout ? 44 : 32 }
 
     private func copyContent() {
         #if os(macOS)

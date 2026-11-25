@@ -4,9 +4,42 @@
 
 Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécuté sur Mac ou iOS.
 
+## Interface iPhone et iPad
+
+La branche `feat/chatgpt-ui-integration` adapte les composants de
+[ChatGPT iOS UI](https://github.com/bryanrg22/chatgpt-ios-ui) à Noctis : compositeur
+natif, contrôles Liquid Glass, historique recherchable et présentation sobre des messages.
+La navigation suit la size class : tiroir en compact, barre latérale en régulier.
+Les vues macOS et visionOS conservent leur parcours existant.
+
+Le package local `Packages/NoctisChatUI` expose uniquement la présentation. Les conversations,
+leurs identifiants SwiftData, le streaming, les erreurs, l'annulation et le contexte personnel
+restent gérés par le ViewModel Noctis existant. Les contenus et services de démonstration
+de l'amont ne sont pas intégrés. La recherche Web continue de passer par Noctis.
+Le rendu Markdown existant est conservé, sans nouvelle dépendance distante.
+
+La provenance et la licence MIT sont conservées dans le package ; la licence est également
+consultable dans Réglages → Crédits sur iOS. Cette adaptation est indépendante d'OpenAI.
+
+Pour essayer l'interface depuis le dépôt Fullmoon :
+
+```sh
+git fetch origin
+git switch feat/chatgpt-ui-integration
+```
+
+Ouvrir `fullmoon.xcodeproj`. Cette branche part du dernier état de l'essai Bonsai
+et conserve sa révision Noctis verrouillée. Les instructions de préparation du moteur
+et de SearXNG ci-dessous s'appliquent toujours.
+
+Vérifier sur appareil : envoi d'un seul échange, streaming et arrêt, changement de
+conversation pendant une génération, recherche/suppression dans l'historique, erreur
+et nouvelle tentative, restitution des conversations après relancement. Contrôler
+les apparences claire/sombre, Dynamic Type, le clavier et les dispositions compactes/régulières.
+
 ## Développement
 
-Cette branche `test/ternary-bonsai-2-4b` utilise exactement le modèle
+La base `test/ternary-bonsai-2-4b` utilisée par cette branche conserve exactement le modèle
 [`prism-ml/Ternary-Bonsai-2-4B-mlx-2bit`](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit).
 Le projet Xcode référence la branche NoctisAi `test/ternary-bonsai-2-4b` ; le commit
 utilisé est verrouillé dans `Package.resolved`. Cette base conserve les corrections iOS
