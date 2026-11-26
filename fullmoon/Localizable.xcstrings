@@ -154,6 +154,23 @@
         }
       }
     },
+    "model.runtime.macos.settings.description" : {
+      "comment" : "Description du modèle GPT local utilisé uniquement par la branche de test macOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This test version runs gpt-oss-20b locally on your Mac and accepts text messages."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette version de test exécute gpt-oss-20b localement sur votre Mac et accepte les messages texte."
+          }
+        }
+      }
+    },
     "model.runtime.mlx.title" : {
       "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
       "localizations" : {
@@ -184,6 +201,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ternary Bonsai 2 (4B) · MLX"
+          }
+        }
+      }
+    },
+    "model.runtime.mlx_macos.title" : {
+      "comment" : "Nom du moteur local utilisé uniquement pour le test GPT sur macOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "gpt-oss-20b · MLX"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "gpt-oss-20b · MLX"
           }
         }
       }
@@ -303,6 +337,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Noctis exécute Ternary Bonsai 2 (4B) localement avec MLX. Les réponses sont générées sur votre appareil."
+          }
+        }
+      }
+    },
+    "onboarding.macos.install.download.description" : {
+      "comment" : "Préparation du modèle GPT local sur macOS ; la taille concerne les poids téléchargés.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If the model is not cached, preparation downloads about 12.1 GB of weights. Allow enough free storage and keep the app open."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si le modèle n’est pas en cache, la préparation télécharge environ 12,1 Go de poids. Prévoyez suffisamment d’espace libre et gardez l’application ouverte."
+          }
+        }
+      }
+    },
+    "onboarding.macos.install.model.description" : {
+      "comment" : "Capacité du modèle GPT chargé uniquement pour le test macOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis uses gpt-oss-20b with MLX to generate text responses directly on your Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis utilise gpt-oss-20b avec MLX pour générer des réponses texte directement sur votre Mac."
+          }
+        }
+      }
+    },
+    "onboarding.macos.local_model.description" : {
+      "comment" : "Présentation du modèle GPT local uniquement dans l’accueil macOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis runs gpt-oss-20b locally on your Mac for text conversations."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis exécute gpt-oss-20b localement sur votre Mac pour les conversations texte."
           }
         }
       }

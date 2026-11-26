@@ -17,7 +17,19 @@ enum ModelRuntime: Equatable, Sendable {
         case .foundationModels:
             "model.runtime.foundation_models.title"
         case .mlx:
+            #if os(macOS)
+            "model.runtime.mlx_macos.title"
+            #else
             "model.runtime.mlx.title"
+            #endif
         }
+    }
+
+    var settingsDescription: LocalizedStringResource {
+        #if os(macOS)
+        "model.runtime.macos.settings.description"
+        #else
+        "model.runtime.settings.description"
+        #endif
     }
 }
