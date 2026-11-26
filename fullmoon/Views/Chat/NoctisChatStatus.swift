@@ -1,6 +1,7 @@
 // Created by Sébastien DAGUIN
 
 #if os(iOS)
+import NoctisChatUI
 import SwiftUI
 
 /// Keeps model availability and recovery actions tied to the existing Noctis runtime.
@@ -22,7 +23,7 @@ struct NoctisChatStatus: View {
             if viewModel.isLoading {
                 ProgressView().controlSize(.small)
             } else {
-                Image(systemName: "moon.stars")
+                NoctisIcon(.moon, size: 17)
                     .accessibilityHidden(true)
             }
             Text(viewModel.connectionMessage)

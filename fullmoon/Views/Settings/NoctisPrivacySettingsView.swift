@@ -45,7 +45,7 @@ struct NoctisPrivacySettingsView: View {
                     .disabled(cloud.isWorking)
             } header: { Text("cloud.title") } footer: { Text("cloud.explanation") }
         }
-        .formStyle(.grouped)
+        .modifier(ThemedForm())
         .navigationTitle("privacy.title")
         .confirmationDialog("cloud.enable.confirm", isPresented: $confirmEnable, titleVisibility: .visible) {
             Button("common.confirm") { Task { await cloud.enable() } }

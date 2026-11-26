@@ -4,6 +4,12 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Photograph a document to include its text in your message.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Use the microphone to dictate a chat message.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Transcribe your voice on this device to compose a chat message.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Protect access to your private Noctis conversations using device authentication.</string>
 </dict>

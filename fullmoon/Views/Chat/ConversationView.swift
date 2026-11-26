@@ -87,7 +87,7 @@ struct ConversationView: View {
                                     .font(.caption.weight(.medium))
                             }
                         }
-                        .foregroundStyle(appManager.appTintColor.getColor())
+                        .foregroundStyle(appManager.resolvedAccent)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 8)
                         .background {

@@ -7,12 +7,11 @@ struct NoctisChatHeader: View {
     let modelName: String
     let onSidebar: () -> Void
     let onNewConversation: () -> Void
-    let onSettings: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
             NoctisToolbarButton(
-                symbol: "line.3.horizontal",
+                icon: .menu,
                 label: NoctisStrings.text("history.open"),
                 action: onSidebar
             )
@@ -33,18 +32,11 @@ struct NoctisChatHeader: View {
             .accessibilityElement(children: .combine)
 
             NoctisToolbarButton(
-                symbol: "square.and.pencil",
+                icon: .newConversation,
                 label: NoctisStrings.text("conversation.new"),
                 action: onNewConversation
             )
             .accessibilityIdentifier("noctis.newConversation")
-
-            NoctisToolbarButton(
-                symbol: "gearshape",
-                label: NoctisStrings.text("settings.open"),
-                action: onSettings
-            )
-            .accessibilityIdentifier("noctis.settings")
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)

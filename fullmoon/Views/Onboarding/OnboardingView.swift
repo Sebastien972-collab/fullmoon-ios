@@ -6,6 +6,7 @@
 //
 //  Adapted from the Fullmoon onboarding by Jordan Singer (Mainframe Computer, Inc., MIT).
 
+import NoctisChatUI
 import SwiftUI
 
 struct OnboardingView: View {
@@ -18,10 +19,7 @@ struct OnboardingView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 28) {
                         VStack(spacing: 12) {
-                            Image(systemName: "moon.stars.fill")
-                                .font(.system(size: 64, weight: .light))
-                                .foregroundStyle(appManager.appTintColor.getColor())
-                                .accessibilityHidden(true)
+                            NoctisEmblem(tint: appManager.resolvedAccent)
                             Text("onboarding.welcome.title")
                                 .font(.largeTitle.weight(.semibold))
                                 .multilineTextAlignment(.center)

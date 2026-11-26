@@ -51,7 +51,7 @@ struct MessageView: View {
             if isUser {
                 Spacer(minLength: 32)
             } else if appearance.showAvatars && !usesChatGPTLayout {
-                MessageAvatar(tint: appManager.appTintColor.getColor())
+                MessageAvatar(tint: appManager.resolvedAccent)
             }
 
             VStack(alignment: isUser ? .trailing : .leading, spacing: 6) {
@@ -67,7 +67,7 @@ struct MessageView: View {
                         if isStreaming && !isUser {
                             Image(systemName: "ellipsis")
                                 .font(.caption2.weight(.semibold))
-                                .foregroundStyle(appManager.appTintColor.getColor())
+                                .foregroundStyle(appManager.resolvedAccent)
                                 .symbolEffect(.variableColor.iterative, options: .repeating,
                                               isActive: !reducesAnimations)
                                 .accessibilityHidden(true)
@@ -85,14 +85,14 @@ struct MessageView: View {
                             isUser: isUser,
                             usesChatGPTLayout: usesChatGPTLayout,
                             appearance: appearance,
-                            tint: appManager.appTintColor.getColor()
+                            tint: appManager.resolvedAccent
                         )
                     }
                     .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous))
                     .contentShape(RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous))
                     .contextMenu {
                         MessageContextMenu(
-                            content: message.content,
+                            content: message.shareableText,
                             isUser: isUser,
                             onCopy: copyContent,
                             onRegenerate: onRegenerate,
@@ -122,6 +122,7 @@ struct MessageView: View {
                 if !isUser && !isStreaming && !message.hasError {
                     MessageAssistantActions(
                         content: message.content,
+                        spokenReplyID: message.role == .assistant ? message.id : nil,
                         copied: copied,
                         targetSize: actionTargetSize,
                         onCopy: copyContent,
@@ -184,7 +185,7 @@ struct MessageView: View {
 
         VStack(alignment: .leading, spacing: 8) {
             if isUser {
-                Text(message.content)
+                MessagePromptView(content: message.content)
                     .font(.system(size: appearance.fontSize * textScale))
                     .foregroundStyle(userTextColor)
                     .textSelection(.enabled)
@@ -253,9 +254,9 @@ struct MessageView: View {
     private func copyContent() {
         #if os(macOS)
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(message.content, forType: .string)
+        NSPasteboard.general.setString(message.shareableText, forType: .string)
         #else
-        UIPasteboard.general.string = message.content
+        UIPasteboard.general.string = message.shareableText
         #endif
         appManager.playHaptic()
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -269,18 +270,19 @@ struct MessageView: View {
 
     private var accessibilityDescription: String {
         let author = String(localized: authorName)
+        let content = message.previewText
         if appManager.appearance.showTimestamps {
             let time = message.timestamp.formatted(date: .omitted, time: .shortened)
-            return String(localized: "message.accessibility.with_time \(author) \(time) \(message.content)")
+            return String(localized: "message.accessibility.with_time \(author) \(time) \(content)")
         }
         if isStreaming {
-            return String(localized: "message.accessibility.streaming \(author) \(message.content)")
+            return String(localized: "message.accessibility.streaming \(author) \(content)")
         } else if message.hasError {
-            return String(localized: "message.accessibility.error \(author) \(message.content)")
+            return String(localized: "message.accessibility.error \(author) \(content)")
         } else if message.isInterrupted {
-            return String(localized: "message.accessibility.interrupted \(author) \(message.content)")
+            return String(localized: "message.accessibility.interrupted \(author) \(content)")
         } else {
-            return String(localized: "message.accessibility.default \(author) \(message.content)")
+            return String(localized: "message.accessibility.default \(author) \(content)")
         }
     }
 }

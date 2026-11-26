@@ -1,29 +1,10 @@
 import AIEffectsKit
 import SwiftUI
 
-enum AppearanceTheme: String, CaseIterable, Codable {
-    case system = "Automatique", light = "Clair", dark = "Sombre", midnight = "Noir profond"
-    case dusk = "Crépuscule", forest = "Forêt"
-    var title: LocalizedStringResource {
-        switch self {
-        case .system: "appearance.theme.system"
-        case .light: "appearance.theme.light"
-        case .dark: "appearance.theme.dark"
-        case .midnight: "appearance.theme.midnight"
-        case .dusk: "appearance.theme.dusk"
-        case .forest: "appearance.theme.forest"
-        }
-    }
-    var scheme: ColorScheme? { switch self { case .system: nil; case .light, .forest: .light; case .dark, .midnight, .dusk: .dark } }
-    var background: Color {
-        switch self {
-        case .midnight: .black
-        case .dusk: Color(red: 0.10, green: 0.08, blue: 0.16)
-        case .forest: Color(red: 0.94, green: 0.96, blue: 0.93)
-        default: DesignTokens.background
-        }
-    }
-}
+#if os(iOS)
+import NoctisChatUI
+#endif
+
 enum ChatDensity: String, CaseIterable, Codable {
     case compact = "Compacte", standard = "Standard", comfortable = "Confortable"
     var title: LocalizedStringResource {
@@ -124,7 +105,8 @@ enum IntelligenceGlowPalette: String, CaseIterable, Codable, Identifiable {
 }
 
 struct ChatAppearance: Codable, Equatable {
-    var theme: AppearanceTheme = .system
+    var theme: AppearanceTheme = .noctis
+    var mode: AppearanceMode = .system
     var density: ChatDensity = .standard
     var messageStyle: MessageStyle = .bubbles
     var intensity: VisualIntensity = .balanced
@@ -205,7 +187,8 @@ struct ChatAppearance: Codable, Equatable {
     }
 
     private enum CodingKeys: String, CodingKey {
-        case theme, density, messageStyle, intensity, fontSize, contentWidth, showAvatars, showTimestamps, reduceAnimations, useGlass
+        case theme, mode, density, messageStyle, intensity, fontSize, contentWidth
+        case showAvatars, showTimestamps, reduceAnimations, useGlass
         case aiEffectsEnabled, aiTextRenderingMode, streamEffect, effectStaggerMilliseconds, effectDurationMilliseconds
         case shimmerWindow, shimmerStrength, shimmerPeriodMilliseconds, typewriterCaret, scrambleIntervalMilliseconds, scrambleProbability
         case thinkingIndicatorEnabled, thinkingDotCount, thinkingDotSize, thinkingSpacing, thinkingPeriodMilliseconds
@@ -215,7 +198,9 @@ struct ChatAppearance: Codable, Equatable {
     init(from decoder: Decoder) throws {
         self.init()
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        theme = try c.decodeIfPresent(AppearanceTheme.self, forKey: .theme) ?? theme
+        let selection = AppearanceTheme.decodeSelection(try c.decodeIfPresent(String.self, forKey: .theme))
+        theme = selection.theme
+        mode = try c.decodeIfPresent(AppearanceMode.self, forKey: .mode) ?? selection.mode
         density = try c.decodeIfPresent(ChatDensity.self, forKey: .density) ?? density
         messageStyle = try c.decodeIfPresent(MessageStyle.self, forKey: .messageStyle) ?? messageStyle
         intensity = try c.decodeIfPresent(VisualIntensity.self, forKey: .intensity) ?? intensity
@@ -265,7 +250,16 @@ struct AppearanceRoot: ViewModifier {
     @Environment(AppManager.self) private var appManager
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     func body(content: Content) -> some View {
-        content.preferredColorScheme(appManager.appearance.theme.scheme).tint(appManager.appTintColor.getColor())
+        content
+            #if os(iOS)
+            .noctisChatPalette(
+                canvas: appManager.appearance.theme.background,
+                surface: appManager.appearance.theme.surface,
+                accent: appManager.resolvedAccent
+            )
+            #endif
+            .preferredColorScheme(appManager.appearance.mode.scheme)
+            .tint(appManager.resolvedAccent)
             .transaction { transaction in
                 if reduceMotion || appManager.appearance.reduceAnimations { transaction.animation = nil; transaction.disablesAnimations = true }
             }

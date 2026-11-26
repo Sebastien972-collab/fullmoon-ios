@@ -1,0 +1,287 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "After download, this voice reads replies directly on your device." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une fois téléchargée, cette voix lit les réponses directement sur votre appareil."
+          }
+        }
+      }
+    },
+    "Back to conversation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour à la conversation"
+          }
+        }
+      }
+    },
+    "Cancel download" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler le téléchargement"
+          }
+        }
+      }
+    },
+    "Clear" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clair"
+          }
+        }
+      }
+    },
+    "Conversation history" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historique des conversations"
+          }
+        }
+      }
+    },
+    "Conversations are kept until you delete them, including archived conversations." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos conversations, y compris celles que vous archivez, sont conservées jusqu’à leur suppression."
+          }
+        }
+      }
+    },
+    "Download voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger la voix"
+          }
+        }
+      }
+    },
+    "Export as Markdown" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporter en Markdown"
+          }
+        }
+      }
+    },
+    "French Noctis voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix française de Noctis"
+          }
+        }
+      }
+    },
+    "iCloud sync enabled" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchronisation iCloud activée"
+          }
+        }
+      }
+    },
+    "iCloud sync off" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchronisation iCloud désactivée"
+          }
+        }
+      }
+    },
+    "If iCloud sync is enabled, deletions are synced to your other devices." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si la synchronisation iCloud est activée, la suppression se répercutera sur vos autres appareils."
+          }
+        }
+      }
+    },
+    "Installing voice…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installation de la voix…"
+          }
+        }
+      }
+    },
+    "Listen to sample" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter un extrait"
+          }
+        }
+      }
+    },
+    "Load model" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charger le modèle"
+          }
+        }
+      }
+    },
+    "Local model" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle local"
+          }
+        }
+      }
+    },
+    "Noctis voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix Noctis"
+          }
+        }
+      }
+    },
+    "Not loaded" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non chargé"
+          }
+        }
+      }
+    },
+    "Profile and memory" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil et mémoire"
+          }
+        }
+      }
+    },
+    "Reduced transparency" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transparence réduite"
+          }
+        }
+      }
+    },
+    "Reply voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix des réponses"
+          }
+        }
+      }
+    },
+    "Retry download" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réessayer le téléchargement"
+          }
+        }
+      }
+    },
+    "Stop sample" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter l’extrait"
+          }
+        }
+      }
+    },
+    "System voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix du système"
+          }
+        }
+      }
+    },
+    "Tinted" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teinté"
+          }
+        }
+      }
+    },
+    "Voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix"
+          }
+        }
+      }
+    },
+    "Your data" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos données"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

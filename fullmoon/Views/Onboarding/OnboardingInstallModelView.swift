@@ -34,7 +34,7 @@ struct OnboardingInstallModelView: View {
                 VStack(spacing: 24) {
                     Image(systemName: viewModel.isConnected ? "checkmark.circle.fill" : "moon.stars.fill")
                         .font(.system(size: 64, weight: .light))
-                        .foregroundStyle(viewModel.isConnected ? Color.green : appManager.appTintColor.getColor())
+                        .foregroundStyle(viewModel.isConnected ? Color.green : appManager.resolvedAccent)
                         .symbolEffect(.pulse, options: .repeating, isActive: viewModel.isLoading
                                       && !reduceMotion && !appManager.appearance.reduceAnimations)
                         .accessibilityHidden(true)

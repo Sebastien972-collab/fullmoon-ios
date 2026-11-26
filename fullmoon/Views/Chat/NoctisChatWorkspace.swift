@@ -9,17 +9,25 @@ import SwiftUI
 /// Connects the presentation package to Fullmoon's existing conversations and local runtime.
 struct NoctisChatWorkspace: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(AppManager.self) private var appManager
     @Query(sort: \Thread.timestamp, order: .reverse) private var threads: [Thread]
     @Binding var currentThread: Thread?
     @Binding var showSettings: Bool
     @Bindable var viewModel: ChatView.ViewModel
+    let speaker: ReplySpeaker
 
     @State private var pendingDestination: Destination?
     @State private var pendingDeletion: Thread?
     @State private var deletionError: String?
     @State private var newConversationDraft = ""
+    @State private var composerDrafts = ComposerDrafts()
     @State private var composerFocusRequest = UUID()
+    @State private var showsLibrary = false
+    @State private var handsFree = HandsFreeConversation()
+    @State private var spokenReply: Message?
+
+    private var chatVisible: Bool { scenePhase == .active && !showSettings && !showsLibrary }
 
     private enum Destination: Equatable {
         case conversation(UUID?)
@@ -28,6 +36,19 @@ struct NoctisChatWorkspace: View {
 
     var body: some View {
         workspace
+            .environment(\.handsFreeConversation, handsFree)
+            .background {
+                if let spokenReply {
+                    SpokenReplyStream(reply: spokenReply, viewModel: viewModel, speaker: speaker, cancel: endVoice)
+                        .id(spokenReply.id)
+                }
+            }
+            .sheet(isPresented: $showsLibrary) {
+                WorkspaceLibraryScreen(sections: [.files, .images, .artifacts, .code]) {
+                    showsLibrary = false
+                }
+                .noctisAppLock()
+            }
             .confirmationDialog(
                 "chats.delete.confirmation.title",
                 isPresented: Binding(
@@ -51,12 +72,21 @@ struct NoctisChatWorkspace: View {
                 Text(deletionError ?? "")
             }
             .onChange(of: currentThread?.id) { previousID, _ in
+                // The first send creates and selects a thread in the same turn.
+                if previousID != nil { endVoice() }
                 synchronizeSelection(previousID: previousID)
+            }
+            .onChange(of: showSettings || showsLibrary || scenePhase == .background) { _, hidden in
+                if hidden { endVoice() }
+            }
+            .onChange(of: handsFree.isActive) { _, active in
+                if !active, spokenReply != nil { stopReading() }
             }
             .onChange(of: viewModel.isSending) { _, sending in
                 if !sending { finishPendingNavigation() }
             }
             .onDisappear {
+                endVoice()
                 pendingDestination = nil
                 viewModel.stop()
             }
@@ -79,18 +109,36 @@ struct NoctisChatWorkspace: View {
             canSend: canSend,
             contentWidth: appManager.appearance.contentWidth,
             focusRequest: composerFocusRequest,
-            onSend: send,
-            onStop: viewModel.stop,
+            onSend: { send(.keyboard) },
+            onStop: stopGenerating,
             onNewConversation: { requestNavigation(.conversation(nil)) },
             onSelectConversation: { requestNavigation(.conversation($0)) },
             onDeleteConversation: { identifier in
                 pendingDeletion = threads.first { $0.id == identifier }
             },
-            onSettings: { showSettings = true }
-        ) {
-            transcript
-        } status: {
-            NoctisChatStatus(viewModel: viewModel) { composerFocusRequest = UUID() }
+            onSettings: { showSettings = true },
+            onLibrary: { showsLibrary = true },
+            transcript: { transcript },
+            status: {
+                NoctisChatStatus(viewModel: viewModel) { composerFocusRequest = UUID() }
+            }
+        )
+        .composer { focus in
+            ComposerInput(
+                prompt: $viewModel.prompt,
+                isEnabled: viewModel.isInputEnabled && pendingDestination == nil,
+                isSending: viewModel.isSending,
+                isStopping: viewModel.isStopping,
+                isLoading: viewModel.isLoading,
+                modelName: modelName,
+                status: viewModel.isConnected ? "chat.connection.status.ready" : viewModel.connectionMessage,
+                onSend: send,
+                onStop: stopGenerating,
+                focus: focus
+            )
+            .environment(\.composerThreadID, currentThread?.id)
+            .environment(\.composerDrafts, composerDrafts)
+            .disabled(showSettings || showsLibrary)
         }
     }
 
@@ -105,7 +153,10 @@ struct NoctisChatWorkspace: View {
                     viewModel.editUserMessage(message, in: currentThread, context: modelContext)
                     composerFocusRequest = UUID()
                 },
-                onDelete: { viewModel.deleteMessage($0, in: currentThread, context: modelContext) },
+                onDelete: { message in
+                    if speaker.currentMessageID == message.id { endVoice() }
+                    viewModel.deleteMessage(message, in: currentThread, context: modelContext)
+                },
                 onBranch: { message in
                     viewModel.createBranch(from: message, in: currentThread, context: modelContext) {
                         self.currentThread = $0
@@ -134,7 +185,7 @@ struct NoctisChatWorkspace: View {
     private var conversationSummaries: [NoctisConversationSummary] {
         threads.filter { !$0.isDeleted }.map { thread in
             let title = viewModel.chatTitle(for: thread)
-            let preview = thread.sortedMessages.last?.content
+            let preview = thread.sortedMessages.last?.previewText
                 .replacingOccurrences(of: "\n", with: " ") ?? ""
             let searchText = ([title] + thread.messages.map(\.content)).joined(separator: "\n")
             return NoctisConversationSummary(
@@ -146,25 +197,60 @@ struct NoctisChatWorkspace: View {
         }
     }
 
-    private func send() {
-        guard canSend else { return }
-        appManager.playHaptic()
+    private func send(_ origin: ChatInputOrigin) {
+        guard canSend, chatVisible else {
+            if origin == .handsFree { handsFree.end() }
+            return
+        }
+        stopReading()
         viewModel.send(to: currentThread, in: modelContext) { currentThread = $0 }
+        guard origin != .keyboard else { return }
+        guard let id = viewModel.generatingMessageID,
+              let reply = currentThread?.messages.first(where: { $0.id == id }) else {
+            handsFree.end()
+            return
+        }
+        if origin == .handsFree { handsFree.submitted(replyID: id) }
+        spokenReply = reply
+        speaker.beginStream(messageID: id) { finished in
+            guard spokenReply?.id == id else { return }
+            spokenReply = nil
+            if origin == .handsFree {
+                if finished && chatVisible { handsFree.replyFinished(id) } else { handsFree.end() }
+            }
+        }
+    }
+
+    private func stopReading() {
+        spokenReply = nil
+        speaker.stop()
+    }
+
+    private func endVoice() {
+        handsFree.end()
+        stopReading()
+    }
+
+    private func stopGenerating() {
+        endVoice()
+        viewModel.stop()
     }
 
     private func regenerate(_ message: Message, in thread: Thread) {
         guard pendingDestination == nil else { return }
+        endVoice()
         viewModel.regenerate(message, in: thread, context: modelContext)
     }
 }
 
 private extension NoctisChatWorkspace {
-    func requestNavigation(_ destination: Destination) {
+    private func requestNavigation(_ destination: Destination) {
         if case .conversation(let identifier) = destination, identifier == currentThread?.id {
             pendingDestination = nil
             return
         }
         appManager.playHaptic()
+        endVoice()
         pendingDestination = destination
         if viewModel.isSending {
             // Keep the active thread alive until Noctis has flushed and saved the interrupted response.

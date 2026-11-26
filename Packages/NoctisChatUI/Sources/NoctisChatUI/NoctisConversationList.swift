@@ -3,11 +3,14 @@ import SwiftUI
 
 @MainActor
 struct NoctisConversationList: View {
+    @Environment(\.noctisPalette) private var palette
     @Binding var search: String
     let conversations: [NoctisConversationSummary]
     let selectedID: UUID?
     let onSelect: (UUID) -> Void
     let onDelete: (UUID) -> Void
+    let onSettings: () -> Void
+    let onLibrary: (() -> Void)?
     let onClose: (() -> Void)?
 
     private var filteredConversations: [NoctisConversationSummary] {
@@ -17,35 +20,61 @@ struct NoctisConversationList: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text("Noctis")
-                    .font(.title2.weight(.semibold))
-                Spacer()
-                if let onClose {
-                    NoctisToolbarButton(
-                        symbol: "xmark",
-                        label: NoctisStrings.text("history.close"),
-                        action: onClose
-                    )
-                    .accessibilityIdentifier("noctis.sidebar.close")
-                }
-            }
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
-            searchField.padding(.horizontal, 12)
-            Text(NoctisStrings.text("history.title"))
-                .font(.headline)
-                .padding(.horizontal, 16)
+        VStack(alignment: .leading, spacing: 0) {
+            header
             history
+            Divider()
+            drawerLink("settings.open", icon: .settings, action: onSettings)
+                .accessibilityIdentifier("noctis.settings")
+                .keyboardShortcut(",", modifiers: .command)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(NoctisStyle.canvas)
+        .background(palette.canvas)
+    }
+
+    private var header: some View {
+        HStack(spacing: 10) {
+            NoctisIcon(.moon, size: 28)
+                .foregroundStyle(.tint)
+                .accessibilityHidden(true)
+            Text("Noctis")
+                .font(.title2.weight(.semibold))
+                .accessibilityAddTraits(.isHeader)
+            Spacer()
+            if let onClose {
+                NoctisToolbarButton(
+                    icon: .back,
+                    label: NoctisStrings.text("history.close"),
+                    action: onClose
+                )
+                .accessibilityIdentifier("noctis.sidebar.close")
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+    }
+
+    private func drawerLink(_ key: String, icon: NoctisIcon.Glyph, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label {
+                Text(NoctisStrings.text(key))
+                    .font(.body.weight(.medium))
+            } icon: {
+                NoctisIcon(icon)
+                    .foregroundStyle(.tint)
+            }
+            .padding(.horizontal, 8)
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     private var searchField: some View {
         HStack(spacing: 10) {
-            Image(systemName: "magnifyingglass")
+            NoctisIcon(.search, size: 18)
                 .foregroundStyle(.secondary)
                 .accessibilityHidden(true)
             TextField(NoctisStrings.text("history.search"), text: $search)
@@ -57,7 +86,7 @@ struct NoctisConversationList: View {
                 Button {
                     search = ""
                 } label: {
-                    Image(systemName: "xmark.circle.fill")
+                    NoctisIcon(.close, size: 18)
                         .foregroundStyle(.secondary)
                         .frame(minWidth: 44, minHeight: 44)
                 }
@@ -68,12 +97,24 @@ struct NoctisConversationList: View {
         .padding(.leading, 12)
         .padding(.trailing, search.isEmpty ? 12 : 0)
         .frame(minHeight: 44)
-        .background(NoctisStyle.surface, in: RoundedRectangle(cornerRadius: 14))
+        .background(palette.surface, in: RoundedRectangle(cornerRadius: 14))
     }
 
     private var history: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 4) {
+                searchField.padding(.horizontal, 4)
+                if let onLibrary {
+                    drawerLink("library.title", icon: .library, action: onLibrary)
+                        .accessibilityIdentifier("noctis.library")
+                        .padding(.horizontal, 4)
+                }
+                Text(NoctisStrings.text("history.title"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .accessibilityAddTraits(.isHeader)
+                    .padding(.leading, 12)
+                    .padding(.top, 12)
                 if filteredConversations.isEmpty {
                     Text(NoctisStrings.text(conversations.isEmpty ? "history.empty" : "history.noResults"))
                         .foregroundStyle(.secondary)
@@ -115,7 +156,7 @@ struct NoctisConversationList: View {
             deleteMenu(conversation)
         }
         .background(
-            selectedID == conversation.id ? Color.accentColor.opacity(0.12) : .clear,
+            selectedID == conversation.id ? palette.accent.opacity(0.12) : .clear,
             in: RoundedRectangle(cornerRadius: 16)
         )
     }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(AppManager.self) private var appManager
-    @Environment(\.dismiss) var dismiss
     @Binding var currentThread: Thread?
     @Bindable var viewModel: ChatView.ViewModel
+    let onBack: () -> Void
 
     private var modelStatus: ModelStatus {
         ModelStatus(
@@ -33,6 +33,16 @@ struct SettingsView: View {
                     NavigationLink(destination: ChatsSettingsView(currentThread: $currentThread)) {
                         Label("settings.row.conversations", systemImage: "message")
                     }
+
+                    #if os(iOS)
+                    NavigationLink(destination: VoiceSettingsView()) {
+                        Label {
+                            Text("Voice", tableName: "Settings")
+                        } icon: {
+                            Image(systemName: "waveform")
+                        }
+                    }
+                    #endif
                 }
 
                 Section {
@@ -109,32 +119,38 @@ struct SettingsView: View {
                     .padding(.vertical)
                 }
             }
-            .formStyle(.grouped)
+            .modifier(ThemedForm())
             .navigationTitle("settings.navigation.title")
             #if os(iOS)
-                .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
             #endif
-                .toolbar {
-                    #if os(iOS) || os(visionOS)
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: { dismiss() }) {
-                            Image(systemName: "xmark")
-                                .accessibilityLabel("common.button.close")
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Button(action: onBack) {
+                        Label {
+                            Text("Back to conversation", tableName: "Settings")
+                        } icon: {
+                            Image(systemName: "chevron.backward")
                         }
                     }
-                    #elseif os(macOS)
-                    ToolbarItem(placement: .destructiveAction) {
-                        Button(action: { dismiss() }) {
-                            Text("common.button.close")
-                        }
-                    }
-                    #endif
+                    .labelStyle(.iconOnly)
+                    .keyboardShortcut(.cancelAction)
+                    .accessibilityIdentifier("noctis.settings.back")
                 }
+            }
+            .accessibilityAction(.escape, onBack)
         }
-        #if !os(visionOS)
-        .tint(appManager.appTintColor.getColor())
-        #endif
-        .modifier(AppearanceRoot())
+    }
+}
+
+struct ThemedForm: ViewModifier {
+    @Environment(AppManager.self) private var appManager
+
+    func body(content: Content) -> some View {
+        content
+            .formStyle(.grouped)
+            .scrollContentBackground(.hidden)
+            .background(appManager.appearance.theme.background)
     }
 }
 
@@ -149,8 +165,11 @@ extension Bundle {
 }
 
 #Preview {
-    SettingsView(currentThread: .constant(nil), viewModel: ChatView.ViewModel())
+    SettingsView(currentThread: .constant(nil), viewModel: ChatView.ViewModel(), onBack: {})
         .environment(AppManager())
         .environment(NoctisCloudSync())
         .environment(NoctisLockController())
+        #if os(iOS)
+        .environment(NoctisVoiceModel.shared)
+        #endif
 }

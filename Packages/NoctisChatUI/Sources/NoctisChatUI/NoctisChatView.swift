@@ -4,11 +4,14 @@ import SwiftUI
 /// Native presentation only. The host supplies its transcript, status and all side effects.
 @MainActor
 public struct NoctisChatView<Transcript: View, Status: View>: View {
+    @Environment(\.noctisPalette) private var palette
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.layoutDirection) private var layoutDirection
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Binding private var prompt: String
     @State private var showsDrawer = false
-    @State private var composerFocused = false
+    @FocusState private var hostEditorFocused: Bool
+    @State private var defaultEditorFocused = false
     @State private var historySearch = ""
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
@@ -28,8 +31,20 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
     private let onSelectConversation: (UUID) -> Void
     private let onDeleteConversation: (UUID) -> Void
     private let onSettings: () -> Void
+    private let onLibrary: (() -> Void)?
     private let transcript: Transcript
     private let status: Status
+
+    private var customComposer: ((FocusState<Bool>.Binding) -> AnyView)?
+
+    /// Hosts a composer with app-specific capabilities while preserving drawer and keyboard focus.
+    public func composer<Content: View>(
+        @ViewBuilder _ content: @escaping (FocusState<Bool>.Binding) -> Content
+    ) -> Self {
+        var chat = self
+        chat.customComposer = { AnyView(content($0)) }
+        return chat
+    }
 
     public init(
         prompt: Binding<String>,
@@ -49,6 +64,7 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
         onSelectConversation: @escaping (UUID) -> Void,
         onDeleteConversation: @escaping (UUID) -> Void,
         onSettings: @escaping () -> Void,
+        onLibrary: (() -> Void)? = nil,
         @ViewBuilder transcript: () -> Transcript,
         @ViewBuilder status: () -> Status
     ) {
@@ -69,6 +85,7 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
         self.onSelectConversation = onSelectConversation
         self.onDeleteConversation = onDeleteConversation
         self.onSettings = onSettings
+        self.onLibrary = onLibrary
         self.transcript = transcript()
         self.status = status()
     }
@@ -81,11 +98,11 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
                 compactLayout
             }
         }
-        .background(NoctisStyle.canvas)
+        .background(palette.canvas)
         .onChange(of: horizontalSizeClass) { _, _ in showsDrawer = false }
         .onChange(of: selectedConversationID) { _, _ in showsDrawer = false }
         .onChange(of: focusRequest) { _, request in
-            if request != nil { composerFocused = true }
+            if request != nil { focusComposer(true) }
         }
         .accessibilityAction(.escape) { showsDrawer = false }
     }
@@ -105,6 +122,7 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
     private var compactLayout: some View {
         GeometryReader { geometry in
             let drawerWidth = min(330, max(0, geometry.size.width - 60))
+            let drawerOffset = layoutDirection == .rightToLeft ? -drawerWidth : drawerWidth
             ZStack(alignment: .leading) {
                 if showsDrawer {
                     history.frame(width: drawerWidth)
@@ -125,9 +143,9 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
                     }
                 }
                 .frame(width: geometry.size.width)
-                .background(NoctisStyle.canvas)
+                .background(palette.canvas)
                 .clipShape(RoundedRectangle(cornerRadius: showsDrawer ? 28 : 0))
-                .offset(x: showsDrawer ? drawerWidth : 0)
+                .offset(x: showsDrawer ? drawerOffset : 0)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             .clipped()
@@ -141,8 +159,7 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
                 title: title,
                 modelName: modelName,
                 onSidebar: toggleSidebar,
-                onNewConversation: newConversation,
-                onSettings: openSettings
+                onNewConversation: newConversation
             )
             if isEmpty {
                 NoctisEmptyConversation()
@@ -153,21 +170,25 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
         .safeAreaInset(edge: .bottom, spacing: 0) {
             VStack(spacing: 8) {
                 status.frame(maxWidth: .infinity, alignment: .leading)
-                NoctisChatComposer(
-                    prompt: $prompt,
-                    focused: $composerFocused,
-                    isGenerating: isGenerating,
-                    isStopping: isStopping,
-                    canSend: canSend,
-                    onSend: onSend,
-                    onStop: onStop
-                )
+                if let customComposer {
+                    customComposer($hostEditorFocused)
+                } else {
+                    NoctisChatComposer(
+                        prompt: $prompt,
+                        focused: $defaultEditorFocused,
+                        isGenerating: isGenerating,
+                        isStopping: isStopping,
+                        canSend: canSend,
+                        onSend: onSend,
+                        onStop: onStop
+                    )
+                }
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
             .frame(maxWidth: contentWidth)
             .frame(maxWidth: .infinity)
-            .background(NoctisStyle.canvas)
+            .background(palette.canvas)
         }
     }
 
@@ -178,6 +199,8 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
             selectedID: selectedConversationID,
             onSelect: selectConversation,
             onDelete: onDeleteConversation,
+            onSettings: { openFromDrawer(onSettings) },
+            onLibrary: onLibrary.map { action in { openFromDrawer(action) } },
             onClose: horizontalSizeClass == .regular ? nil : { showsDrawer = false }
         )
     }
@@ -186,8 +209,16 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
         reduceMotion ? nil : .spring(response: 0.38, dampingFraction: 0.86)
     }
 
+    private func focusComposer(_ focused: Bool) {
+        if customComposer == nil {
+            defaultEditorFocused = focused
+        } else {
+            hostEditorFocused = focused
+        }
+    }
+
     private func toggleSidebar() {
-        composerFocused = false
+        focusComposer(false)
         if horizontalSizeClass == .regular {
             withAnimation(sidebarAnimation) {
                 columnVisibility = columnVisibility == .detailOnly ? .all : .detailOnly
@@ -198,20 +229,21 @@ public struct NoctisChatView<Transcript: View, Status: View>: View {
     }
 
     private func selectConversation(_ identifier: UUID) {
-        composerFocused = false
+        focusComposer(false)
         showsDrawer = false
         onSelectConversation(identifier)
     }
 
     private func newConversation() {
-        composerFocused = false
+        focusComposer(false)
         showsDrawer = false
         onNewConversation()
     }
 
-    private func openSettings() {
-        composerFocused = false
-        onSettings()
+    private func openFromDrawer(_ action: () -> Void) {
+        focusComposer(false)
+        showsDrawer = false
+        action()
     }
 }
 #endif

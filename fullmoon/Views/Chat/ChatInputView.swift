@@ -5,6 +5,7 @@
 //  Created by Xavier on 16/12/2024.
 //
 
+import NoctisChatUI
 import SwiftUI
 
 struct ChatInputView: View {
@@ -76,19 +77,19 @@ struct ChatInputView: View {
                         ProgressView()
                             .controlSize(.small)
                     } else if isSending {
-                        Image(systemName: "stop.fill")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundStyle(.white)
+                        NoctisIcon(.stop, size: 15)
+                            .foregroundStyle(ContrastingSymbolColor(background: .red))
                             .frame(width: 32, height: 32)
-                            .background(Color.red.gradient, in: Circle())
+                            .background(Color.red, in: Circle())
                     } else {
-                        Image(systemName: "arrow.up")
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundStyle(sendEnabled ? .white : Color.secondary.opacity(0.5))
+                        NoctisIcon(.send, size: 18)
+                            .foregroundStyle(sendEnabled
+                                ? AnyShapeStyle(ContrastingSymbolColor(background: appManager.resolvedAccent))
+                                : AnyShapeStyle(Color.secondary.opacity(0.5)))
                             .frame(width: 32, height: 32)
                             .background(
                                 sendEnabled
-                                    ? AnyShapeStyle(appManager.appTintColor.getColor().gradient)
+                                    ? AnyShapeStyle(appManager.resolvedAccent)
                                     : AnyShapeStyle(Color.secondary.opacity(0.12)),
                                 in: Circle()
                             )

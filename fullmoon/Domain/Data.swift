@@ -22,6 +22,8 @@ final class AppManager {
     var appTintColor: AppTintColor {
         didSet { defaults.set(appTintColor.rawValue, forKey: "appTintColor") }
     }
+    var resolvedAccent: Color { appTintColor.getColor(for: appearance.theme) }
+
     var appFontDesign: AppFontDesign {
         didSet { defaults.set(appFontDesign.rawValue, forKey: "appFontDesign") }
     }
@@ -51,7 +53,7 @@ final class AppManager {
         appearance = defaults.data(forKey: "chatAppearance")
             .flatMap { try? JSONDecoder().decode(ChatAppearance.self, from: $0) } ?? ChatAppearance()
         systemPrompt = defaults.string(forKey: "systemPrompt") ?? "you are a helpful assistant"
-        appTintColor = defaults.string(forKey: "appTintColor").flatMap(AppTintColor.init(rawValue:)) ?? .monochrome
+        appTintColor = defaults.string(forKey: "appTintColor").flatMap(AppTintColor.init(rawValue:)) ?? .theme
         appFontDesign = defaults.string(forKey: "appFontDesign").flatMap(AppFontDesign.init(rawValue:)) ?? .standard
         appFontSize = defaults.string(forKey: "appFontSize").flatMap(AppFontSize.init(rawValue:)) ?? .medium
         appFontWidth = defaults.string(forKey: "appFontWidth").flatMap(AppFontWidth.init(rawValue:)) ?? .standard
@@ -122,10 +124,11 @@ final class AppManager {
 }
 
 enum AppTintColor: String, CaseIterable {
-    case monochrome, blue, brown, gray, green, indigo, mint, orange, pink, purple, red, teal, yellow
+    case theme, monochrome, blue, brown, gray, green, indigo, mint, orange, pink, purple, red, teal, yellow
 
     var title: LocalizedStringResource {
         switch self {
+        case .theme: LocalizedStringResource("Theme color", table: "Theme")
         case .monochrome: "appearance.tint.monochrome"
         case .blue: "appearance.tint.blue"
         case .brown: "appearance.tint.brown"
@@ -142,8 +145,14 @@ enum AppTintColor: String, CaseIterable {
         }
     }
     
-    func getColor() -> Color {
+    func getColor(for theme: AppearanceTheme = .noctis) -> Color {
+        overrideColor ?? theme.accent
+    }
+
+    private var overrideColor: Color? {
         switch self {
+        case .theme:
+            nil
         case .monochrome:
             .primary
         case .blue:

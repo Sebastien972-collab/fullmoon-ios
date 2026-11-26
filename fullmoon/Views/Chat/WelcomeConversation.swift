@@ -1,6 +1,8 @@
+import NoctisChatUI
 import SwiftUI
 
 struct WelcomeConversation: View {
+    @Environment(AppManager.self) private var appManager
     let onSelect: (String) -> Void
     private let suggestions: [(title: LocalizedStringResource, prompt: LocalizedStringResource)] = [
         ("chat.welcome.suggestion.clarify", "chat.welcome.prompt.clarify"),
@@ -11,10 +13,7 @@ struct WelcomeConversation: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Image(systemName: "moon.stars")
-                    .font(.system(size: 42, weight: .light))
-                    .foregroundStyle(.secondary)
-                    .accessibilityHidden(true)
+                NoctisEmblem(tint: appManager.resolvedAccent)
                 Text("chat.welcome.title")
                     .font(.title2.weight(.semibold))
                 Text("chat.welcome.description")
@@ -42,4 +41,4 @@ struct WelcomeConversation: View {
     }
 }
 
-#Preview { WelcomeConversation { _ in } }
+#Preview { WelcomeConversation { _ in }.environment(AppManager()) }

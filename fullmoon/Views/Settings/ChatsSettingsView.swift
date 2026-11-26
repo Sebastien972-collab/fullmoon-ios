@@ -49,7 +49,7 @@ struct ChatsSettingsView: View {
                 .buttonStyle(.borderless)
             }
         }
-        .formStyle(.grouped)
+        .modifier(ThemedForm())
         .navigationTitle("chat_settings.navigation.title")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)

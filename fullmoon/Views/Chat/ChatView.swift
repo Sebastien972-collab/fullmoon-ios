@@ -40,9 +40,11 @@ struct ChatView: View {
             #if os(iOS) || os(visionOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
+            #if os(iOS)
             .toolbar {
                 chatToolbar
             }
+            #endif
         }
         .onAppear {
             viewModel.updateThreadSelection(currentThread)
@@ -173,7 +175,7 @@ struct ChatView: View {
                     }
                     .font(.caption2.weight(.semibold))
                     .buttonStyle(.plain)
-                    .foregroundStyle(appManager.appTintColor.getColor())
+                    .foregroundStyle(appManager.resolvedAccent)
                 }
             }
             .padding(.horizontal, 12)
@@ -185,9 +187,9 @@ struct ChatView: View {
 
     // MARK: - Toolbar
 
+    #if os(iOS)
     @ToolbarContentBuilder
     private var chatToolbar: some ToolbarContent {
-        #if os(iOS) || os(visionOS)
         if appManager.userInterfaceIdiom == .phone {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
@@ -203,11 +205,6 @@ struct ChatView: View {
         ToolbarItem(placement: .topBarTrailing) {
             settingsButton
         }
-        #elseif os(macOS)
-        ToolbarItem(placement: .primaryAction) {
-            settingsButton
-        }
-        #endif
     }
 
     // MARK: - Actions
@@ -222,6 +219,7 @@ struct ChatView: View {
         .accessibilityLabel("chat.toolbar.settings.accessibility.label")
         .keyboardShortcut(",", modifiers: .command)
     }
+    #endif
 }
 
 // MARK: - Previews

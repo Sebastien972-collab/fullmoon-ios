@@ -18,13 +18,40 @@ struct ContentView: View {
     @State var showChats = false
     @State var currentThread: Thread?
     @State private var chatViewModel = ChatView.ViewModel()
+    #if os(iOS)
+    @State private var replySpeaker = ReplySpeaker()
+    #endif
     @FocusState var isPromptFocused: Bool
 
     var body: some View {
-        cloudManagedContent
+        ZStack {
+            // Keep the conversation mounted so navigation preserves drafts and active responses.
+            cloudManagedContent
+                .opacity(showSettings ? 0 : 1)
+                .disabled(showSettings)
+                .accessibilityHidden(showSettings)
+
+            if showSettings {
+                SettingsView(currentThread: $currentThread, viewModel: chatViewModel) {
+                    showSettings = false
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(appManager.appearance.theme.background)
+            }
+        }
         .environment(appManager)
+        #if os(iOS)
+        .environment(\.replySpeaker, replySpeaker)
+        .environment(NoctisVoiceModel.shared)
+        .onChange(of: scenePhase) { _, phase in
+            if phase != .active { replySpeaker.stop() }
+        }
+        #endif
         .onChange(of: appManager.hasCompletedOnboarding) { _, completed in
             isPromptFocused = completed
+        }
+        .onChange(of: showSettings) { _, isOpen in
+            if isOpen { isPromptFocused = false }
         }
         #if !os(iOS)
         .sheet(isPresented: $showChats) {
@@ -33,10 +60,6 @@ struct ContentView: View {
                 .environment(appManager)
                 .presentationDragIndicator(.hidden)
         }
-        #endif
-        .sheet(isPresented: $showSettings) { settingsSheet }
-        #if !os(visionOS)
-        .tint(appManager.appTintColor.getColor())
         #endif
         .fontDesign(appManager.appFontDesign.getFontDesign())
         .modifier(AppearanceRoot())
@@ -67,11 +90,16 @@ struct ContentView: View {
             NoctisChatWorkspace(
                 currentThread: $currentThread,
                 showSettings: $showSettings,
-                viewModel: chatViewModel
+                viewModel: chatViewModel,
+                speaker: replySpeaker
             )
             #else
             NavigationSplitView {
-                ChatsListView(currentThread: $currentThread, isPromptFocused: $isPromptFocused)
+                ChatsListView(
+                    currentThread: $currentThread,
+                    isPromptFocused: $isPromptFocused,
+                    onSettings: { showSettings = true }
+                )
                 #if os(macOS)
                     .navigationSplitViewColumnWidth(min: 240, ideal: 240, max: 320)
                 #endif
@@ -86,16 +114,6 @@ struct ContentView: View {
             }
             #endif
         }
-    }
-
-    private var settingsSheet: some View {
-        SettingsView(currentThread: $currentThread, viewModel: chatViewModel)
-            .noctisAppLock()
-            .environment(appManager)
-            .presentationDragIndicator(.hidden)
-            .if(appManager.userInterfaceIdiom == .phone) { view in
-                view.presentationDetents([.medium, .large])
-            }
     }
 
     @MainActor
@@ -113,16 +131,6 @@ struct ContentView: View {
             } catch {
                 break
             }
-        }
-    }
-}
-
-extension View {
-    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
-        if condition {
-            transform(self)
-        } else {
-            self
         }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Color palette" : {
+      "localizations" : {
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Palette de couleurs" } }
+      }
+    },
+    "Display mode" : {
+      "localizations" : {
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Mode d’affichage" } }
+      }
+    },
+    "Theme color" : {
+      "localizations" : {
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Couleur du thème" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

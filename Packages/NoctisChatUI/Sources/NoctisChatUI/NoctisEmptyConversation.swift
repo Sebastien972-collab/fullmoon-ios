@@ -3,6 +3,8 @@ import SwiftUI
 
 @MainActor
 struct NoctisEmptyConversation: View {
+    @Environment(\.noctisPalette) private var palette
+
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
@@ -15,17 +17,12 @@ struct NoctisEmptyConversation: View {
 
     private var welcome: some View {
         VStack(spacing: 16) {
-            Image(systemName: "moon.stars")
-                .font(.largeTitle)
-                .symbolRenderingMode(.hierarchical)
-                .accessibilityHidden(true)
+            NoctisEmblem(tint: palette.accent)
             Text("Noctis")
-                .font(.title.weight(.semibold))
+                .font(.largeTitle.weight(.semibold))
+                .fontDesign(.rounded)
             Text(NoctisStrings.text("conversation.welcome"))
                 .font(.title3)
-            Text(NoctisStrings.text("conversation.welcome.detail"))
-                .font(.body)
-                .foregroundStyle(.secondary)
         }
         .multilineTextAlignment(.center)
         .frame(maxWidth: 380)

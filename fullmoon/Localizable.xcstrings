@@ -1,311 +1,32 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "model.fallback.apple_intelligence_disabled" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence is not enabled on this device."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence n’est pas activé sur cet appareil."
-          }
-        }
-      }
+    "·" : {
+
     },
-    "model.fallback.device_ineligible" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This device does not support the local Apple model."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cet appareil n’est pas compatible avec le modèle Apple local."
-          }
-        }
-      }
+    "A message can include up to three attachments." : {
+
     },
-    "model.fallback.framework_unavailable" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This version of the app does not support Foundation Models."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette version de l’application ne prend pas en charge Foundation Models."
-          }
-        }
-      }
+    "Add a file" : {
+
     },
-    "model.fallback.model_not_ready" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The local Apple model is not ready on this device yet."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le modèle Apple local n’est pas encore prêt sur cet appareil."
-          }
-        }
-      }
+    "Add an artifact" : {
+
     },
-    "model.fallback.requires_ios26" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The local Apple model requires iOS 26 or later."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le modèle Apple local nécessite iOS 26 ou une version ultérieure."
-          }
-        }
-      }
+    "Add task" : {
+
     },
-    "model.fallback.unknown" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The local Apple model is currently unavailable."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le modèle Apple local est actuellement indisponible."
-          }
-        }
-      }
+    "Allow camera access in Settings to capture a document." : {
+
     },
-    "model.runtime.automatic.title" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatic selection"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélection automatique"
-          }
-        }
-      }
+    "Allow microphone access in Settings to use dictation." : {
+
     },
-    "model.runtime.foundation_models.title" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Foundation Models"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Foundation Models"
-          }
-        }
-      }
+    "Allow speech recognition in Settings to use dictation." : {
+
     },
-    "model.runtime.label" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Local engine"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moteur local"
-          }
-        }
-      }
-    },
-    "model.runtime.mlx.title" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ternary Bonsai 2 (4B) · MLX"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ternary Bonsai 2 (4B) · MLX"
-          }
-        }
-      }
-    },
-    "model.runtime.mlx_ios.title" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ternary Bonsai 2 (4B) · MLX"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ternary Bonsai 2 (4B) · MLX"
-          }
-        }
-      }
-    },
-    "model.runtime.settings.description" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This test version uses Ternary Bonsai 2 (4B) with MLX. Responses are generated on this device."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette version de test utilise Ternary Bonsai 2 (4B) avec MLX. Les réponses sont générées sur cet appareil."
-          }
-        }
-      }
-    },
-    "onboarding.ios.install.download.description" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preparing the model downloads Ternary Bonsai 2 (4B) if it is not cached. Use Wi-Fi and leave enough storage available."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La préparation télécharge Ternary Bonsai 2 (4B) s’il n’est pas en cache. Utilisez le Wi-Fi et prévoyez suffisamment d’espace libre."
-          }
-        }
-      }
-    },
-    "onboarding.ios.install.duration.description" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep the app open while Noctis prepares the local engine. An MLX download may take several minutes."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gardez l’application ouverte pendant la préparation du moteur local. Un téléchargement MLX peut prendre plusieurs minutes."
-          }
-        }
-      }
-    },
-    "onboarding.ios.install.model.description" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noctis uses Ternary Bonsai 2 (4B) with MLX, running directly on your device."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noctis utilise Ternary Bonsai 2 (4B) avec MLX, exécuté directement sur votre appareil."
-          }
-        }
-      }
-    },
-    "onboarding.ios.install.offline.description" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Once the local engine is ready, responses can be generated offline."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Une fois le moteur local prêt, les réponses peuvent être générées hors ligne."
-          }
-        }
-      }
-    },
-    "onboarding.ios.install.retry.description" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check the error message, your connection and available storage, then try again."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Consultez le message d’erreur, vérifiez votre connexion et l’espace disponible, puis réessayez."
-          }
-        }
-      }
-    },
-    "onboarding.ios.local_model.description" : {
-      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noctis runs Ternary Bonsai 2 (4B) locally with MLX. Responses are generated on your device."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noctis exécute Ternary Bonsai 2 (4B) localement avec MLX. Les réponses sont générées sur votre appareil."
-          }
-        }
-      }
+    "Answer style" : {
+
     },
     "app.command.show_main_window" : {
       "comment" : "Texte de l’interface Noctis.",
@@ -1125,6 +846,7 @@
     },
     "appearance.picker.theme" : {
       "comment" : "Texte de l’interface Noctis.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1873,6 +1595,7 @@
     },
     "appearance.theme.dusk" : {
       "comment" : "Texte de l’interface Noctis.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1890,6 +1613,7 @@
     },
     "appearance.theme.forest" : {
       "comment" : "Texte de l’interface Noctis.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1924,6 +1648,7 @@
     },
     "appearance.theme.midnight" : {
       "comment" : "Texte de l’interface Noctis.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2329,6 +2054,30 @@
           }
         }
       }
+    },
+    "Artifact content" : {
+
+    },
+    "Artifacts" : {
+
+    },
+    "Attach a document" : {
+
+    },
+    "Attach or dictate" : {
+
+    },
+    "Attachments" : {
+
+    },
+    "Automatic" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Cancel dictation" : {
+
     },
     "Charger le modèle" : {
 
@@ -3047,6 +2796,18 @@
         }
       }
     },
+    "Choose a file under 20 MB." : {
+
+    },
+    "Choose an image, PDF or UTF-8 text file." : {
+
+    },
+    "Choose from Space" : {
+
+    },
+    "Close" : {
+
+    },
     "cloud.account.changed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3472,6 +3233,9 @@
         }
       }
     },
+    "Code" : {
+
+    },
     "code_block.copy.accessibility.label" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {
@@ -3744,6 +3508,30 @@
         }
       }
     },
+    "Complete" : {
+
+    },
+    "Composer" : {
+
+    },
+    "Concise" : {
+
+    },
+    "Connections" : {
+
+    },
+    "Context" : {
+
+    },
+    "Context files" : {
+
+    },
+    "Continue project" : {
+
+    },
+    "Conversation context" : {
+
+    },
     "conversation.scroll_button.accessibility.label" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {
@@ -3812,16 +3600,79 @@
         }
       }
     },
-    "credits.chat_ui.title" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chat interface" } },
-        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Interface de discussion" } }
-      }
+    "Conversations" : {
+
+    },
+    "Copied" : {
+
+    },
+    "Copy preview" : {
+
+    },
+    "Couldn’t open Space" : {
+
+    },
+    "Couldn’t save the item" : {
+
+    },
+    "Couldn’t update project" : {
+
+    },
+    "Create" : {
+
+    },
+    "Create a project" : {
+
+    },
+    "Create an artifact" : {
+
     },
     "credits.chat_ui.license" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "MIT license" } },
-        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Licence MIT" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIT license"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licence MIT"
+          }
+        }
+      }
+    },
+    "credits.chat_ui.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat interface"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface de discussion"
+          }
+        }
+      }
+    },
+    "credits.icons.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icons"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icônes"
+          }
+        }
       }
     },
     "credits.navigation.title" : {
@@ -3841,13 +3692,98 @@
         }
       }
     },
+    "credits.themes.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color palettes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palettes de couleurs"
+          }
+        }
+      }
+    },
+    "Delete" : {
+
+    },
+    "Delete project" : {
+
+    },
+    "Delete task" : {
+
+    },
+    "Delete the selected files from Space?" : {
+
+    },
+    "Delete this project?" : {
+
+    },
+    "Dictate a message" : {
+
+    },
+    "Done" : {
+
+    },
+    "Edit project" : {
+
+    },
+    "End voice conversation" : {
+
+    },
     "English" : {
 
     },
     "État" : {
 
     },
+    "Explain code" : {
+
+    },
+    "Explain this code step by step:" : {
+
+    },
+    "Explain your answer step by step." : {
+
+    },
+    "Explore" : {
+
+    },
+    "File actions" : {
+
+    },
+    "File unavailable" : {
+
+    },
+    "Files" : {
+
+    },
+    "Finishing dictation…" : {
+
+    },
     "Français" : {
+
+    },
+    "Give a concise answer." : {
+
+    },
+    "Goal" : {
+
+    },
+    "Hands-free conversation" : {
+
+    },
+    "History" : {
+
+    },
+    "Home" : {
+
+    },
+    "How should Noctis help?" : {
 
     },
     "identity.allow.information" : {
@@ -4326,7 +4262,37 @@
         }
       }
     },
-    "Le modèle est défini par Noctis et ne peut pas être changé ici." : {
+    "Images" : {
+
+    },
+    "Import a file" : {
+
+    },
+    "Import a photo" : {
+
+    },
+    "Incomplete" : {
+
+    },
+    "Insert" : {
+
+    },
+    "Keep an ongoing conversation, its instructions and files together." : {
+
+    },
+    "Latest message" : {
+
+    },
+    "Library" : {
+
+    },
+    "Link a conversation" : {
+
+    },
+    "Listening…" : {
+
+    },
+    "Markdown" : {
 
     },
     "message.accessibility.default %@ %@" : {
@@ -4669,10 +4635,287 @@
         }
       }
     },
+    "Model" : {
+
+    },
+    "model.fallback.apple_intelligence_disabled" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence is not enabled on this device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence n’est pas activé sur cet appareil."
+          }
+        }
+      }
+    },
+    "model.fallback.device_ineligible" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This device does not support the local Apple model."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cet appareil n’est pas compatible avec le modèle Apple local."
+          }
+        }
+      }
+    },
+    "model.fallback.framework_unavailable" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This version of the app does not support Foundation Models."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette version de l’application ne prend pas en charge Foundation Models."
+          }
+        }
+      }
+    },
+    "model.fallback.model_not_ready" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The local Apple model is not ready on this device yet."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle Apple local n’est pas encore prêt sur cet appareil."
+          }
+        }
+      }
+    },
+    "model.fallback.requires_ios26" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The local Apple model requires iOS 26 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle Apple local nécessite iOS 26 ou une version ultérieure."
+          }
+        }
+      }
+    },
+    "model.fallback.unknown" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The local Apple model is currently unavailable."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le modèle Apple local est actuellement indisponible."
+          }
+        }
+      }
+    },
+    "model.runtime.automatic.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic selection"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélection automatique"
+          }
+        }
+      }
+    },
+    "model.runtime.foundation_models.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Foundation Models"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Foundation Models"
+          }
+        }
+      }
+    },
+    "model.runtime.label" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local engine"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moteur local"
+          }
+        }
+      }
+    },
+    "model.runtime.mlx_ios.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
+          }
+        }
+      }
+    },
+    "model.runtime.mlx.title" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ternary Bonsai 2 (4B) · MLX"
+          }
+        }
+      }
+    },
+    "model.runtime.settings.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This test version uses Ternary Bonsai 2 (4B) with MLX. Responses are generated on this device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette version de test utilise Ternary Bonsai 2 (4B) avec MLX. Les réponses sont générées sur cet appareil."
+          }
+        }
+      }
+    },
     "Modèle IA" : {
 
     },
-    "Moteur" : {
+    "Name" : {
+
+    },
+    "New conversation" : {
+
+    },
+    "New project" : {
+
+    },
+    "New task" : {
+
+    },
+    "No artifacts yet" : {
+
+    },
+    "No attachments" : {
+
+    },
+    "No available conversations" : {
+
+    },
+    "No camera is available." : {
+
+    },
+    "No code files yet" : {
+
+    },
+    "No context files" : {
+
+    },
+    "No files yet" : {
+
+    },
+    "No images yet" : {
+
+    },
+    "No items available" : {
+
+    },
+    "No linked artifacts" : {
+
+    },
+    "No linked conversations" : {
+
+    },
+    "No microphone is available." : {
+
+    },
+    "No readable text was found. Try a clearer photo or a PDF with selectable text." : {
+
+    },
+    "No speech detected. Voice conversation ended." : {
+
+    },
+    "Noctis" : {
+
+    },
+    "Noctis is responding…" : {
+
+    },
+    "Noctis reads the text extracted on this device from your images and documents." : {
+
+    },
+    "Not connected" : {
+
+    },
+    "OK" : {
+
+    },
+    "On-device dictation is unavailable for this language." : {
 
     },
     "onboarding.appearance.button.discover" : {
@@ -5032,6 +5275,108 @@
         }
       }
     },
+    "onboarding.ios.install.download.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparing the model downloads Ternary Bonsai 2 (4B) if it is not cached. Use Wi-Fi and leave enough storage available."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La préparation télécharge Ternary Bonsai 2 (4B) s’il n’est pas en cache. Utilisez le Wi-Fi et prévoyez suffisamment d’espace libre."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.duration.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep the app open while Noctis prepares the local engine. An MLX download may take several minutes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gardez l’application ouverte pendant la préparation du moteur local. Un téléchargement MLX peut prendre plusieurs minutes."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.model.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis uses Ternary Bonsai 2 (4B) with MLX, running directly on your device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis utilise Ternary Bonsai 2 (4B) avec MLX, exécuté directement sur votre appareil."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.offline.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once the local engine is ready, responses can be generated offline."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une fois le moteur local prêt, les réponses peuvent être générées hors ligne."
+          }
+        }
+      }
+    },
+    "onboarding.ios.install.retry.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check the error message, your connection and available storage, then try again."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consultez le message d’erreur, vérifiez votre connexion et l’espace disponible, puis réessayez."
+          }
+        }
+      }
+    },
+    "onboarding.ios.local_model.description" : {
+      "comment" : "Texte de la sélection locale du moteur Noctis sur iOS.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis runs Ternary Bonsai 2 (4B) locally with MLX. Responses are generated on your device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis exécute Ternary Bonsai 2 (4B) localement avec MLX. Les réponses sont générées sur votre appareil."
+          }
+        }
+      }
+    },
     "onboarding.local_model.description" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {
@@ -5134,6 +5479,27 @@
         }
       }
     },
+    "Open" : {
+
+    },
+    "Open original" : {
+
+    },
+    "Photo" : {
+
+    },
+    "Pin" : {
+
+    },
+    "Preparing microphone…" : {
+
+    },
+    "Preview shortened · Open original" : {
+
+    },
+    "Preview unavailable" : {
+
+    },
     "privacy.title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5151,7 +5517,64 @@
         }
       }
     },
+    "Project" : {
+
+    },
+    "Project actions" : {
+
+    },
+    "Project name" : {
+
+    },
+    "Project unavailable" : {
+
+    },
+    "Projects" : {
+
+    },
+    "Projects that use these files will lose access to them." : {
+
+    },
+    "Projects unavailable" : {
+
+    },
+    "Read text from a photo" : {
+
+    },
+    "Read text from an image" : {
+
+    },
+    "Recent conversations" : {
+
+    },
     "Réessayer" : {
+
+    },
+    "Remove attachment" : {
+
+    },
+    "Replace %@" : {
+
+    },
+    "Replace a pinned shortcut" : {
+
+    },
+    "Replace with %@" : {
+
+    },
+    "Reply in progress" : {
+
+    },
+    "Resume" : {
+
+    },
+    "Save" : {
+
+    },
+    "Saving to your Space…" : {
+
+    },
+    "Scan with camera" : {
 
     },
     "security.authentication.failed" : {
@@ -5375,6 +5798,15 @@
         }
       }
     },
+    "Select" : {
+
+    },
+    "Send dictation" : {
+
+    },
+    "Settings" : {
+
+    },
     "settings.navigation.title" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {
@@ -5443,6 +5875,27 @@
         }
       }
     },
+    "Share" : {
+
+    },
+    "Share or export" : {
+
+    },
+    "Shortcuts" : {
+
+    },
+    "Space" : {
+
+    },
+    "Standing instructions" : {
+
+    },
+    "Start dictation" : {
+
+    },
+    "Step by step" : {
+
+    },
     "storage.recovery" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5476,6 +5929,60 @@
           }
         }
       }
+    },
+    "Summarize a page" : {
+
+    },
+    "Summarize the attached text." : {
+
+    },
+    "Summarize the main points of this page:" : {
+
+    },
+    "Tabler Icons · Paweł Kuna" : {
+
+    },
+    "Tabs" : {
+
+    },
+    "Tasks" : {
+
+    },
+    "Text and small PDFs can provide short excerpts to Noctis." : {
+
+    },
+    "Third-party connections are planned for a future version." : {
+
+    },
+    "This document is too long. Choose an excerpt of up to 6,000 characters and 30 PDF pages." : {
+
+    },
+    "Title" : {
+
+    },
+    "Translate" : {
+
+    },
+    "Translate the following text into " : {
+
+    },
+    "Try again" : {
+
+    },
+    "Unlink" : {
+
+    },
+    "Unlock this PDF before attaching it." : {
+
+    },
+    "Unpin" : {
+
+    },
+    "Used in conversations linked to this project." : {
+
+    },
+    "Voice input" : {
+
     },
     "web_search.error.invalid_query" : {
       "comment" : "Texte de l’interface Noctis.",
@@ -5527,6 +6034,18 @@
           }
         }
       }
+    },
+    "What would you like to achieve?" : {
+
+    },
+    "What’s on your mind?" : {
+
+    },
+    "Your conversations and files stay in History and Space." : {
+
+    },
+    "Your projects" : {
+
     }
   },
   "version" : "1.0"

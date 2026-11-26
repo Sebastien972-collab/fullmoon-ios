@@ -9,12 +9,16 @@ struct AppearanceSettingsView: View {
         @Bindable var manager = appManager
         Form {
             Section("appearance.section.theme") {
-                Picker("appearance.picker.theme", selection: $manager.appearance.theme) {
-                    ForEach(AppearanceTheme.allCases, id: \.self) { Text($0.title).tag($0) }
+                Picker(selection: $manager.appearance.mode) {
+                    ForEach(AppearanceMode.allCases, id: \.self) { Text($0.title).tag($0) }
+                } label: {
+                    Text("Display mode", tableName: "Theme")
                 }
+                PalettePicker(selection: $manager.appearance.theme)
                 Picker("appearance.picker.accent", selection: $manager.appTintColor) {
                     ForEach(AppTintColor.allCases, id: \.self) { color in
-                        Label(color.title, systemImage: "circle.fill").foregroundStyle(color.getColor()).tag(color)
+                        Label(color.title, systemImage: "circle.fill")
+                            .foregroundStyle(color.getColor(for: manager.appearance.theme)).tag(color)
                     }
                 }
             }
@@ -58,7 +62,58 @@ struct AppearanceSettingsView: View {
             }
         }
         .formStyle(.grouped)
+        .scrollContentBackground(.hidden)
+        .background(manager.appearance.theme.background)
         .navigationTitle("appearance.navigation.title")
+    }
+}
+
+private struct PalettePicker: View {
+    @Binding var selection: AppearanceTheme
+
+    var body: some View {
+        NavigationLink {
+            List(AppearanceTheme.allCases, id: \.self) { theme in
+                Button {
+                    selection = theme
+                } label: {
+                    HStack(spacing: 12) {
+                        HStack(spacing: 2) {
+                            swatch(theme).environment(\.colorScheme, .light)
+                            swatch(theme).environment(\.colorScheme, .dark)
+                        }
+                        .accessibilityHidden(true)
+                        Text(verbatim: theme.name)
+                        Spacer()
+                        if theme == selection {
+                            Image(systemName: "checkmark").foregroundStyle(.tint)
+                                .accessibilityHidden(true)
+                        }
+                    }
+                    .frame(minHeight: 44)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityAddTraits(theme == selection ? .isSelected : [])
+                .listRowBackground(selection.surface)
+            }
+            .scrollContentBackground(.hidden)
+            .background(selection.background)
+            .navigationTitle(Text("Color palette", tableName: "Theme"))
+        } label: {
+            LabeledContent {
+                Text(verbatim: selection.name)
+            } label: {
+                Text("Color palette", tableName: "Theme")
+            }
+        }
+    }
+
+    private func swatch(_ theme: AppearanceTheme) -> some View {
+        RoundedRectangle(cornerRadius: 5)
+            .fill(theme.surface)
+            .overlay { Circle().fill(theme.accent).frame(width: 9, height: 9) }
+            .frame(width: 23, height: 27)
     }
 }
 

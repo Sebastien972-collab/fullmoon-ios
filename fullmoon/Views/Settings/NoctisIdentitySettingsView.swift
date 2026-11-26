@@ -67,7 +67,7 @@ struct NoctisIdentitySettingsView: View {
                 if saved { Label("identity.saved", systemImage: "checkmark.circle") }
             }
         }
-        .formStyle(.grouped)
+        .modifier(ThemedForm())
         .navigationTitle("identity.title")
         .onAppear {
             if !hasLoadedProfile { load() }

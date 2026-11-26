@@ -1,5 +1,6 @@
-"history.open" = "Afficher les conversations";
-"history.close" = "Fermer les conversations";
+"history.open" = "Menu de navigation";
+"history.close" = "Revenir à la conversation";
+"library.title" = "Bibliothèque";
 "history.title" = "Conversations";
 "history.search" = "Rechercher une conversation";
 "history.clearSearch" = "Effacer la recherche";

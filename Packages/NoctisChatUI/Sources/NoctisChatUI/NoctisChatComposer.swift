@@ -3,6 +3,7 @@ import SwiftUI
 
 @MainActor
 struct NoctisChatComposer: View {
+    @Environment(\.noctisPalette) private var palette
     @Binding var prompt: String
     @Binding var focused: Bool
     let isGenerating: Bool
@@ -37,14 +38,14 @@ struct NoctisChatComposer: View {
         Button(action: performPrimaryAction) {
             Group {
                 if isStopping {
-                    ProgressView().tint(NoctisStyle.canvas)
+                    ProgressView().tint(palette.canvas)
                 } else {
                     Image(systemName: isGenerating ? "stop.fill" : "arrow.up")
                         .font(.body.weight(.semibold))
                 }
             }
             .frame(width: 44, height: 44)
-            .foregroundStyle(NoctisStyle.canvas)
+            .foregroundStyle(palette.canvas)
             .background(
                 isGenerating || canSend ? Color.primary : Color.secondary,
                 in: Circle()

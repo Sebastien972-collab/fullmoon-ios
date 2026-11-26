@@ -1,3 +1,4 @@
+import NoctisChatUI
 import SwiftData
 import SwiftUI
 
@@ -7,6 +8,7 @@ struct ChatsListView: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var currentThread: Thread?
     @FocusState.Binding var isPromptFocused: Bool
+    var onSettings: (() -> Void)?
     @Query(sort: \Thread.timestamp, order: .reverse) private var threads: [Thread]
     @State private var search = ""
     @State private var deletionError: String?
@@ -68,6 +70,27 @@ struct ChatsListView: View {
                 }
             }
             .listStyle(.sidebar)
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                if let onSettings {
+                    VStack(spacing: 0) {
+                        Divider()
+                        Button(action: onSettings) {
+                            Label {
+                                Text("settings.navigation.title")
+                            } icon: {
+                                NoctisIcon(.settings, size: 20).foregroundStyle(.tint)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                            .padding(.horizontal)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .keyboardShortcut(",", modifiers: .command)
+                        .accessibilityIdentifier("noctis.settings")
+                    }
+                    .background(.bar)
+                }
+            }
             .navigationTitle("app.name")
             .searchable(text: $search, prompt: "chats.search.placeholder")
             .toolbar {
@@ -121,7 +144,7 @@ private struct ConversationRow: View {
             Image(systemName: "bubble.left").foregroundStyle(.secondary)
             VStack(alignment: .leading, spacing: 5) {
                 Group {
-                    if let title = thread.title ?? thread.sortedMessages.first?.content {
+                    if let title = thread.title ?? thread.sortedMessages.first?.previewText {
                         Text(title)
                     } else {
                         Text("chats.default_title")

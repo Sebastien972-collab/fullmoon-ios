@@ -308,7 +308,7 @@ extension ChatView.ViewModel {
     }
 
     func chatTitle(for thread: Thread?) -> String {
-        thread?.title ?? thread?.sortedMessages.first.map { String($0.content.prefix(70)) }
+        thread?.title ?? thread?.sortedMessages.first.map { String($0.previewText.prefix(70)) }
             ?? String(localized: "chats.default_title")
     }
 

@@ -25,3 +25,7 @@ does not implement inference, persistence or network requests.
 The public Foundation types and resource attribution are available on all
 declared platforms. The SwiftUI chat shell is compiled only for iOS; existing
 macOS and visionOS interfaces remain host responsibilities.
+
+## Tabler Icons
+
+The chat controls and lunar mark use [Tabler Icons v3.34.1](https://github.com/tabler/tabler-icons/tree/v3.34.1), by Paweł Kuna. The bundled SVGs preserve the upstream paths and use a solid template color so SwiftUI can tint them. The iOS launcher uses the same `moon-stars` paths with a lighter stroke and backgrounds for the light, dark and tinted appearances. The release's complete MIT notice ships in `TablerIcons-MIT.txt`.

@@ -6,6 +6,7 @@
 //  Extracted from MessageView.swift.
 //
 
+import NoctisChatUI
 import SwiftUI
 
 struct MessageAvatar: View {
@@ -15,8 +16,7 @@ struct MessageAvatar: View {
         ZStack {
             Circle()
                 .fill(.quaternary.opacity(0.6))
-            Image(systemName: "moon.stars.fill")
-                .font(.system(size: 13, weight: .medium))
+            NoctisIcon(.moon, size: 17)
                 .foregroundStyle(tint)
         }
         .frame(width: 28, height: 28)
@@ -35,7 +35,7 @@ struct MessageBubbleBackground: View {
         if usesChatGPTLayout {
             if isUser {
                 RoundedRectangle(cornerRadius: 24, style: .continuous)
-                    .fill(assistantBubbleFill)
+                    .fill(appearance.theme.surface)
             }
         } else if appearance.messageStyle == .bubbles {
             if isUser {
@@ -43,7 +43,7 @@ struct MessageBubbleBackground: View {
                     .fill(tint.opacity(userBubbleOpacity))
             } else {
                 RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous)
-                    .fill(assistantBubbleFill)
+                    .fill(appearance.theme.surface)
                     .overlay {
                         RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous)
                             .strokeBorder(Color.primary.opacity(colorScheme == .dark ? 0.08 : 0.05), lineWidth: 0.5)
@@ -60,13 +60,6 @@ struct MessageBubbleBackground: View {
         }
     }
 
-    private var assistantBubbleFill: Color {
-        #if os(macOS)
-        return Color(nsColor: .controlBackgroundColor).opacity(0.8)
-        #else
-        return Color(uiColor: .secondarySystemBackground)
-        #endif
-    }
 }
 
 struct MessageErrorRecoveryBar: View {
@@ -121,7 +114,11 @@ struct MessageInterruptedBanner: View {
 }
 
 struct MessageAssistantActions: View {
+    #if os(iOS)
+    @Environment(\.replySpeaker) private var speaker
+    #endif
     let content: String
+    let spokenReplyID: UUID?
     let copied: Bool
     let targetSize: CGFloat
     let onCopy: () -> Void
@@ -146,6 +143,26 @@ struct MessageAssistantActions: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel("message.button.copy.accessibility.label")
+
+            #if os(iOS)
+            if let speaker, let spokenReplyID, content.contains(where: { !$0.isWhitespace }) {
+                let isReading = speaker.currentMessageID == spokenReplyID
+                Button {
+                    speaker.toggle(messageID: spokenReplyID, text: content)
+                } label: {
+                    Image(systemName: isReading ? "stop.fill" : "speaker.wave.2")
+                        .font(.caption)
+                        .foregroundStyle(isReading ? Color.accentColor : Color.secondary)
+                        .frame(minWidth: targetSize, minHeight: targetSize)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .disabled(speaker.isDictating)
+                .accessibilityLabel(isReading
+                    ? Text("Stop reading", tableName: "MessageActions")
+                    : Text("Read aloud", tableName: "MessageActions"))
+            }
+            #endif
 
             // Regenerate
             if let onRegenerate {
