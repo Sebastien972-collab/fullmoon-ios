@@ -86,12 +86,12 @@ struct NoctisChatWorkspace: View {
             onDeleteConversation: { identifier in
                 pendingDeletion = threads.first { $0.id == identifier }
             },
-            onSettings: { showSettings = true }
-        ) {
-            transcript
-        } status: {
-            NoctisChatStatus(viewModel: viewModel) { composerFocusRequest = UUID() }
-        }
+            onSettings: { showSettings = true },
+            transcript: { transcript },
+            status: {
+                NoctisChatStatus(viewModel: viewModel) { composerFocusRequest = UUID() }
+            }
+        )
     }
 
     @ViewBuilder
