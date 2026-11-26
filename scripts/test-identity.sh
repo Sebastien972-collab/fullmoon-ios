@@ -22,6 +22,7 @@ cp fullmoon/Views/Settings/NoctisIdentitySettingsView.swift fullmoon/Views/Setti
 # Use the existing Noctis protocol sources, not a replacement API or an MLX model.
 cp "$noctis/Sources/Noctis/Core/AI/Domain/AIChatMessage.swift" "$scratch/"
 cp "$noctis/Sources/Noctis/Core/AI/AIModelService.swift" "$scratch/"
+cp "$noctis/Sources/Noctis/Core/AI/AIResponseEvent.swift" "$scratch/"
 cp "$noctis/Sources/Noctis/Core/Enum/AIModelLoadPhase.swift" "$scratch/"
 cd "$scratch"
 "$compiler" -parse-as-library -swift-version 6 -strict-concurrency=complete \
@@ -33,7 +34,7 @@ cd "$scratch"
 "$compiler" -emit-module -emit-library -swift-version 6 -strict-concurrency=complete \
     -target arm64-apple-macos14.0 -sdk "$sdk" -module-name Noctis \
     -module-cache-path "$scratch/cache" -emit-module-path "$scratch/Noctis.swiftmodule" \
-    AIChatMessage.swift AIModelService.swift AIModelLoadPhase.swift -o "$scratch/libNoctis.dylib"
+    AIChatMessage.swift AIModelService.swift AIResponseEvent.swift AIModelLoadPhase.swift -o "$scratch/libNoctis.dylib"
 "$compiler" -parse-as-library -swift-version 6 -strict-concurrency=complete \
     -target arm64-apple-macos14.0 -sdk "$sdk" -module-name NoctisIdentityTests \
     -Xfrontend -disable-sandbox -module-cache-path "$scratch/cache" \

@@ -36,6 +36,8 @@ extension ChatView {
         @ObservationIgnored private var generationTask: Task<Void, Never>?
         @ObservationIgnored private var streamingMessage: Message?
         @ObservationIgnored private var pendingResponse = ""
+        @ObservationIgnored private var pendingActivity: NoctisResponseActivity?
+        @ObservationIgnored private var activityIsDirty = false
         @ObservationIgnored private var flushTask: Task<Void, Never>?
         @ObservationIgnored private var hasDisplayedResponse = false
         @ObservationIgnored private var responseStarted: ContinuousClock.Instant?
@@ -172,15 +174,12 @@ extension ChatView {
             generatingMessageID = response.id
             pendingResponse = ""
             hasDisplayedResponse = false
-            firstTextDelay = nil
-            charactersPerSecond = nil
-            responseStarted = nil
-            firstText = nil
-            characterCount = 0
+            let started = Date()
+            let responseID = response.id
+            beginActivity(for: response, at: started)
 
             let threadID = thread.id
             generationTask = Task {
-                let started = Date()
                 let clock = ContinuousClock()
                 defer { finishGeneration(response: response, thread: thread, context: context, started: started) }
 
@@ -194,10 +193,10 @@ extension ChatView {
                     try Task.checkCancellation()
                     identitySession.confirm(thread: threadID)
                     responseStarted = clock.now
-                    try await service.withResponse(prompt: text) { [weak self] stream in
-                        for try await chunk in stream {
+                    try await service.withResponseEvents(prompt: text) { [weak self] stream in
+                        for try await event in stream {
                             try Task.checkCancellation()
-                            try await self?.appendResponse(chunk)
+                            try await self?.appendResponseEvent(event, messageID: responseID)
                         }
                     }
                     try Task.checkCancellation()
@@ -220,6 +219,29 @@ extension ChatView {
             }
         }
 
+        private func beginActivity(for response: Message, at started: Date) {
+            firstTextDelay = nil
+            charactersPerSecond = nil
+            responseStarted = nil
+            firstText = nil
+            characterCount = 0
+            pendingActivity = NoctisResponseActivity(startedAt: started)
+            activityIsDirty = false
+            response.activityData = pendingActivity?.encoded()
+        }
+
+        private func appendResponseEvent(_ event: AIResponseEvent, messageID: UUID) throws {
+            guard let message = streamingMessage, message.id == messageID, !message.isDeleted,
+                  message.modelContext != nil, let thread = message.thread, !thread.isDeleted else {
+                throw CancellationError()
+            }
+            pendingActivity?.observe(event)
+            activityIsDirty = true
+            generationPhase = pendingActivity?.phase == .responding ? .streaming : .thinking
+            if case .textDelta(let chunk) = event { try appendResponse(chunk) }
+            scheduleFlush()
+        }
+
         private func appendResponse(_ chunk: String) throws {
             guard let message = streamingMessage, !message.isDeleted,
                   message.modelContext != nil, let thread = message.thread, !thread.isDeleted else {
@@ -227,13 +249,15 @@ extension ChatView {
             }
             guard !chunk.isEmpty else { return }
             if firstText == nil { firstText = ContinuousClock.now }
-            generationPhase = .streaming
             characterCount += chunk.count
             pendingResponse += chunk
             if !hasDisplayedResponse {
                 hasDisplayedResponse = true
                 flushPendingResponse()
             }
+        }
+
+        private func scheduleFlush() {
             if flushTask == nil {
                 flushTask = Task { [weak self] in
                     do { try await Task.sleep(for: .milliseconds(100)) }
@@ -245,11 +269,15 @@ extension ChatView {
         }
 
         private func flushPendingResponse() {
-            guard !pendingResponse.isEmpty else { return }
-            defer { pendingResponse = "" }
+            guard !pendingResponse.isEmpty || activityIsDirty else { return }
+            defer {
+                pendingResponse = ""
+                activityIsDirty = false
+            }
             guard let message = streamingMessage, !message.isDeleted,
                   message.modelContext != nil, let thread = message.thread, !thread.isDeleted else { return }
             message.content += pendingResponse
+            if activityIsDirty { message.activityData = pendingActivity?.encoded() }
         }
 
         private static func seconds(_ duration: Duration) -> Double {
@@ -259,7 +287,7 @@ extension ChatView {
         func stop() {
             guard isSending, !isStopping else { return }
             isStopping = true
-            // withResponse waits for the engine to clean up after task cancellation.
+            // Scoped event consumption waits for engine cleanup after task cancellation.
             generationTask?.cancel()
         }
     }
@@ -291,26 +319,6 @@ extension ChatView.ViewModel {
         }
     }
     #endif
-
-    var hasMeaningfulPrompt: Bool {
-        prompt.contains { !$0.isWhitespace }
-    }
-
-    var isInputEnabled: Bool { isConnected && !isLoading }
-
-    var connectionMessage: LocalizedStringResource {
-        guard isLoading else { return "chat.connection.status.disconnected" }
-        switch loadPhase {
-        case .downloading: return "chat.connection.status.downloading"
-        case .loading: return "chat.connection.status.loading"
-        case .ready: return "chat.connection.status.ready"
-        }
-    }
-
-    func chatTitle(for thread: Thread?) -> String {
-        thread?.title ?? thread?.sortedMessages.first.map { String($0.content.prefix(70)) }
-            ?? String(localized: "chats.default_title")
-    }
 
     // MARK: - Draft Management
 
@@ -356,12 +364,15 @@ extension ChatView.ViewModel {
                 """)
         }
         if !response.isDeleted, !thread.isDeleted, response.modelContext != nil {
-            if response.content.isEmpty {
+            if response.content.isEmpty && !response.isInterrupted {
                 response.hasError = true
                 response.content = String(localized: "chat.error.response_generation_failed")
-            } else {
-                response.generatingTime = Date().timeIntervalSince(started)
             }
+            response.generatingTime = Date().timeIntervalSince(started)
+            let outcome: NoctisResponseActivity.Phase = response.hasError ? .failed
+                : (response.isInterrupted ? .interrupted : .completed)
+            pendingActivity?.finish(outcome)
+            response.activityData = pendingActivity?.encoded()
             do {
                 try context.save()
             } catch {
@@ -370,6 +381,8 @@ extension ChatView.ViewModel {
         }
         if case .error = generationPhase {} else { generationPhase = .done }
         streamingMessage = nil
+        pendingActivity = nil
+        activityIsDirty = false
         generatingMessageID = nil
         isSending = false
         isStopping = false

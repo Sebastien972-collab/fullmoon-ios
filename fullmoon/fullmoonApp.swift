@@ -20,15 +20,15 @@ struct fullmoonApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                switch NoctisPersistence.store {
-                case .success(let container):
-                    ContentView()
-                        .noctisAppLock()
-                        .modelContainer(container)
-                case .failure:
-                    ContentUnavailableView("storage.unavailable", systemImage: "externaldrive.badge.exclamationmark",
-                                           description: Text("storage.recovery"))
+                #if DEBUG
+                if let scenario = activityPreviewScenario {
+                    NoctisActivityPreviewScreen(scenario: scenario, animate: false)
+                } else {
+                    persistentContent
                 }
+                #else
+                persistentContent
+                #endif
             }
                 .environment(lock)
                 .environment(cloud)
@@ -57,6 +57,28 @@ struct fullmoonApp: App {
         }
         #endif
     }
+
+    @ViewBuilder
+    private var persistentContent: some View {
+        switch NoctisPersistence.store {
+        case .success(let container):
+            ContentView()
+                .noctisAppLock()
+                .modelContainer(container)
+        case .failure:
+            ContentUnavailableView("storage.unavailable", systemImage: "externaldrive.badge.exclamationmark",
+                                   description: Text("storage.recovery"))
+        }
+    }
+
+    #if DEBUG
+    private var activityPreviewScenario: NoctisActivityPreviewScenario? {
+        let environment = ProcessInfo.processInfo.environment
+        guard environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1",
+              let value = environment["NOCTIS_ACTIVITY_PREVIEW"] else { return nil }
+        return NoctisActivityPreviewScenario(rawValue: value)
+    }
+    #endif
 }
 
 #if os(macOS)

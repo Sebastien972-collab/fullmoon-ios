@@ -219,7 +219,8 @@ final class NoctisSyncStore {
                             messages: thread.messages.map {
             NoctisMessageSnapshot(id: $0.id, role: $0.role.rawValue, content: $0.content, timestamp: $0.timestamp,
                                  generatingTime: $0.generatingTime,
-                                 isInterrupted: $0.isInterrupted, hasError: $0.hasError)
+                                 isInterrupted: $0.isInterrupted, hasError: $0.hasError,
+                                 activityData: $0.activityData)
         }.sorted { $0.id.uuidString < $1.id.uuidString })
     }
 
@@ -249,6 +250,7 @@ final class NoctisSyncStore {
             message.generatingTime = value.generatingTime
             message.isInterrupted = value.isInterrupted
             message.hasError = value.hasError
+            message.activityData = value.activityData
             message.thread = thread
         }
     }

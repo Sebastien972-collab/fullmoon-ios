@@ -4,6 +4,35 @@
 
 Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécuté sur Mac ou iOS.
 
+## Réflexion et activité de Noctis
+
+La branche `feat/noctis-thinking-activity` ajoute une sphère animée et un panneau d’activité
+dépliable dans chaque réponse. L’en-tête suit les événements réels : réflexion, utilisation
+d’un outil, rédaction, fin ou interruption. Les recherches affichent leur requête, le nombre
+de résultats et des liens vers les sources ; chaque appel conserve son état.
+
+La réflexion émise par le modèle reste séparée du texte de réponse, de la copie et du partage.
+Le profil Bonsai actuel désactive `enable_thinking` : il produit donc l’activité des outils,
+mais pas de transcription de réflexion. Le panneau ne fabrique pas cette transcription.
+La [fiche du modèle](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit) recommande
+au moins 8 192 tokens de sortie pour son mode thinking, contre les 2 048 du profil existant.
+
+L’activité est enregistrée avec le message, conservée par la synchronisation et réinitialisée
+lors d’une nouvelle tentative. L’indicateur respecte la réduction des animations et se met
+en pause hors écran. Réglages → Apparence permet de désactiver son animation indépendamment
+des effets de texte.
+
+La dépendance Noctis est verrouillée sur `feat/response-activity-stream`. Avec les deux dépôts
+côte à côte, les vérifications de logique et de persistance se lancent ainsi sur Mac :
+
+```sh
+./scripts/test-response-activity.sh
+./scripts/test-identity.sh
+```
+
+Les previews et les captures simulateur d’activité utilisent des événements de démonstration
+explicites, sans charger le modèle. Elles valident la présentation, pas l’inférence réelle.
+
 ## Interface iPhone et iPad
 
 La branche `feat/chatgpt-ui-integration` adapte les composants de
@@ -41,7 +70,7 @@ les apparences claire/sombre, Dynamic Type, le clavier et les dispositions compa
 
 La base `test/ternary-bonsai-2-4b` utilisée par cette branche conserve exactement le modèle
 [`prism-ml/Ternary-Bonsai-2-4B-mlx-2bit`](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit).
-Le projet Xcode référence la branche NoctisAi `test/ternary-bonsai-2-4b` ; le commit
+Le projet Xcode référence la branche NoctisAi `feat/response-activity-stream` ; le commit
 utilisé est verrouillé dans `Package.resolved`. Cette base conserve les corrections iOS
 et Web déjà intégrées dans `main`.
 Les scripts de préparation

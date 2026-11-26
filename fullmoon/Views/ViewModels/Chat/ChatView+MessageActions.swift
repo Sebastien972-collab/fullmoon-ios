@@ -52,6 +52,8 @@ extension ChatView.ViewModel {
         targetResponse.content = ""
         targetResponse.isInterrupted = false
         targetResponse.hasError = false
+        targetResponse.activityData = nil
+        targetResponse.generatingTime = nil
         targetResponse.timestamp = Date()
 
         do {
@@ -85,6 +87,7 @@ extension ChatView.ViewModel {
         context.insert(branch)
         for original in messages[..<userIndex] {
             let copy = Message(role: original.role, content: original.content)
+            copy.activityData = original.activityData
             context.insert(copy)
             branch.messages.append(copy)
         }

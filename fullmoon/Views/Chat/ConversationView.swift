@@ -29,6 +29,7 @@ struct ConversationView: View {
     var body: some View {
         let sorted = thread.sortedMessages
         let isGenerating = generatingMessageID != nil
+        let activeMessage = sorted.first { $0.id == generatingMessageID }
 
         ScrollViewReader { proxy in
             ZStack(alignment: .bottom) {
@@ -119,11 +120,22 @@ struct ConversationView: View {
                       thread.messages.contains(where: { $0.id == id }) else { return }
                 proxy.scrollTo(bottomAnchorID, anchor: .bottom)
             }
+            .onChange(of: activeMessage?.content) {
+                followActivity(using: proxy)
+            }
+            .onChange(of: activeMessage?.activityData) {
+                followActivity(using: proxy)
+            }
         }
     }
 
     private var messageSpacing: CGFloat {
         usesChatGPTLayout ? 24 : appManager.appearance.density.spacing
+    }
+
+    private func followActivity(using proxy: ScrollViewProxy) {
+        guard generatingMessageID != nil, followsResponse, !isUserScrolling else { return }
+        proxy.scrollTo(bottomAnchorID, anchor: .bottom)
     }
 }
 
