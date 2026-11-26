@@ -11,7 +11,6 @@ import SwiftUI
 
 struct MessageView: View {
     @Environment(AppManager.self) private var appManager
-    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @ScaledMetric(relativeTo: .body) private var textScale = 1.0
 
@@ -23,6 +22,7 @@ struct MessageView: View {
     var onEdit: (() -> Void)? = nil
     var onDelete: (() -> Void)? = nil
     var onBranch: (() -> Void)? = nil
+    var usesChatGPTLayout = false
 
     @State private var copied = false
     @State private var showDeleteConfirmation = false
@@ -50,66 +50,89 @@ struct MessageView: View {
         HStack(alignment: .top, spacing: 10) {
             if isUser {
                 Spacer(minLength: 32)
-            } else if appearance.showAvatars {
-                avatarView
+            } else if appearance.showAvatars && !usesChatGPTLayout {
+                MessageAvatar(tint: appManager.appTintColor.getColor())
             }
 
             VStack(alignment: isUser ? .trailing : .leading, spacing: 6) {
                 // Header (Author + Timestamp)
-                HStack(spacing: 6) {
-                    Text(authorName)
-                        .font(.caption.weight(.semibold))
-                    if appearance.showTimestamps {
-                        Text(message.timestamp, style: .time)
-                            .font(.caption2)
+                if !usesChatGPTLayout || appearance.showTimestamps {
+                    HStack(spacing: 6) {
+                        Text(authorName)
+                            .font(.caption.weight(.semibold))
+                        if appearance.showTimestamps {
+                            Text(message.timestamp, style: .time)
+                                .font(.caption2)
+                        }
+                        if isStreaming && !isUser {
+                            Image(systemName: "ellipsis")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(appManager.appTintColor.getColor())
+                                .symbolEffect(.variableColor.iterative, options: .repeating,
+                                              isActive: !reducesAnimations)
+                                .accessibilityHidden(true)
+                        }
                     }
-                    if isStreaming && !isUser {
-                        Image(systemName: "ellipsis")
-                            .font(.caption2.weight(.semibold))
-                            .foregroundStyle(appManager.appTintColor.getColor())
-                            .symbolEffect(.variableColor.iterative, options: .repeating,
-                                          isActive: !reducesAnimations)
-                            .accessibilityHidden(true)
-                    }
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, appearance.messageStyle == .bubbles ? 4 : 0)
                 }
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, appearance.messageStyle == .bubbles ? 4 : 0)
 
                 // Message Body Bubble / Canvas
                 messageBody
-                    .padding(appearance.messageStyle == .bubbles ? 14 : 4)
+                    .padding(messagePadding)
                     .background {
-                        bubbleBackground
+                        MessageBubbleBackground(
+                            isUser: isUser,
+                            usesChatGPTLayout: usesChatGPTLayout,
+                            appearance: appearance,
+                            tint: appManager.appTintColor.getColor()
+                        )
                     }
                     .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous))
                     .contentShape(RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous))
                     .contextMenu {
-                        messageContextMenu
+                        MessageContextMenu(
+                            content: message.content,
+                            isUser: isUser,
+                            onCopy: copyContent,
+                            onRegenerate: onRegenerate,
+                            onRetry: onRetry,
+                            onEdit: onEdit,
+                            onBranch: onBranch,
+                            onRequestDelete: onDelete.map { _ in { showDeleteConfirmation = true } }
+                        )
                     }
                     .intelligenceGlow(
                         colors: appearance.intelligenceGlowPalette.colors,
                         lineWidth: appearance.intelligenceGlowLineWidth,
                         cornerRadius: appearance.intelligenceGlowCornerRadius,
-                        activeWhen: appearance.aiEffectsEnabled && appearance.intelligenceGlowEnabled
+                        activeWhen: !usesChatGPTLayout
+                            && appearance.aiEffectsEnabled && appearance.intelligenceGlowEnabled
                             && !isUser && isStreaming && (generationPhase?.isActive ?? false)
                     )
 
                 // Status banner if interrupted or errored
                 if message.hasError {
-                    errorRecoveryBar
+                    MessageErrorRecoveryBar(retryAction: onRetry ?? onRegenerate)
                 } else if message.isInterrupted && !isStreaming {
-                    interruptedBanner
+                    MessageInterruptedBanner(onRegenerate: onRegenerate)
                 }
 
                 // Assistant Action Bar (Discreet, appears after completion)
                 if !isUser && !isStreaming && !message.hasError {
-                    assistantActions
+                    MessageAssistantActions(
+                        content: message.content,
+                        copied: copied,
+                        targetSize: actionTargetSize,
+                        onCopy: copyContent,
+                        onRegenerate: onRegenerate
+                    )
                         .padding(.top, 2)
                         .padding(.leading, appearance.messageStyle == .bubbles ? 4 : 0)
                 }
             }
 
-            if !isUser {
+            if !isUser && !usesChatGPTLayout {
                 Spacer(minLength: 24)
             }
         }
@@ -151,21 +174,6 @@ struct MessageView: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityDescription)
-    }
-
-    // MARK: - Avatar
-
-    @ViewBuilder
-    private var avatarView: some View {
-        ZStack {
-            Circle()
-                .fill(.quaternary.opacity(0.6))
-            Image(systemName: "moon.stars.fill")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(appManager.appTintColor.getColor())
-        }
-        .frame(width: 28, height: 28)
-        .accessibilityHidden(true)
     }
 
     // MARK: - Message Content
@@ -229,194 +237,18 @@ struct MessageView: View {
         }
     }
 
-    // MARK: - Bubble Background
-
-    @ViewBuilder
-    private var bubbleBackground: some View {
-        let appearance = appManager.appearance
-
-        if appearance.messageStyle == .bubbles {
-            if isUser {
-                RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous)
-                    .fill(appManager.appTintColor.getColor().opacity(userBubbleOpacity))
-            } else {
-                RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous)
-                    .fill(assistantBubbleFill)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: DesignTokens.cornerRadius, style: .continuous)
-                            .strokeBorder(Color.primary.opacity(colorScheme == .dark ? 0.08 : 0.05), lineWidth: 0.5)
-                    }
-            }
-        }
-    }
-
-    private var userBubbleOpacity: Double {
-        switch appManager.appearance.intensity {
-        case .subtle: return 0.14
-        case .balanced: return 0.22
-        case .expressive: return 0.32
-        }
-    }
-
-    private var assistantBubbleFill: Color {
-        #if os(macOS)
-        return Color(nsColor: .controlBackgroundColor).opacity(0.8)
-        #else
-        return Color(uiColor: .secondarySystemBackground)
-        #endif
+    private var messagePadding: CGFloat {
+        if usesChatGPTLayout { return isUser ? 14 : 0 }
+        return appManager.appearance.messageStyle == .bubbles ? 14 : 4
     }
 
     private var userTextColor: Color {
         .primary
     }
 
-    // MARK: - Error & Interrupted States
-
-    @ViewBuilder
-    private var errorRecoveryBar: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundStyle(.orange)
-                .font(.caption)
-            Text("message.error.description")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Spacer()
-            if let retryAction = onRetry ?? onRegenerate {
-                Button(action: retryAction) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "arrow.clockwise")
-                        Text("common.button.retry")
-                    }
-                    .font(.caption.weight(.medium))
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.mini)
-            }
-        }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
-        .background(.orange.opacity(0.1), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-    }
-
-    @ViewBuilder
-    private var interruptedBanner: some View {
-        HStack(spacing: 6) {
-            Image(systemName: "stop.circle")
-                .font(.caption2)
-            Text("message.interrupted.description")
-                .font(.caption2)
-            Spacer()
-            if let onRegenerate {
-                Button("message.button.resume", action: onRegenerate)
-                    .font(.caption2.weight(.medium))
-            }
-        }
-        .foregroundStyle(.secondary)
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-    }
-
-    // MARK: - Assistant Actions Strip
-
-    @ViewBuilder
-    private var assistantActions: some View {
-        HStack(spacing: 8) {
-            // Copy
-            Button {
-                copyContent()
-            } label: {
-                HStack(spacing: 4) {
-                    Image(systemName: copied ? "checkmark" : "doc.on.doc")
-                    if copied {
-                        Text("common.status.copied").font(.caption2)
-                    }
-                }
-                .font(.caption)
-                .foregroundStyle(copied ? Color.green : Color.secondary)
-                .frame(minWidth: 32, minHeight: 32)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("message.button.copy.accessibility.label")
-
-            // Regenerate
-            if let onRegenerate {
-                Button(action: onRegenerate) {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .frame(minWidth: 32, minHeight: 32)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("message.button.regenerate.accessibility.label")
-            }
-
-            // Share
-            ShareLink(item: message.content) {
-                Image(systemName: "square.and.arrow.up")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .frame(minWidth: 32, minHeight: 32)
-                    .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("message.button.share.accessibility.label")
-        }
-        .padding(.horizontal, 4)
-    }
-
-    // MARK: - Context Menu
-
-    @ViewBuilder
-    private var messageContextMenu: some View {
-        Button {
-            copyContent()
-        } label: {
-            Label("message.context_menu.copy", systemImage: "doc.on.doc")
-        }
-
-        ShareLink(item: message.content) {
-            Label("common.button.share", systemImage: "square.and.arrow.up")
-        }
-
-        if isUser {
-            if let onEdit {
-                Button(action: onEdit) {
-                    Label("message.context_menu.edit_prompt", systemImage: "pencil")
-                }
-            }
-            if let onRetry {
-                Button(action: onRetry) {
-                    Label("message.context_menu.resend", systemImage: "arrow.clockwise")
-                }
-            }
-        } else {
-            if let onRegenerate {
-                Button(action: onRegenerate) {
-                    Label("message.context_menu.regenerate", systemImage: "arrow.clockwise")
-                }
-            }
-            if let onBranch {
-                Button(action: onBranch) {
-                    Label("message.context_menu.create_variant", systemImage: "arrow.triangle.branch")
-                }
-            }
-        }
-
-        Divider()
-
-        if onDelete != nil {
-            Button(role: .destructive) {
-                showDeleteConfirmation = true
-            } label: {
-                Label("common.button.delete", systemImage: "trash")
-            }
-        }
-    }
-
     // MARK: - Helpers
+
+    private var actionTargetSize: CGFloat { usesChatGPTLayout ? 44 : 32 }
 
     private func copyContent() {
         #if os(macOS)

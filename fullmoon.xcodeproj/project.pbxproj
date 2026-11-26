@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		860F26A42CBC31D6004E8D40 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 860F26A32CBC31D6004E8D40 /* MarkdownUI */; };
 		CF200BB5309D75C000FDFEC2 /* Noctis in Frameworks */ = {isa = PBXBuildFile; productRef = CF200BB4309D75C000FDFEC2 /* Noctis */; };
+		CF7A260330C0270000C7A003 /* NoctisChatUI in Frameworks */ = {isa = PBXBuildFile; productRef = CF7A260230C0270000C7A002 /* NoctisChatUI */; };
 		CF9AC159309D414600515FF2 /* AIEffectsKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9AC158309D414600515FF2 /* AIEffectsKit */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF200BB5309D75C000FDFEC2 /* Noctis in Frameworks */,
+				CF7A260330C0270000C7A003 /* NoctisChatUI in Frameworks */,
 				CF9AC159309D414600515FF2 /* AIEffectsKit in Frameworks */,
 				860F26A42CBC31D6004E8D40 /* MarkdownUI in Frameworks */,
 			);
@@ -100,6 +102,7 @@
 				CF9AC158309D414600515FF2 /* AIEffectsKit */,
 				860F26A32CBC31D6004E8D40 /* MarkdownUI */,
 				CF200BB4309D75C000FDFEC2 /* Noctis */,
+				CF7A260230C0270000C7A002 /* NoctisChatUI */,
 			);
 			productName = fullmoon;
 			productReference = 860E9CCE2CB055B000C5BB52 /* fullmoon.app */;
@@ -135,6 +138,7 @@
 				CF9AC157309D414600515FF2 /* XCRemoteSwiftPackageReference "AIEffectsKit" */,
 				860F26A22CBC31D6004E8D40 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				CF200BB3309D75C000FDFEC2 /* XCRemoteSwiftPackageReference "NoctisAi" */,
+				CF7A260130C0270000C7A001 /* XCLocalSwiftPackageReference "Packages/NoctisChatUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 860E9CCF2CB055B000C5BB52 /* Products */;
@@ -476,6 +480,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		CF7A260130C0270000C7A001 /* XCLocalSwiftPackageReference "Packages/NoctisChatUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/NoctisChatUI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		860F26A22CBC31D6004E8D40 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -489,8 +500,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Sebastien972-collab/NoctisAi.git";
 			requirement = {
-				kind = revision;
-				revision = c6120133d09f999234ccea8e9a9b0c2593deb748;
+				branch = "test/ternary-bonsai-2-4b";
+				kind = branch;
 			};
 		};
 		CF9AC157309D414600515FF2 /* XCRemoteSwiftPackageReference "AIEffectsKit" */ = {
@@ -513,6 +524,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF200BB3309D75C000FDFEC2 /* XCRemoteSwiftPackageReference "NoctisAi" */;
 			productName = Noctis;
+		};
+		CF7A260230C0270000C7A002 /* NoctisChatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NoctisChatUI;
 		};
 		CF9AC158309D414600515FF2 /* AIEffectsKit */ = {
 			isa = XCSwiftPackageProductDependency;

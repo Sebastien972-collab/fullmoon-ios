@@ -3,9 +3,11 @@
 swiftlint_version: 0.65.1
 included:
   - fullmoon
+  - Packages/NoctisChatUI/Sources/NoctisChatUI
 excluded:
   - .build
   - build
   - .git
+  - Packages/NoctisChatUI/Sources/NoctisChatUI/Resources
 baseline: .swiftlint-baseline.json
 cache_path: build/swiftlint-cache

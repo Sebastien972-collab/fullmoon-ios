@@ -14,8 +14,8 @@
       "kind": "remoteSourceControl",
       "location": "https://github.com/mattt/EventSource.git",
       "state": {
-        "revision": "bb4b61273b5a976bb571859c17f903ebc3439df1",
-        "version": "1.6.0"
+        "revision": "c3c9534a38895f13a6fd929ea18619c97f889631",
+        "version": "1.6.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind": "remoteSourceControl",
       "location": "https://github.com/ml-explore/mlx-swift",
       "state": {
-        "revision": "19601207e9a0de51e03ee6ec0c3c5f3784275075",
-        "version": "0.32.3"
+        "revision": "7ede4fd6d05f63305c1c0ebf4f8c1909a637c574",
+        "version": "0.33.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind": "remoteSourceControl",
       "location": "https://github.com/ml-explore/mlx-swift-lm.git",
       "state": {
-        "revision": "3b339ad6e3b3f44c8121ecff5131c7fd55e075e6",
-        "version": "3.32.3"
+        "revision": "ca661dc6885f8603e911746838b60d312439a368",
+        "version": "3.33.0"
       }
     },
     {
@@ -59,7 +59,8 @@
       "kind": "remoteSourceControl",
       "location": "https://github.com/Sebastien972-collab/NoctisAi.git",
       "state": {
-        "revision": "c6120133d09f999234ccea8e9a9b0c2593deb748"
+        "branch": "test/ternary-bonsai-2-4b",
+        "revision": "a437607061c970aee78c422776bd5835cb83ff9b"
       }
     },
     {

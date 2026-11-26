@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+#if os(iOS)
+import NoctisChatUI
+#endif
 
 struct CreditsView: View {
     var body: some View {
@@ -20,6 +23,26 @@ struct CreditsView: View {
                 }
                     .badge(Text(Image(systemName: "arrow.up.right")))
             }
+            #if os(iOS)
+            Section("credits.chat_ui.title") {
+                if let url = URL(string: NoctisChatAttribution.sourceURL) {
+                    Link(destination: url) {
+                        Text(verbatim: "ChatGPT iOS UI · Bryan Ramirez-Gonzalez")
+                    }
+                }
+                NavigationLink {
+                    ScrollView {
+                        Text(verbatim: NoctisChatAttribution.licenseText)
+                            .font(.footnote)
+                            .textSelection(.enabled)
+                            .padding()
+                    }
+                    .navigationTitle("credits.chat_ui.license")
+                } label: {
+                    Text("credits.chat_ui.license")
+                }
+            }
+            #endif
         }
         .formStyle(.grouped)
         .navigationTitle("credits.navigation.title")
