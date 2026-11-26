@@ -24,9 +24,9 @@ lors d’une nouvelle tentative. L’indicateur respecte la réduction des anima
 en pause hors écran. Réglages → Apparence permet de désactiver son animation indépendamment
 des effets de texte.
 
-La dépendance Noctis est verrouillée sur `test/gpt-oss-macos`, qui intègre également les API
-d’activité de `main`. Avec les deux dépôts
-côte à côte, les vérifications de logique et de persistance se lancent ainsi sur Mac :
+La dépendance Noctis est verrouillée dans `Package.resolved` sur une révision de
+`test/gpt-oss-macos` réunissant le profil GPT sur Mac et les événements d’activité.
+Avec les deux dépôts côte à côte, les vérifications de logique et de persistance se lancent ainsi sur Mac :
 
 ```sh
 ./scripts/test-response-activity.sh
