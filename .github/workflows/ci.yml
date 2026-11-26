@@ -105,6 +105,10 @@ jobs:
           xcodebuild -version
           swift --version
           xcodebuild -downloadComponent MetalToolchain
+      - name: Test activity history and conversation persistence
+        run: |
+          ./scripts/test-response-activity.sh
+          ./scripts/test-identity.sh
       - name: Install runtime preparation tools
         run: brew install uv
       - name: Prepare the macOS SearXNG runtime

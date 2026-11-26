@@ -67,6 +67,7 @@ private struct AIEffectsSettingsSection: View {
 
     var body: some View {
         Section("appearance.section.ai_effects") {
+            Toggle("appearance.toggle.thinking_animation", isOn: $appearance.thinkingIndicatorEnabled)
             Toggle("appearance.toggle.ai_effects", isOn: $appearance.aiEffectsEnabled)
             if appearance.aiEffectsEnabled {
                 Picker("appearance.picker.response_rendering", selection: $appearance.aiTextRenderingMode) {
@@ -77,20 +78,6 @@ private struct AIEffectsSettingsSection: View {
                 }
                 Text(appearance.streamEffect.detail).font(.caption).foregroundStyle(.secondary)
                 StreamEffectControls(appearance: $appearance)
-                Toggle("appearance.toggle.thinking_indicator", isOn: $appearance.thinkingIndicatorEnabled)
-                if appearance.thinkingIndicatorEnabled {
-                    Stepper("appearance.thinking_indicator.dots \(appearance.thinkingDotCount)",
-                                value: $appearance.thinkingDotCount, in: 2...6)
-                    ValueSlider(title: "appearance.control.size",
-                                value: $appearance.thinkingDotSize,
-                                range: 3...12, step: 1, suffix: " pt")
-                    ValueSlider(title: "appearance.control.spacing",
-                                value: $appearance.thinkingSpacing,
-                                range: 1...12, step: 1, suffix: " pt")
-                    ValueSlider(title: "appearance.control.period",
-                                value: $appearance.thinkingPeriodMilliseconds,
-                                range: 500...2_500, step: 100, suffix: " ms")
-                }
                 Toggle("appearance.toggle.intelligence_glow", isOn: $appearance.intelligenceGlowEnabled)
                 if appearance.intelligenceGlowEnabled {
                     Picker("appearance.picker.palette", selection: $appearance.intelligenceGlowPalette) {
@@ -157,6 +144,7 @@ private struct ValueSlider: View {
 }
 
 private struct AIEffectsPreview: View {
+    @Environment(AppManager.self) private var appManager
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     let appearance: ChatAppearance
@@ -168,10 +156,11 @@ private struct AIEffectsPreview: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if appearance.aiEffectsEnabled && appearance.thinkingIndicatorEnabled && phase == .thinking {
-                ThinkingIndicator(dotCount: appearance.thinkingDotCount, dotSize: appearance.thinkingDotSize,
-                                  spacing: appearance.thinkingSpacing, period: .milliseconds(appearance.thinkingPeriodMilliseconds))
-                    .aiState(state)
+            if phase == .thinking {
+                NoctisThinkingOrb(
+                    tint: appManager.appTintColor.getColor(), isAnimating: appearance.thinkingIndicatorEnabled,
+                    reduceMotion: reduceMotion || appearance.reduceAnimations
+                )
             }
             previewText
                 .font(.system(size: fontSize))

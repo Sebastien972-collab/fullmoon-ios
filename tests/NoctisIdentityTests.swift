@@ -120,10 +120,11 @@ actor TestCloud: NoctisCloudTransport {
         try await contextPipeline()
         await authentication()
         try await synchronization()
+        try activityPersistence()
         try await profileAndRemoteReset()
         try migration(path: CommandLine.arguments[1], includesProfile: true)
         try migration(path: CommandLine.arguments[2], includesProfile: false)
-        print("Identity, contact consent, context, lock, sync, conflict, deletion, retry and migration tests passed")
+        print("Identity, context, lock, sync, response activity, conflict, deletion, retry and migration tests passed")
     }
 
     @MainActor static func testDefaults() -> UserDefaults {
@@ -406,6 +407,42 @@ actor TestCloud: NoctisCloudTransport {
         check(lock.unlocked)
     }
 
+    @MainActor static func activityPersistence() throws {
+        let legacy = Data(#"{"id":"22222222-2222-2222-2222-222222222222","role":"assistant","content":"Legacy answer","timestamp":0,"isInterrupted":false,"hasError":false}"#.utf8)
+        let legacySnapshot = try JSONDecoder().decode(NoctisMessageSnapshot.self, from: legacy)
+        check(legacySnapshot.activityData == nil, "Old synchronization payloads must decode without activity")
+
+        let source = try NoctisPersistence.makeContainer(inMemory: true)
+        let context = source.mainContext
+        let thread = makeConversation(in: context)
+        let response = Message(role: .assistant, content: "Answer with activity")
+        response.activityData = Data(#"{"phase":"completed","startedAt":0,"updatedAt":1,"endedAt":1,"reasoning":"Actual model reflection","reasoningTruncated":false,"tools":[],"omittedToolCount":0}"#.utf8)
+        context.insert(response)
+        response.thread = thread
+        try context.save()
+        let sourceStore = NoctisSyncStore(context: context, device: "source")
+        let key = "conversation-\(thread.id.uuidString)"
+        let record = try sourceStore.capture(includeProfile: false)[key]!
+        let document = try JSONDecoder().decode(NoctisSyncDocument.self, from: record.document)
+        let snapshot = try JSONDecoder().decode(NoctisThreadSnapshot.self, from: document.payload)
+        check(snapshot.messages.first { $0.id == response.id }?.activityData == response.activityData,
+              "Capturing a conversation must preserve activity bytes")
+
+        let destination = try NoctisPersistence.makeContainer(inMemory: true)
+        let destinationStore = NoctisSyncStore(context: destination.mainContext, device: "destination")
+        try destinationStore.apply(document)
+        let restored = try destination.mainContext.fetch(FetchDescriptor<Message>()).first { $0.id == response.id }
+        check(restored?.activityData == response.activityData && restored?.content == response.content,
+              "Applying a synchronized conversation must preserve both response and activity")
+        let duplicate = NoctisSyncDocument(id: document.id, kind: .conversation,
+                                          modifiedAt: document.modifiedAt.addingTimeInterval(1), author: "conflict",
+                                          deleted: false, payload: document.payload)
+        try destinationStore.apply(document, conflict: duplicate)
+        let copies = try destination.mainContext.fetch(FetchDescriptor<Message>()).filter { $0.role == .assistant }
+        check(copies.count == 2 && copies.allSatisfy { $0.activityData == response.activityData },
+              "Conflict copies must retain the activity attached to each response")
+    }
+
     @MainActor static func migration(path: String, includesProfile: Bool) throws {
         let container = try NoctisPersistence.makeContainer(url: URL(fileURLWithPath: path))
         let context = container.mainContext
@@ -413,6 +450,8 @@ actor TestCloud: NoctisCloudTransport {
         let profiles = try context.fetch(FetchDescriptor<NoctisUserProfile>())
         check(threads.count == 1 && threads[0].title == "Legacy conversation")
         check(Set(threads[0].messages.map(\.content)) == Set(["Legacy question", "Legacy answer"]))
+        check(threads[0].messages.allSatisfy { $0.activityData == nil },
+              "Legacy stores must migrate without creating reflection or tool activity")
         check(threads[0].id == UUID(uuidString: "11111111-1111-1111-1111-111111111111"))
         check(threads[0].timestamp == Date(timeIntervalSince1970: 1_700_000_000))
         if includesProfile {

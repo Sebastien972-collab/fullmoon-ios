@@ -2415,9 +2415,7 @@
         }
       }
     },
-    "Charger le modèle" : {
-
-    },
+    "Charger le modèle" : {},
     "chat_settings.button.delete_all" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {
@@ -3899,14 +3897,34 @@
     },
     "credits.chat_ui.title" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chat interface" } },
-        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Interface de discussion" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat interface"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface de discussion"
+          }
+        }
       }
     },
     "credits.chat_ui.license" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "MIT license" } },
-        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Licence MIT" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIT license"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licence MIT"
+          }
+        }
       }
     },
     "credits.navigation.title" : {
@@ -3926,15 +3944,9 @@
         }
       }
     },
-    "English" : {
-
-    },
-    "État" : {
-
-    },
-    "Français" : {
-
-    },
+    "English" : {},
+    "État" : {},
+    "Français" : {},
     "identity.allow.information" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4411,9 +4423,7 @@
         }
       }
     },
-    "Le modèle est défini par Noctis et ne peut pas être changé ici." : {
-
-    },
+    "Le modèle est défini par Noctis et ne peut pas être changé ici." : {},
     "message.accessibility.default %@ %@" : {
       "comment" : "Paramètres : auteur, contenu.",
       "localizations" : {
@@ -4754,12 +4764,8 @@
         }
       }
     },
-    "Modèle IA" : {
-
-    },
-    "Moteur" : {
-
-    },
+    "Modèle IA" : {},
+    "Moteur" : {},
     "onboarding.appearance.button.discover" : {
       "comment" : "Texte de l’interface Noctis.",
       "localizations" : {
@@ -5236,9 +5242,7 @@
         }
       }
     },
-    "Réessayer" : {
-
-    },
+    "Réessayer" : {},
     "security.authentication.failed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5609,6 +5613,554 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La recherche Web a échoué."
+          }
+        }
+      }
+    },
+    "activity.expanded" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expanded"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déplié"
+          }
+        }
+      }
+    },
+    "activity.collapsed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collapsed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replié"
+          }
+        }
+      }
+    },
+    "activity.hide_details" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide reasoning and tool activity."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer la réflexion et les outils utilisés."
+          }
+        }
+      }
+    },
+    "activity.show_details" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show reasoning and tool activity."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la réflexion et les outils utilisés."
+          }
+        }
+      }
+    },
+    "activity.reasoning.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model reasoning"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réflexion du modèle"
+          }
+        }
+      }
+    },
+    "activity.reasoning.truncated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only the beginning of this long reasoning was saved."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seul le début de cette longue réflexion a été conservé."
+          }
+        }
+      }
+    },
+    "activity.phase.thinking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis is thinking"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noctis réfléchit"
+          }
+        }
+      }
+    },
+    "activity.phase.tools" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Using tools"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisation des outils"
+          }
+        }
+      }
+    },
+    "activity.phase.responding" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing the response"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rédaction de la réponse"
+          }
+        }
+      }
+    },
+    "activity.phase.completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activity completed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activité terminée"
+          }
+        }
+      }
+    },
+    "activity.phase.interrupted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Response interrupted"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponse interrompue"
+          }
+        }
+      }
+    },
+    "activity.phase.failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Response failed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponse en échec"
+          }
+        }
+      }
+    },
+    "activity.tool.web_search" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Web search"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche Web"
+          }
+        }
+      }
+    },
+    "activity.tool.web_open" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read a page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture d’une page"
+          }
+        }
+      }
+    },
+    "activity.tool.list_files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List files"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste des fichiers"
+          }
+        }
+      }
+    },
+    "activity.tool.read_file" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read a file"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture d’un fichier"
+          }
+        }
+      }
+    },
+    "activity.tool.search_code" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search code"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche dans le code"
+          }
+        }
+      }
+    },
+    "activity.progress.web_search" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching the web"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche sur le Web"
+          }
+        }
+      }
+    },
+    "activity.progress.web_open" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reading a page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consultation d’une page"
+          }
+        }
+      }
+    },
+    "activity.progress.tool %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Using %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisation de %@"
+          }
+        }
+      }
+    },
+    "activity.tool.running" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In progress"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cours"
+          }
+        }
+      }
+    },
+    "activity.tool.completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé"
+          }
+        }
+      }
+    },
+    "activity.tool.failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec"
+          }
+        }
+      }
+    },
+    "activity.tool.interrupted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interrupted"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interrompu"
+          }
+        }
+      }
+    },
+    "activity.tools.count %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tool used"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tools used"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld outil utilisé"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld outils utilisés"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "activity.results.count %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld result found"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld results found"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld résultat trouvé"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld résultats trouvés"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "activity.tools.more %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld additional tool call"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld additional tool calls"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld appel d’outil supplémentaire"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld appels d’outils supplémentaires"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "appearance.toggle.thinking_animation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animate thinking indicator"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animer l’indicateur de réflexion"
           }
         }
       }

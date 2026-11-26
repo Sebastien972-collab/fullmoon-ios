@@ -28,9 +28,9 @@ struct MessageView: View {
     @State private var showDeleteConfirmation = false
     @State private var responseVisible = false
     @State private var markdownContent = MarkdownContent("")
-    @State private var effectState = AIState()
     @State private var animatedText = AnimatedTextRelay()
     @State private var animatedTextRun = 0
+    @State private var activity: NoctisResponseActivity?
 
     private var isUser: Bool {
         message.role == .user
@@ -119,7 +119,7 @@ struct MessageView: View {
                 }
 
                 // Assistant Action Bar (Discreet, appears after completion)
-                if !isUser && !isStreaming && !message.hasError {
+                if !isUser && !isStreaming && !message.hasError && !message.content.isEmpty {
                     MessageAssistantActions(
                         content: message.content,
                         copied: copied,
@@ -156,6 +156,9 @@ struct MessageView: View {
                 }
             }
         }
+        .onChange(of: message.activityData, initial: true) { _, data in
+            activity = NoctisResponseActivity.decode(data)
+        }
         .onChange(of: isStreaming, initial: true) { _, streaming in
             if streaming {
                 animatedText.reset()
@@ -165,15 +168,10 @@ struct MessageView: View {
                 animatedText.finish()
             }
         }
-        .onChange(of: generationPhase, initial: true) { _, phase in
-            effectState.phase = phase ?? .idle
-        }
         .onDisappear {
             animatedText.finish()
-            effectState.phase = .idle
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(accessibilityDescription)
+        .accessibilityElement(children: .contain)
     }
 
     // MARK: - Message Content
@@ -183,27 +181,27 @@ struct MessageView: View {
         let appearance = appManager.appearance
 
         VStack(alignment: .leading, spacing: 8) {
+            if !isUser, let activity {
+                NoctisActivityView(
+                    activity: activity, isStreaming: isStreaming,
+                    tint: appManager.appTintColor.getColor(), reduceMotion: reducesAnimations,
+                    animate: appearance.thinkingIndicatorEnabled
+                )
+            }
             if isUser {
                 Text(message.content)
                     .font(.system(size: appearance.fontSize * textScale))
                     .foregroundStyle(userTextColor)
                     .textSelection(.enabled)
+                    .accessibilityLabel(accessibilityDescription)
             } else if isStreaming && message.content.isEmpty {
-                if appearance.aiEffectsEnabled && appearance.thinkingIndicatorEnabled {
+                if activity == nil {
                     HStack(spacing: 8) {
-                        ThinkingIndicator(
-                            dotCount: appearance.thinkingDotCount,
-                            dotSize: appearance.thinkingDotSize,
-                            spacing: appearance.thinkingSpacing,
-                            period: .milliseconds(appearance.thinkingPeriodMilliseconds)
+                        NoctisThinkingOrb(
+                            tint: appManager.appTintColor.getColor(),
+                            isAnimating: appearance.thinkingIndicatorEnabled,
+                            reduceMotion: reducesAnimations
                         )
-                        Text("chat.status.thinking").font(.subheadline).foregroundStyle(.secondary)
-                    }
-                    .aiState(effectState)
-                    .padding(.vertical, 4)
-                } else {
-                    HStack(spacing: 8) {
-                        ProgressView().controlSize(.small)
                         Text("chat.status.thinking").font(.subheadline).foregroundStyle(.secondary)
                     }
                     .padding(.vertical, 4)
@@ -215,6 +213,7 @@ struct MessageView: View {
                     .id(animatedTextRun)
                     .font(.system(size: appearance.fontSize * textScale))
                     .textSelection(.enabled)
+                    .accessibilityLabel(accessibilityDescription)
             } else {
                 // MarkdownUI preserves unchanged blocks; keep the same renderer when streaming ends.
                 Markdown(markdownContent)
@@ -225,6 +224,7 @@ struct MessageView: View {
                         MessageCodeBlock(configuration: configuration)
                     }
                     .textSelection(.enabled)
+                    .accessibilityLabel(accessibilityDescription)
                     .transaction { transaction in
                         transaction.animation = nil
                         transaction.disablesAnimations = true

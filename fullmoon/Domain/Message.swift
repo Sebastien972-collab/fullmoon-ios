@@ -23,6 +23,7 @@ class Message {
     var generatingTime: TimeInterval?
     var isInterrupted: Bool = false
     var hasError: Bool = false
+    var activityData: Data?
     
     @Relationship(inverse: \Thread.messages) var thread: Thread?
     

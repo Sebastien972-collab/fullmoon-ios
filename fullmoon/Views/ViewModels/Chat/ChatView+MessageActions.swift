@@ -49,10 +49,7 @@ extension ChatView.ViewModel {
             context.insert(targetResponse)
             thread.messages.append(targetResponse)
         }
-        targetResponse.content = ""
-        targetResponse.isInterrupted = false
-        targetResponse.hasError = false
-        targetResponse.timestamp = Date()
+        prepareForRegeneration(targetResponse)
 
         do {
             try context.save()
@@ -72,6 +69,15 @@ extension ChatView.ViewModel {
         )
     }
 
+    private func prepareForRegeneration(_ response: Message) {
+        response.content = ""
+        response.isInterrupted = false
+        response.hasError = false
+        response.activityData = nil
+        response.generatingTime = nil
+        response.timestamp = Date()
+    }
+
     /// Create a branch in a separate conversation from a given message
     func createBranch(from message: Message, in thread: Thread, context: ModelContext, select: (Thread) -> Void) {
         guard !isSending, isConnected,
@@ -85,6 +91,7 @@ extension ChatView.ViewModel {
         context.insert(branch)
         for original in messages[..<userIndex] {
             let copy = Message(role: original.role, content: original.content)
+            copy.activityData = original.activityData
             context.insert(copy)
             branch.messages.append(copy)
         }
