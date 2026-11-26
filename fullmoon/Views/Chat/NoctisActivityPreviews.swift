@@ -147,7 +147,6 @@ private enum NoctisActivityPreviewFixtures {
 #Preview("Activity · Dark, reduced motion") {
     NoctisActivityPreviewScreen(scenario: .searching, reduceMotion: true)
         .preferredColorScheme(.dark)
-        .environment(\.accessibilityReduceMotion, true)
 }
 
 #Preview("Activity · Accessibility text") {
