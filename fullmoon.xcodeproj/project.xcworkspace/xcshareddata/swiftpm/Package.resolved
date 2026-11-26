@@ -59,8 +59,8 @@
       "kind": "remoteSourceControl",
       "location": "https://github.com/Sebastien972-collab/NoctisAi.git",
       "state": {
-        "branch": "feat/response-activity-stream",
-        "revision": "127bba74735c734fe033205158226b4a179eac9e"
+        "branch": "test/gpt-oss-macos",
+        "revision": "a14f642c3548348f901ec49f6a3ab044e50e6c61"
       }
     },
     {

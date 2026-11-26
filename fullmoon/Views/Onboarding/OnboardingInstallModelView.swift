@@ -93,6 +93,10 @@ struct OnboardingInstallModelView: View {
             Text("onboarding.ios.install.model.description")
                 .foregroundStyle(.secondary)
             Text("onboarding.ios.install.download.description")
+            #elseif os(macOS)
+            Text("onboarding.macos.install.model.description")
+                .foregroundStyle(.secondary)
+            Text("onboarding.macos.install.download.description")
             #else
             Text("onboarding.install.model.description")
                 .foregroundStyle(.secondary)

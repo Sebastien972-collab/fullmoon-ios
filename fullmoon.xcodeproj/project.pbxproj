@@ -500,7 +500,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Sebastien972-collab/NoctisAi.git";
 			requirement = {
-				branch = "feat/response-activity-stream";
+				branch = "test/gpt-oss-macos";
 				kind = branch;
 			};
 		};
