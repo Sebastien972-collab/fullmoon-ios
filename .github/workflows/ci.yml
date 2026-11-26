@@ -111,7 +111,7 @@ jobs:
         run: python3 ../NoctisAi/infrastructure/searxng/setup_runtime.py --standalone --destination build/SearXNG
       - name: Build macOS
         run: >-
-          xcodebuild -project fullmoon.xcodeproj -scheme fullmoon
+          xcodebuild -quiet -project fullmoon.xcodeproj -scheme fullmoon
           -configuration Debug -destination 'generic/platform=macOS'
           -derivedDataPath build/DerivedData -skipPackageUpdates -skipMacroValidation
           -skipPackagePluginValidation
@@ -122,7 +122,7 @@ jobs:
           --mac-runtime build/SearXNG --destination build/SearXNG-iOS
       - name: Build iOS Simulator
         run: >-
-          xcodebuild -project fullmoon.xcodeproj -scheme fullmoon
+          xcodebuild -quiet -project fullmoon.xcodeproj -scheme fullmoon
           -configuration Debug -destination 'generic/platform=iOS Simulator'
           -derivedDataPath build/DerivedData -skipPackageUpdates -skipMacroValidation
           -skipPackagePluginValidation
