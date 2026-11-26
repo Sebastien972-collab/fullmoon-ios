@@ -4,12 +4,46 @@
 
 Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécuté sur Mac ou iOS.
 
+## Interface iPhone et iPad
+
+La branche `feat/chatgpt-ui-integration` adapte les composants de
+[ChatGPT iOS UI](https://github.com/bryanrg22/chatgpt-ios-ui) à Noctis : compositeur
+natif, contrôles Liquid Glass, historique recherchable et présentation sobre des messages.
+La navigation suit la size class : tiroir en compact, barre latérale en régulier.
+Les vues macOS et visionOS conservent leur parcours existant.
+
+Le package local `Packages/NoctisChatUI` expose uniquement la présentation. Les conversations,
+leurs identifiants SwiftData, le streaming, les erreurs, l'annulation et le contexte personnel
+restent gérés par le ViewModel Noctis existant. Les contenus et services de démonstration
+de l'amont ne sont pas intégrés. La recherche Web continue de passer par Noctis.
+Le rendu Markdown existant est conservé, sans nouvelle dépendance distante.
+
+La provenance et la licence MIT sont conservées dans le package ; la licence est également
+consultable dans Réglages → Crédits sur iOS. Cette adaptation est indépendante d'OpenAI.
+
+Pour essayer l'interface depuis le dépôt Fullmoon :
+
+```sh
+git fetch origin
+git switch feat/chatgpt-ui-integration
+```
+
+Ouvrir `fullmoon.xcodeproj`. Cette branche part du dernier état de l'essai Bonsai
+et conserve sa révision Noctis verrouillée. Les instructions de préparation du moteur
+et de SearXNG ci-dessous s'appliquent toujours.
+
+Vérifier sur appareil : envoi d'un seul échange, streaming et arrêt, changement de
+conversation pendant une génération, recherche/suppression dans l'historique, erreur
+et nouvelle tentative, restitution des conversations après relancement. Contrôler
+les apparences claire/sombre, Dynamic Type, le clavier et les dispositions compactes/régulières.
+
 ## Développement
 
-Le projet Xcode résout le package Noctis depuis son dépôt GitHub, à la révision
-`c6120133d09f999234ccea8e9a9b0c2593deb748` de la
-[PR Noctis #27](https://github.com/Sebastien972-collab/NoctisAi/pull/27).
-Cette révision fournit le service iOS automatique et le correctif de recherche Web utilisé par l’application.
+La base `test/ternary-bonsai-2-4b` utilisée par cette branche conserve exactement le modèle
+[`prism-ml/Ternary-Bonsai-2-4B-mlx-2bit`](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit).
+Le projet Xcode référence la branche NoctisAi `test/ternary-bonsai-2-4b` ; le commit
+utilisé est verrouillé dans `Package.resolved`. Cette base conserve les corrections iOS
+et Web déjà intégrées dans `main`.
 Les scripts de préparation
 et de packaging SearXNG utilisent encore `../NoctisAi` ; conserver les deux dépôts côte à côte :
 
@@ -19,34 +53,42 @@ NoctisAI/
 └── fullmoon-ios/
 ```
 
-Ouvrir `fullmoon.xcodeproj`, sélectionner la cible Mac et lancer l’application. Le modèle reste
-`mlx-community/Ministral-3-14B-Instruct-2512-4bit` sur macOS.
+Ouvrir `fullmoon.xcodeproj`, sélectionner la cible Mac ou iPhone et lancer l’application.
+Les deux plateformes utilisent **Ternary Bonsai 2 (4B)** avec MLX.
 
-### Inférence locale sur iOS
+### Essayer Ternary Bonsai 2 (4B)
 
-Fullmoon crée `IOSModelService(preference: .automatic)` uniquement sur iOS, avec le même
-service de recherche Web embarqué. Lors de « Préparer Noctis », le service sélectionne :
+Depuis chaque dépôt, récupérer la branche de test :
 
-- **Foundation Models** si le modèle Apple sur l’appareil est disponible ;
-- **MLX Ministral 3B** sinon, avec le modèle
-  `mlx-community/Ministral-3-3B-Instruct-2512-4bit` et un téléchargement si le cache est incomplet.
+```sh
+git fetch origin
+git switch test/ternary-bonsai-2-4b
+git pull --ff-only
+```
 
-Le moteur Apple utilise explicitement `SystemLanguageModel.default`. L’inférence reste sur
-l’appareil et aucun fournisseur Private Cloud Compute n’est configuré. Les recherches Web
-restent des requêtes réseau, quel que soit le moteur d’inférence.
+La dépendance distante du projet suffit pour obtenir le moteur Noctis. Le checkout voisin
+sert aux scripts SearXNG décrits ci-dessous. Préparer ces runtimes s’ils ne le sont pas déjà,
+puis compiler l’application depuis Xcode sur l’appareil souhaité.
 
-Les réglages affichent le moteur effectivement chargé et, pour un repli vers MLX, la raison
-de l’indisponibilité du modèle Apple. La sélection reste stable pendant la vie du moteur ;
-une erreur de génération ne déclenche pas de repli ni de répétition automatique du message.
+Sur iOS, Fullmoon crée `IOSModelService(preference: .mlx)` avec le service Web embarqué.
+Sur macOS, il crée `MLXModelService` avec SearXNG embarqué. Les deux services utilisent
+le modèle Bonsai fixé par la branche Noctis. L’essai ne sélectionne pas automatiquement
+Foundation Models : une erreur de chargement ou de génération reste visible.
 
-Avec le moteur Apple, les demandes courtes et explicites de recherche ou d’actualité déclenchent
-une recherche avant la synthèse. La relance « Tu peux utiliser web search ? » peut reprendre
-le sujet du message précédent lorsqu’aucune recherche n’avait encore été exécutée. Les rôles
-de conversation et la dernière demande sont présentés séparément au modèle. Le guide
-[de contribution](CONTRIBUTING.md#vérifier-la-recherche-web-sur-iphone) décrit le test sur appareil
-et les traces locales permettant de vérifier l’appel du service Web.
-Le parcours iOS laisse le service vérifier la disponibilité du modèle Apple avant d’exiger
-un téléchargement MLX. La configuration macOS conserve `MLXModelService` et Ministral 14B.
+Au premier lancement, choisir « Préparer Noctis ». Si l’accueil a déjà été validé,
+ouvrir les réglages et charger le modèle. Vérifier **Ternary Bonsai 2 (4B) · MLX** dans
+« Modèle IA », puis attendre l’état **Prêt**. Le cache utilisé par Locally est distinct
+de celui de Fullmoon ; les poids peuvent donc être téléchargés à nouveau.
+
+Pour vérifier le parcours, ouvrir une nouvelle conversation, demander une réponse courte
+en français, poursuivre le même échange, puis arrêter et relancer une génération.
+Essayer ensuite une recherche Web explicite et contrôler les sources. L’inférence est locale ;
+la recherche Web nécessite Internet. Le guide
+[de contribution](CONTRIBUTING.md#vérifier-la-recherche-web-sur-iphone) décrit les traces
+locales permettant de confirmer l’appel du service Web.
+
+Pour revenir à la configuration habituelle, quitter l’application et revenir sur `main`
+dans les deux dépôts, puis laisser Xcode résoudre la dépendance correspondante.
 
 ### Recherche Web sur Mac, sans Docker
 
@@ -115,13 +157,11 @@ La validation sur un iPhone physique et la distribution App Store restent à eff
 - Les fichiers des modèles MLX sont conservés dans le cache Hugging Face utilisé par l’application.
 - Une installation complète est recherchée localement avant tout accès réseau. Une installation
   MLX absente ou incomplète passe par le téléchargement Hugging Face, qui réutilise les fichiers présents.
-- Le modèle Apple est géré par le système et ne nécessite pas de téléchargement Hugging Face.
 - L’interface distingue « Téléchargement… », « Chargement du modèle… » et « Prêt ».
 - Chaque fenêtre conserve son moteur pendant sa durée de vie. Changer de chat ou interrompre
   une réponse réinitialise uniquement la conversation, après le nettoyage de la génération.
-- L’historique SwiftData et le contexte d’identité sont transmis au service avec leurs rôles.
-  Noctis adapte ensuite le contexte au fournisseur : messages natifs pour MLX, transcript utilisateur/assistant
-  et contexte limité pour Foundation Models. Les conversations sauvegardées restent complètes.
+- L’historique SwiftData et le contexte d’identité sont transmis au service MLX avec leurs rôles.
+  Les conversations sauvegardées restent complètes.
 - Après fermeture complète, les poids MLX doivent être rechargés du disque en mémoire. Un cache
   supprimé par l’utilisateur ou le système nécessite une nouvelle installation.
 
@@ -151,6 +191,9 @@ Mesure ponctuelle du moteur le 4 novembre 2026, avant/après sur le même Mac, e
 avec le modèle déjà installé et le réseau bloqué. Le même prompt demande les nombres de
 1 à 20 ; chaque réponse comporte 69 caractères. Le second échange simule un changement
 de conversation. Les autres compilations en cours rendent les durées et débits indicatifs.
+
+Ces mesures historiques concernent le modèle Ministral 14B précédemment utilisé ; elles
+ne mesurent pas les performances de Bonsai sur cette branche.
 
 | Second échange | Avant | Après |
 | --- | ---: | ---: |
@@ -202,7 +245,7 @@ Fullmoon d’origine, adaptées au moteur Noctis et aux réglages actuels. Il s�
 jusqu’à la première préparation réussie, puis à la validation « Commencer la conversation ».
 Le téléchargement éventuel ne commence qu’après « Préparer Noctis ». Un modèle en cache
 est réutilisé et le moteur chargé est conservé lors de l’ouverture du chat.
-Sur iOS, les textes expliquent le choix automatique Apple/MLX 3B ; la préparation du modèle
-Apple n’est pas bloquée par un contrôle préalable de disponibilité Metal.
+Sur iOS et macOS, les textes présentent Ternary Bonsai 2 (4B) et son téléchargement.
+La préparation vérifie la disponibilité de Metal avant de charger le modèle MLX.
 Les erreurs restent visibles avec la possibilité de réessayer. L’apparence peut être
 personnalisée depuis l’accueil, sans charger le modèle.

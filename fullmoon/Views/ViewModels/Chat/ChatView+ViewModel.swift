@@ -53,7 +53,7 @@ extension ChatView {
             }
             return MLXModelService(webSearchService: search)
             #elseif os(iOS)
-            return IOSModelService(preference: .automatic, webSearchService: IOSWebSearchService.shared)
+            return IOSModelService(preference: .mlx, webSearchService: IOSWebSearchService.shared)
             #else
             return MLXModelService()
             #endif

@@ -6,9 +6,7 @@
 //
 //  Adapted from the Fullmoon model installation flow by Jordan Singer (Mainframe Computer, Inc., MIT).
 
-#if !os(iOS)
 import Metal
-#endif
 import Noctis
 import SwiftUI
 
@@ -16,17 +14,7 @@ struct OnboardingInstallModelView: View {
     @Environment(AppManager.self) private var appManager
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Bindable var viewModel: ChatView.ViewModel
-    #if !os(iOS)
-    private let supportsMetal = MTLCreateSystemDefaultDevice() != nil
-    #endif
-
-    private var canPrepare: Bool {
-        #if os(iOS)
-        true
-        #else
-        supportsMetal
-        #endif
-    }
+    private let canPrepare = MTLCreateSystemDefaultDevice() != nil
 
     private var status: LocalizedStringResource {
         if viewModel.isConnected { return "onboarding.install.status.ready" }

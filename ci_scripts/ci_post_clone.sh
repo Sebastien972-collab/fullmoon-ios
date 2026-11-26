@@ -63,7 +63,12 @@ references = [item for item in project.get("objects", {}).values()
 if len(references) != 1:
     raise SystemExit("error: The Xcode project must contain exactly one NoctisAi reference.")
 requirement = references[0].get("requirement", {})
-if requirement.get("kind") != "revision" or requirement.get("revision") != revision:
+kind = requirement.get("kind")
+matches_revision = kind == "revision" and requirement.get("revision") == revision
+matches_branch = (kind == "branch" and isinstance(requirement.get("branch"), str)
+                  and bool(requirement["branch"])
+                  and requirement["branch"] == pin.get("state", {}).get("branch"))
+if not (matches_revision or matches_branch):
     raise SystemExit("error: The NoctisAi pin differs between Package.resolved and the Xcode project.")
 print(revision)
 PY

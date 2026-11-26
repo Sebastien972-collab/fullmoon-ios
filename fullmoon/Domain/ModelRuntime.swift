@@ -7,11 +7,7 @@ enum ModelRuntime: Equatable, Sendable {
     case mlx
 
     static var initial: Self {
-        #if os(iOS)
-        .automatic
-        #else
         .mlx
-        #endif
     }
 
     var title: LocalizedStringResource {
@@ -21,11 +17,7 @@ enum ModelRuntime: Equatable, Sendable {
         case .foundationModels:
             "model.runtime.foundation_models.title"
         case .mlx:
-            #if os(iOS)
-            "model.runtime.mlx_ios.title"
-            #else
             "model.runtime.mlx.title"
-            #endif
         }
     }
 }
