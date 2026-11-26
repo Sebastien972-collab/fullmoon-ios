@@ -65,7 +65,7 @@ struct NoctisMessageSnapshot: Codable, Equatable, Sendable {
     var generatingTime: TimeInterval?
     var isInterrupted: Bool
     var hasError: Bool
-    var activityData: Data? = nil
+    var activityData: Data?
 }
 
 struct NoctisThreadSnapshot: Codable, Equatable, Sendable {

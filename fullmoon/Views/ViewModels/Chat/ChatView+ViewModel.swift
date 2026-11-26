@@ -284,16 +284,17 @@ extension ChatView {
             Double(duration.components.seconds) + Double(duration.components.attoseconds) / 1e18
         }
 
-        func stop() {
-            guard isSending, !isStopping else { return }
-            isStopping = true
-            // Scoped event consumption waits for engine cleanup after task cancellation.
-            generationTask?.cancel()
-        }
     }
 }
 
 extension ChatView.ViewModel {
+    func stop() {
+        guard isSending, !isStopping else { return }
+        isStopping = true
+        // Scoped event consumption waits for engine cleanup after task cancellation.
+        generationTask?.cancel()
+    }
+
     #if os(iOS)
     private func updateModelRuntime(from service: any AIModelService) async {
         guard let localService = service as? IOSModelService,
