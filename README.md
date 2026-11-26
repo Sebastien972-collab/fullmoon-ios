@@ -6,23 +6,26 @@ Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécut�
 
 ## Réflexion et activité de Noctis
 
-La branche `feat/noctis-thinking-activity` ajoute une sphère animée et un panneau d’activité
+L’interface affiche une sphère animée et un panneau d’activité
 dépliable dans chaque réponse. L’en-tête suit les événements réels : réflexion, utilisation
 d’un outil, rédaction, fin ou interruption. Les recherches affichent leur requête, le nombre
 de résultats et des liens vers les sources ; chaque appel conserve son état.
 
 La réflexion émise par le modèle reste séparée du texte de réponse, de la copie et du partage.
-Le profil Bonsai actuel désactive `enable_thinking` : il produit donc l’activité des outils,
+Sur iPhone, le profil Bonsai conserve `enable_thinking=false` : il produit donc l’activité des outils,
 mais pas de transcription de réflexion. Le panneau ne fabrique pas cette transcription.
 La [fiche du modèle](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit) recommande
 au moins 8 192 tokens de sortie pour son mode thinking, contre les 2 048 du profil existant.
+Sur Mac, le profil GPT-OSS transmet le texte de réponse et l’activité des outils,
+en conservant son analyse interne dans le moteur.
 
 L’activité est enregistrée avec le message, conservée par la synchronisation et réinitialisée
 lors d’une nouvelle tentative. L’indicateur respecte la réduction des animations et se met
 en pause hors écran. Réglages → Apparence permet de désactiver son animation indépendamment
 des effets de texte.
 
-La dépendance Noctis est verrouillée sur `feat/response-activity-stream`. Avec les deux dépôts
+La dépendance Noctis est verrouillée sur `test/gpt-oss-macos`, qui intègre également les API
+d’activité de `main`. Avec les deux dépôts
 côte à côte, les vérifications de logique et de persistance se lancent ainsi sur Mac :
 
 ```sh
@@ -68,9 +71,14 @@ les apparences claire/sombre, Dynamic Type, le clavier et les dispositions compa
 
 ## Développement
 
-La base `test/ternary-bonsai-2-4b` utilisée par cette branche conserve exactement le modèle
-[`prism-ml/Ternary-Bonsai-2-4B-mlx-2bit`](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit).
-Le projet Xcode référence la branche NoctisAi `feat/response-activity-stream` ; le commit
+La branche `test/gpt-oss-macos` sélectionne le modèle selon la plateforme :
+
+| Plateforme | Modèle local | Moteur |
+| --- | --- | --- |
+| macOS | [`mlx-community/gpt-oss-20b-MXFP4-Q8`](https://huggingface.co/mlx-community/gpt-oss-20b-MXFP4-Q8) | MLX |
+| iPhone et iPad | [`prism-ml/Ternary-Bonsai-2-4B-mlx-2bit`](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit), avec ses réglages existants | MLX |
+
+Le projet Xcode référence la branche NoctisAi `test/gpt-oss-macos` ; le commit
 utilisé est verrouillé dans `Package.resolved`. Cette base conserve les corrections iOS
 et Web déjà intégrées dans `main`.
 Les scripts de préparation
@@ -130,8 +138,9 @@ locales permettant de confirmer l’appel du service Web.
 Après les essais Mac, lancer la cible iPhone et vérifier que le modèle indiqué reste Bonsai,
 que son cache existant est réutilisé et qu’aucun téléchargement GPT n’est déclenché.
 
-Pour revenir à la configuration habituelle, quitter l’application et revenir sur `main`
-dans les deux dépôts, puis laisser Xcode résoudre la dépendance correspondante.
+Le modèle Mac dépend de la révision Noctis verrouillée par Fullmoon. Après un changement
+de version ou de branche, laisser Xcode résoudre les packages et vérifier le modèle affiché
+dans les réglages. Les poids déjà téléchargés restent en cache.
 
 ### Recherche Web sur Mac, sans Docker
 
