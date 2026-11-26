@@ -159,7 +159,7 @@ struct NoctisChatWorkspace: View {
 }
 
 private extension NoctisChatWorkspace {
-    func requestNavigation(_ destination: Destination) {
+    private func requestNavigation(_ destination: Destination) {
         if case .conversation(let identifier) = destination, identifier == currentThread?.id {
             pendingDestination = nil
             return
