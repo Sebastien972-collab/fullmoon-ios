@@ -37,6 +37,9 @@ struct OnboardingView: View {
                                 #if os(iOS)
                                 Text("onboarding.ios.local_model.description")
                                     .foregroundStyle(.secondary)
+                                #elseif os(macOS)
+                                Text("onboarding.macos.local_model.description")
+                                    .foregroundStyle(.secondary)
                                 #else
                                 Text("onboarding.local_model.description")
                                     .foregroundStyle(.secondary)

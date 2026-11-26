@@ -80,7 +80,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Modèle IA")
                 } footer: {
-                    Text("model.runtime.settings.description")
+                    Text(viewModel.modelRuntime.settingsDescription)
                 }
 
                 Section {

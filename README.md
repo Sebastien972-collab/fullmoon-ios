@@ -6,7 +6,7 @@ Interface SwiftUI avec conversations locales SwiftData et moteur Noctis exécut�
 
 ## Interface iPhone et iPad
 
-La branche `feat/chatgpt-ui-integration` adapte les composants de
+L’interface adapte les composants de
 [ChatGPT iOS UI](https://github.com/bryanrg22/chatgpt-ios-ui) à Noctis : compositeur
 natif, contrôles Liquid Glass, historique recherchable et présentation sobre des messages.
 La navigation suit la size class : tiroir en compact, barre latérale en régulier.
@@ -21,16 +21,16 @@ Le rendu Markdown existant est conservé, sans nouvelle dépendance distante.
 La provenance et la licence MIT sont conservées dans le package ; la licence est également
 consultable dans Réglages → Crédits sur iOS. Cette adaptation est indépendante d'OpenAI.
 
-Pour essayer l'interface depuis le dépôt Fullmoon :
+Pour essayer cette version depuis le dépôt Fullmoon :
 
 ```sh
 git fetch origin
-git switch feat/chatgpt-ui-integration
+git switch test/gpt-oss-macos
 ```
 
-Ouvrir `fullmoon.xcodeproj`. Cette branche part du dernier état de l'essai Bonsai
-et conserve sa révision Noctis verrouillée. Les instructions de préparation du moteur
-et de SearXNG ci-dessous s'appliquent toujours.
+Ouvrir `fullmoon.xcodeproj`. Cette branche de test part de `main` et utilise GPT uniquement
+sur Mac. L’interface et le modèle iPhone restent ceux de la base. Les instructions de
+préparation du moteur et de SearXNG ci-dessous s’appliquent toujours.
 
 Vérifier sur appareil : envoi d'un seul échange, streaming et arrêt, changement de
 conversation pendant une génération, recherche/suppression dans l'historique, erreur
@@ -39,9 +39,14 @@ les apparences claire/sombre, Dynamic Type, le clavier et les dispositions compa
 
 ## Développement
 
-La base `test/ternary-bonsai-2-4b` utilisée par cette branche conserve exactement le modèle
-[`prism-ml/Ternary-Bonsai-2-4B-mlx-2bit`](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit).
-Le projet Xcode référence la branche NoctisAi `test/ternary-bonsai-2-4b` ; le commit
+La branche `test/gpt-oss-macos` sélectionne le modèle selon la plateforme :
+
+| Plateforme | Modèle local | Moteur |
+| --- | --- | --- |
+| macOS | [`mlx-community/gpt-oss-20b-MXFP4-Q8`](https://huggingface.co/mlx-community/gpt-oss-20b-MXFP4-Q8) | MLX |
+| iPhone et iPad | [`prism-ml/Ternary-Bonsai-2-4B-mlx-2bit`](https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-mlx-2bit), identique à la base | MLX |
+
+Le projet Xcode référence la branche NoctisAi `test/gpt-oss-macos` ; le commit
 utilisé est verrouillé dans `Package.resolved`. Cette base conserve les corrections iOS
 et Web déjà intégrées dans `main`.
 Les scripts de préparation
@@ -54,15 +59,16 @@ NoctisAI/
 ```
 
 Ouvrir `fullmoon.xcodeproj`, sélectionner la cible Mac ou iPhone et lancer l’application.
-Les deux plateformes utilisent **Ternary Bonsai 2 (4B)** avec MLX.
+Sur Mac, le modèle GPT reçoit et génère du texte ; cet essai n’ajoute pas de traitement
+d’images ou d’audio.
 
-### Essayer Ternary Bonsai 2 (4B)
+### Essayer gpt-oss-20b sur Mac
 
 Depuis chaque dépôt, récupérer la branche de test :
 
 ```sh
 git fetch origin
-git switch test/ternary-bonsai-2-4b
+git switch test/gpt-oss-macos
 git pull --ff-only
 ```
 
@@ -71,21 +77,34 @@ sert aux scripts SearXNG décrits ci-dessous. Préparer ces runtimes s’ils ne 
 puis compiler l’application depuis Xcode sur l’appareil souhaité.
 
 Sur iOS, Fullmoon crée `IOSModelService(preference: .mlx)` avec le service Web embarqué.
-Sur macOS, il crée `MLXModelService` avec SearXNG embarqué. Les deux services utilisent
-le modèle Bonsai fixé par la branche Noctis. L’essai ne sélectionne pas automatiquement
+Il conserve exactement le modèle Bonsai et ses réglages. Sur macOS, Fullmoon crée
+`MLXModelService` avec SearXNG embarqué et le modèle GPT fixé par la branche Noctis.
+L’essai ne sélectionne pas automatiquement
 Foundation Models : une erreur de chargement ou de génération reste visible.
 
 Au premier lancement, choisir « Préparer Noctis ». Si l’accueil a déjà été validé,
-ouvrir les réglages et charger le modèle. Vérifier **Ternary Bonsai 2 (4B) · MLX** dans
-« Modèle IA », puis attendre l’état **Prêt**. Le cache utilisé par Locally est distinct
-de celui de Fullmoon ; les poids peuvent donc être téléchargés à nouveau.
+ouvrir les réglages et charger le modèle. Vérifier **gpt-oss-20b · MLX** dans
+« Modèle IA » sur Mac, puis attendre l’état **Prêt**. Sur iPhone, le titre reste
+**Ternary Bonsai 2 (4B) · MLX**.
+
+La conversion GPT publiée représente environ **12,1 Go de poids**. Cette taille ne
+comprend pas la mémoire nécessaire au cache de conversation et aux allocations du moteur.
+Sur un Mac de 18 Go, commencer avec une seule fenêtre et une conversation courte pour
+mesurer la pression mémoire. Les poids Bonsai déjà en cache sont conservés. Le cache de
+Locally est distinct de celui de Fullmoon ; les poids GPT peuvent donc être téléchargés à nouveau.
 
 Pour vérifier le parcours, ouvrir une nouvelle conversation, demander une réponse courte
 en français, poursuivre le même échange, puis arrêter et relancer une génération.
-Essayer ensuite une recherche Web explicite et contrôler les sources. L’inférence est locale ;
+Vérifier que la réponse affichée ne contient pas de balises du protocole Harmony, puis
+changer de conversation et reprendre un échange sauvegardé. Essayer ensuite une recherche
+Web explicite et contrôler les sources ainsi que l’absence d’erreur `invalid tool call`.
+L’inférence est locale ;
 la recherche Web nécessite Internet. Le guide
 [de contribution](CONTRIBUTING.md#vérifier-la-recherche-web-sur-iphone) décrit les traces
 locales permettant de confirmer l’appel du service Web.
+
+Après les essais Mac, lancer la cible iPhone et vérifier que le modèle indiqué reste Bonsai,
+que son cache existant est réutilisé et qu’aucun téléchargement GPT n’est déclenché.
 
 Pour revenir à la configuration habituelle, quitter l’application et revenir sur `main`
 dans les deux dépôts, puis laisser Xcode résoudre la dépendance correspondante.
@@ -193,7 +212,7 @@ avec le modèle déjà installé et le réseau bloqué. Le même prompt demande 
 de conversation. Les autres compilations en cours rendent les durées et débits indicatifs.
 
 Ces mesures historiques concernent le modèle Ministral 14B précédemment utilisé ; elles
-ne mesurent pas les performances de Bonsai sur cette branche.
+ne mesurent pas les performances de GPT sur Mac ni celles de Bonsai sur iPhone.
 
 | Second échange | Avant | Après |
 | --- | ---: | ---: |
@@ -245,7 +264,8 @@ Fullmoon d’origine, adaptées au moteur Noctis et aux réglages actuels. Il s�
 jusqu’à la première préparation réussie, puis à la validation « Commencer la conversation ».
 Le téléchargement éventuel ne commence qu’après « Préparer Noctis ». Un modèle en cache
 est réutilisé et le moteur chargé est conservé lors de l’ouverture du chat.
-Sur iOS et macOS, les textes présentent Ternary Bonsai 2 (4B) et son téléchargement.
+Sur macOS, les textes présentent gpt-oss-20b, les conversations texte et la taille du
+téléchargement. Sur iOS, ils présentent toujours Ternary Bonsai 2 (4B).
 La préparation vérifie la disponibilité de Metal avant de charger le modèle MLX.
 Les erreurs restent visibles avec la possibilité de réessayer. L’apparence peut être
 personnalisée depuis l’accueil, sans charger le modèle.

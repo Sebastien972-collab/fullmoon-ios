@@ -59,8 +59,8 @@
       "kind": "remoteSourceControl",
       "location": "https://github.com/Sebastien972-collab/NoctisAi.git",
       "state": {
-        "branch": "test/ternary-bonsai-2-4b",
-        "revision": "a437607061c970aee78c422776bd5835cb83ff9b"
+        "branch": "test/gpt-oss-macos",
+        "revision": "a14f642c3548348f901ec49f6a3ab044e50e6c61"
       }
     },
     {
